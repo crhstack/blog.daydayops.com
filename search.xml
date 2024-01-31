@@ -18,10 +18,10 @@
     
     <entry>
       <title>测试文章</title>
-      <link href="/2021/01/20/test/"/>
-      <url>/2021/01/20/test/</url>
+      <link href="/2024/01/20/ce-shi-wen-zhang/"/>
+      <url>/2024/01/20/ce-shi-wen-zhang/</url>
       
-        <content type="html"><![CDATA[<p>这是一篇测试文章</p><p><img src="/./12.jpeg" alt="testimg"></p><p>代码块</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure><p>表情<br>:smile:</p>]]></content>
+        <content type="html"><![CDATA[<p>这是一篇测试文章</p><p><img src="/./12.jpeg" alt="testimg"></p><p>代码块</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
