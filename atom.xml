@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>天天运维博客</title>
+  
+  
+  <link href="https://blog.daydayops.com/atom.xml" rel="self"/>
+  
+  <link href="https://blog.daydayops.com/"/>
+  <updated>2024-02-01T09:50:20.947Z</updated>
+  <id>https://blog.daydayops.com/</id>
+  
+  <author>
+    <name>daydayops</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Github Pages创建自己域名网站</title>
+    <link href="https://blog.daydayops.com/2024/01/31/github-pages-chuang-jian-zi-ji-yu-ming-wang-zhan/"/>
+    <id>https://blog.daydayops.com/2024/01/31/github-pages-chuang-jian-zi-ji-yu-ming-wang-zhan/</id>
+    <published>2024-01-31T10:19:40.000Z</published>
+    <updated>2024-02-01T09:50:20.947Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一、准备工作&quot;&gt;&lt;a href=&quot;#一、准备工作&quot; class=&quot;headerlink&quot; title=&quot;一、准备工作&quot;&gt;&lt;/a&gt;一、准备工作&lt;/h2&gt;&lt;h3 id=&quot;1-1-注册域名&quot;&gt;&lt;a href=&quot;#1-1-注册域名&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="web" scheme="https://blog.daydayops.com/categories/web/"/>
+    
+    
+    <category term="原创" scheme="https://blog.daydayops.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+    <category term="github" scheme="https://blog.daydayops.com/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://blog.daydayops.com/2024/01/31/hello-world/"/>
+    <id>https://blog.daydayops.com/2024/01/31/hello-world/</id>
+    <published>2024-01-31T06:34:36.745Z</published>
+    <updated>2024-01-31T06:34:36.745Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>测试文章</title>
+    <link href="https://blog.daydayops.com/2024/01/20/ce-shi-wen-zhang/"/>
+    <id>https://blog.daydayops.com/2024/01/20/ce-shi-wen-zhang/</id>
+    <published>2024-01-20T07:00:00.000Z</published>
+    <updated>2024-01-31T08:04:01.011Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;这是一篇测试文章&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/./12.jpeg&quot; alt=&quot;testimg&quot;&gt;&lt;/p&gt;
+&lt;p&gt;代码块&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    <category term="测试" scheme="https://blog.daydayops.com/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+    <category term="原创" scheme="https://blog.daydayops.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+    <category term="测试" scheme="https://blog.daydayops.com/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+</feed>
