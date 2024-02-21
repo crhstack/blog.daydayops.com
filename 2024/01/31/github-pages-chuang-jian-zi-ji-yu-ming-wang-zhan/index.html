@@ -51,9 +51,9 @@
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
 <meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="天天运维博客" type="application/atom+xml">
-
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+</head>
 
 
 <body>
@@ -400,14 +400,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-02-01
+                    2024-02-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    512
+                    592
                 </div>
                 
 
@@ -438,7 +438,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><h3 id="1-1-注册域名"><a href="#1-1-注册域名" class="headerlink" title="1.1 注册域名"></a>1.1 注册域名</h3><p>自行到各个域名注册商注册域名即可，腾讯云，阿里云都支持</p>
-<h3 id="1-2-注册github账号"><a href="#1-2-注册github账号" class="headerlink" title="1.2 注册github账号"></a>1.2 注册github账号</h3><p>Github(<a target="_blank" rel="noopener" href="https://github.com)账号注册/">https://github.com)账号注册</a></p>
+<h3 id="1-2-注册github账号"><a href="#1-2-注册github账号" class="headerlink" title="1.2 注册github账号"></a>1.2 注册github账号</h3><p><a target="_blank" rel="noopener" href="https://github.com/">Github</a>账号注册</p>
 <h3 id="1-3-安装git环境"><a href="#1-3-安装git环境" class="headerlink" title="1.3 安装git环境"></a>1.3 安装git环境</h3><p>根据</p>
 <h2 id="二、创建github-pages"><a href="#二、创建github-pages" class="headerlink" title="二、创建github pages"></a>二、创建github pages</h2><p>创建仓库，仓库名称为站点域名 blog.daydayops.com</p>
 <p><img src="/2024/01/31/github-pages-chuang-jian-zi-ji-yu-ming-wang-zhan/create_repo.png" alt="创建仓库"></p>
@@ -451,11 +451,11 @@
 cd daydayops_blog
 npm install
 </code></pre>
-<h3 id="3-3-主题选择"><a href="#3-3-主题选择" class="headerlink" title="3.3 主题选择"></a>3.3 主题选择</h3><p>官网(<a target="_blank" rel="noopener" href="https://hexo.io/themes/)%E6%9C%89%E5%BE%88%E5%A4%9A%E4%B8%BB%E9%A2%98%EF%BC%8C%E8%BF%99%E9%87%8C%E9%80%89%E6%8B%A9matery(https://blinkfox.github.io/)">https://hexo.io/themes/)有很多主题，这里选择matery(https://blinkfox.github.io/)</a><br>将主题源码clone到themes目录下</p>
+<h3 id="3-3-主题选择"><a href="#3-3-主题选择" class="headerlink" title="3.3 主题选择"></a>3.3 主题选择</h3><p><a target="_blank" rel="noopener" href="https://hexo.io/themes/">官网</a>有很多主题，这里选择<a target="_blank" rel="noopener" href="https://blinkfox.github.io/">matery</a><br>将主题源码clone到themes目录下</p>
 <pre class=" language-shell"><code class="language-shell">cd daydayops_blog/themes
 git clone https://github.com/blinkfox/hexo-theme-matery.git
 </code></pre>
-<p>具体详细配置可以参考文章(<a target="_blank" rel="noopener" href="https://blinkfox.github.io/2018/09/28/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/">https://blinkfox.github.io/2018/09/28/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/</a>)</p>
+<p>具体详细配置可以<a target="_blank" rel="noopener" href="https://blinkfox.github.io/2018/09/28/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/">参考文章</a></p>
 <h2 id="四、部署"><a href="#四、部署" class="headerlink" title="四、部署"></a>四、部署</h2><h3 id="4-1-本地启动"><a href="#4-1-本地启动" class="headerlink" title="4.1 本地启动"></a>4.1 本地启动</h3><pre class=" language-shell"><code class="language-shell">hexo s
 </code></pre>
 <p>访问本地地址<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a></p>
@@ -476,7 +476,25 @@ git clone https://github.com/blinkfox/hexo-theme-matery.git
 <h3 id="4-4-上传到github"><a href="#4-4-上传到github" class="headerlink" title="4.4 上传到github"></a>4.4 上传到github</h3><pre class=" language-shell"><code class="language-shell">hexo d
 </code></pre>
 <p>部署完成<br><img src="/2024/01/31/github-pages-chuang-jian-zi-ji-yu-ming-wang-zhan/image-1.png" alt="Alt text"></p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>配置github pages后github默认会在仓库里新增一个CNAME文件，文件里是自己要解析域名，但是每次hexo上传代码后，这个文件就会被覆盖，导致域名解析失败，所以需要手动修改CNAME文件，将域名写入CNAME文件中，这样每次hexo上传代码后，CNAME文件不会被覆盖，域名解析也不会失败。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="1-CNAME问题"><a href="#1-CNAME问题" class="headerlink" title="1. CNAME问题"></a>1. CNAME问题</h3><p>配置github pages后github默认会在仓库里新增一个CNAME文件，文件里是自己要解析域名，但是每次hexo上传代码后，这个文件就会被覆盖，导致域名解析失败，所以需要手动修改CNAME文件，将域名写入CNAME文件中，这样每次hexo上传代码后，CNAME文件不会被覆盖，域名解析也不会失败。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>在source目录下创建CNAME文件，文件内容为自己的域名，如blog.daydayops.com。</p>
+<h3 id="2-代码显示问题"><a href="#2-代码显示问题" class="headerlink" title="2. 代码显示问题"></a>2. 代码显示问题</h3><p>hexo7.1.1版本，该主题下代码块显示不正常，网上的多数办法不行</p>
+<h3 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h3><p>在_config.yml文件中添加如下配置：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">syntax_highlighter</span><span class="token punctuation">:</span> prismjs
+<span class="token key atrule">highlight</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+  <span class="token key atrule">line_number</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">auto_detect</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+  <span class="token key atrule">tab_replace</span><span class="token punctuation">:</span> <span class="token string">''</span>
+  <span class="token key atrule">wrap</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">hljs</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+<span class="token key atrule">prismjs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">preprocess</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">line_number</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">tab_replace</span><span class="token punctuation">:</span> <span class="token string">''</span>
+</code></pre>
+<p>替换prismjs的的css,js文件，<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/issues/910">参考链接</a></p>
 <p>配置参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaorongke/article/details/119089190">https://blog.csdn.net/yaorongke/article/details/119089190</a></p>
 <p><a target="_blank" rel="noopener" href="https://blinkfox.github.io/2018/09/28/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/">https://blinkfox.github.io/2018/09/28/qian-duan/hexo-bo-ke-zhu-ti-zhi-hexo-theme-matery-de-jie-shao/</a></p>
@@ -1179,7 +1197,7 @@ git clone https://github.com/blinkfox/hexo-theme-matery.git
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">599</span>
+                        class="white-color">679</span>
             
             
             
