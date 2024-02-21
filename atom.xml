@@ -79,7 +79,7 @@
     <summary type="html">&lt;p&gt;这是一篇测试文章&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/./12.jpeg&quot; alt=&quot;testimg&quot;&gt;&lt;/p&gt;
 &lt;p&gt;代码块&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td</summary>
+&lt;pre class=&quot; language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span</summary>
         
       
     
