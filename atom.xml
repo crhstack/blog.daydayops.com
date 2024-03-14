@@ -6,7 +6,7 @@
   <link href="https://blog.daydayops.com/atom.xml" rel="self"/>
   
   <link href="https://blog.daydayops.com/"/>
-  <updated>2024-02-21T09:07:53.262Z</updated>
+  <updated>2024-03-14T11:28:16.030Z</updated>
   <id>https://blog.daydayops.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>基于minikube安装kubernetes</title>
+    <link href="https://blog.daydayops.com/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/"/>
+    <id>https://blog.daydayops.com/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/</id>
+    <published>2024-02-27T06:31:48.000Z</published>
+    <updated>2024-03-14T11:28:16.030Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;国内基于minikube安装kubernetes&quot;&gt;&lt;a href=&quot;#国内基于minikube安装kubernetes&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="minikube, kubernetes" scheme="https://blog.daydayops.com/tags/minikube-kubernetes/"/>
+    
+  </entry>
   
   <entry>
     <title>Github Pages创建自己域名网站</title>

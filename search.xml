@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>基于minikube安装kubernetes</title>
+      <link href="/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/"/>
+      <url>/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/</url>
+      
+        <content type="html"><![CDATA[<h1 id="国内基于minikube安装kubernetes"><a href="#国内基于minikube安装kubernetes" class="headerlink" title="国内基于minikube安装kubernetes"></a>国内基于minikube安装kubernetes</h1><pre><code>个人学习kubernets练手，minikube可以满足基本的安装环境，方便快速学习机器要求至少2CPU 2G内存，硬盘20G，安装过程需要网络实验环境Centos7.6 </code></pre><p>配置阿里镜像源</p><pre class=" language-shell"><code class="language-shell">wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo</code></pre><p>安装docker</p><pre class=" language-shell"><code class="language-shell">yum install -y yum-utils   device-mapper-persistent-data   lvm2yum-config-manager     --add-repo     http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repoyum install docker-ce-20.10.6</code></pre><p>docker国内源</p><pre class=" language-shell"><code class="language-shell">cat <<EOF > /etc/docker/daemon.json{  "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"]}EOF</code></pre><p>启动docker</p><pre class=" language-shell"><code class="language-shell">systemctl start dockersystemctl enable docker</code></pre><p>安装minikube <a href="https://minikube.sigs.k8s.io/docs/start/">官网地址</a> </p><pre class=" language-shell"><code class="language-shell">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64sudo install minikube-linux-amd64 /usr/local/bin/minikube</code></pre><p>minikube启动kubernetes集群</p><pre class=" language-shell"><code class="language-shell">minikube start --driver=docker --image-mirror-country=cn --force</code></pre><p><img src="/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/image.png" alt="安装过程"><br><img src="/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/image-1.png" alt="集群验证"></p><p>minikube安装kubernetes集群需要使用命令minikube kubectl 命令操作，为了操作习惯，这里安装kubectl命令</p><pre class=" language-shell"><code class="language-shell">cat <<EOF > /etc/yum.repos.d/kubernetes.repo[kubernetes]name=Kubernetesbaseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/enabled=1gpgcheck=1repo_gpgcheck=1gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpgEOFyum install kubectl -y</code></pre><p><img src="/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/image-2.png" alt="kubectl命令"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> minikube, kubernetes </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Github Pages创建自己域名网站</title>
       <link href="/2024/01/31/github-pages-chuang-jian-zi-ji-yu-ming-wang-zhan/"/>
       <url>/2024/01/31/github-pages-chuang-jian-zi-ji-yu-ming-wang-zhan/</url>
