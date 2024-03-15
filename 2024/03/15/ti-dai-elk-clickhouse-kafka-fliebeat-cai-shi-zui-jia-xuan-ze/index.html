@@ -4,13 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="测试文章, 天天运维博客">
-    <meta name="description" content="这是一篇测试文章
-
-代码块
-print(&#34;hello world&#34;)
-
-">
+    <meta name="keywords" content="替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？, 天天运维博客">
+    <meta name="description" content="替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？背景SaaS 服务未来会面临数据安全、合规等问题。公司的业务需要沉淀一套私有化部署能力，帮助业务提升行业竞争力。为了完善平台系统能力、我们需要沉淀一套数据体系帮助">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +17,7 @@ print(&#34;hello world&#34;)
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>测试文章 | 天天运维博客</title>
+    <title>替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？ | 天天运维博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -340,12 +335,12 @@ print(&#34;hello world&#34;)
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">测试文章</h1>
+                    <h1 class="description center-align post-title">替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？</h1>
                 </div>
             </div>
         </div>
@@ -369,27 +364,26 @@ print(&#34;hello world&#34;)
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%8E%9F%E5%88%9B/">
-                                <span class="chip bg-color">原创</span>
+                            <a href="/tags/clickhouse/">
+                                <span class="chip bg-color">clickhouse</span>
                             </a>
                         
-                            <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                                <span class="chip bg-color">测试</span>
+                            <a href="/tags/ELK/">
+                                <span class="chip bg-color">ELK</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/">
+                                <span class="chip bg-color">日志收集</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%97%A5%E5%BF%97%E5%8F%AF%E8%A7%82%E6%B5%8B/">
+                                <span class="chip bg-color">日志可观测</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E6%B5%8B%E8%AF%95/" class="post-category">
-                                测试
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -398,28 +392,28 @@ print(&#34;hello world&#34;)
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-01-20
+                    2024-03-15
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-01-31
+                    2024-03-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    14
+                    1.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    7 分
                 </div>
                 
 
@@ -442,11 +436,216 @@ print(&#34;hello world&#34;)
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这是一篇测试文章</p>
-<p><img src="/./12.jpeg" alt="testimg"></p>
-<p>代码块</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span>
+                <h1 id="替代ELK：ClickHouse-Kafka-FlieBeat，才是最佳选择？"><a href="#替代ELK：ClickHouse-Kafka-FlieBeat，才是最佳选择？" class="headerlink" title="替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？"></a>替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>SaaS 服务未来会面临数据安全、合规等问题。公司的业务需要沉淀一套私有化部署能力，帮助业务提升行业竞争力。为了完善平台系统能力、我们需要沉淀一套数据体系帮助运营分析活动效果、提升运营能力。</p>
+<p>然而在实际的开发过程中，如果直接部署一套大数据体系，对于使用者来说将是一笔比较大的服务器开销。为此我们选用折中方案完善数据分析能力。</p>
+<p>Easticsearch vs Clickhouse<br>ClickHouse是一款高性能列式分布式数据库管理系统，我们对ClickHouse进行了测试，发现有下列优势：</p>
+<p>ClickHouse写入吞吐量大，单服务器日志写入量在50MB到200MB/s，每秒写入超过60w记录数，是ES的5倍以上。在ES中比较常见的写Rejected导致数据丢失、写入延迟等问题，在ClickHouse中不容易发生。</p>
+<p>查询速度快，官方宣称数据在pagecache中，单服务器查询速率大约在2-30GB/s；没在pagecache的情况下，查询速度取决于磁盘的读取速率和数据的压缩率。经测试ClickHouse的查询速度比ES快5-30倍以上。</p>
+<p>ClickHouse比ES服务器成本更低。一方面ClickHouse的数据压缩比比ES高，相同数据占用的磁盘空间只有ES的1/3到1/30，节省了磁盘空间的同时，也能有效的减少磁盘IO，这也是ClickHouse查询效率更高的原因之一；另一方面ClickHouse比ES占用更少的内存，消耗更少的CPU资源。我们预估用ClickHouse处理日志可以将服务器成本降低一半。</p>
+<p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image.png" alt="架构"></p>
+<p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image-1.png" alt="成本对比"></p>
+<p>成本分析<br>备注：在没有任何折扣的情况下，基于aliyun分析</p>
+<p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image-2.png" alt="成本分析"></p>
+<h2 id="环境部署"><a href="#环境部署" class="headerlink" title="环境部署"></a>环境部署</h2><h3 id="zookeeper-集群部署"><a href="#zookeeper-集群部署" class="headerlink" title="zookeeper 集群部署"></a>zookeeper 集群部署</h3><p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image-3.png" alt="启动zk"></p>
+<pre class=" language-shell"><code class="language-shell">yum install java-1.8.0-openjdk-devel.x86_64
+#将java环境变量加入/etc/profile 配置环境变量
+#更新系统时间
+yum install  ntpdate
+ntpdate asia.pool.ntp.org
+
+
+mkdir zookeeper
+mkdir ./zookeeper/data
+mkdir ./zookeeper/logs
+
+
+wget  --no-check-certificate https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.7.1/apache-zookeeper-3.7.1-bin.tar.gz
+tar -zvxf apache-zookeeper-3.7.1-bin.tar.gz -C /usr/zookeeper
+
+
+export ZOOKEEPER_HOME=/usr/zookeeper/apache-zookeeper-3.7.1-bin
+export PATH=$ZOOKEEPER_HOME/bin:$PATH
+
+
+#进入ZooKeeper配置目录
+cd $ZOOKEEPER_HOME/conf
+
+
+#新建配置文件
+vim zoo.cfg
+
+
+tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/usr/zookeeper/data
+dataLogDir=/usr/zookeeper/logs
+clientPort=2181
+server.1=zk1:2888:3888
+server.2=zk2:2888:3888
+server.3=zk3:2888:3888
+
+
+# 在每台服务器上执行，给zookeeper创建myid
+echo "1" > /usr/zookeeper/data/myid
+echo "2" > /usr/zookeeper/data/myid
+echo "3" > /usr/zookeeper/data/myid
+
+
+#进入ZooKeeper bin目录
+cd $ZOOKEEPER_HOME/bin
+sh zkServer.sh start
 </code></pre>
+<h3 id="Kafka-集群部署"><a href="#Kafka-集群部署" class="headerlink" title="Kafka 集群部署"></a>Kafka 集群部署</h3><pre class=" language-shell"><code class="language-shell">mkdir -p /usr/kafka
+chmod 777 -R /usr/kafka
+wget  --no-check-certificate https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/3.2.0/kafka_2.12-3.2.0.tgz
+tar -zvxf kafka_2.12-3.2.0.tgz -C /usr/kafka
+
+
+#不同的broker Id 设置不一样，比如 1,2,3
+broker.id=1
+listeners=PLAINTEXT://ip:9092
+socket.send.buffer.bytes=102400
+socket.receive.buffer.bytes=102400
+socket.request.max.bytes=104857600
+log.dir=/usr/kafka/logs
+num.partitinotallow=5
+num.recovery.threads.per.data.dir=3
+offsets.topic.replication.factor=2
+transaction.state.log.replication.factor=3
+transaction.state.log.min.isr=3
+log.retention.hours=168
+log.segment.bytes=1073741824
+log.retention.check.interval.ms=300000
+zookeeper.cnotallow=zk1:2181,zk2:2181,zk3:2181
+zookeeper.connection.timeout.ms=30000
+group.initial.rebalance.delay.ms=0
+
+
+#后台常驻进程启动kafka
+nohup /usr/kafka/kafka_2.12-3.2.0/bin/kafka-server-start.sh /usr/kafka/kafka_2.12-3.2.0/config/server.properties   >/usr/kafka/logs/kafka.log >&1 &
+
+
+/usr/kafka/kafka_2.12-3.2.0/bin/kafka-server-stop.sh
+
+
+$KAFKA_HOME/bin/kafka-topics.sh --list --bootstrap-server  ip:9092
+
+
+$KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server ip:9092 --topic test --from-beginning
+
+
+$KAFKA_HOME/bin/kafka-topics.sh  --create --bootstrap-server  ip:9092  --replication-factor 2 --partitions 3 --topic xxx_data
+</code></pre>
+<h3 id="FileBeat-部署"><a href="#FileBeat-部署" class="headerlink" title="FileBeat 部署"></a>FileBeat 部署</h3><pre class=" language-shell"><code class="language-shell">sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+
+Create a file with a .repo extension (for example, elastic.repo) in your /etc/yum.repos.d/ directory and add the following lines:
+# 在/etc/yum.repos.d/ 目录下创建elastic.repo
+
+
+[elastic-8.x]
+name=Elastic repository for 8.x packages
+baseurl=https://artifacts.elastic.co/packages/8.x/yum
+gpgcheck=1
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+enabled=1
+autorefresh=1
+type=rpm-md
+
+
+yum install filebeat
+systemctl enable filebeat
+chkconfig --add filebeat
+</code></pre>
+<p>FileBeat 配置文件说明，坑点1（需设置keys_under_root: true）。如果不设置kafka的消息字段如下：</p>
+<p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image-4.png" alt="filebeat字段说明"></p>
+<p>文件目录：/etc/filebeat/filebeat.yml</p>
+<pre class=" language-yml"><code class="language-yml">filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /root/logs/xxx/inner/*.log
+  json:  
+# 如果不设置该索性，所有的数据都存储在message里面，这样设置以后数据会平铺。
+       keys_under_root: true 
+output.kafka:
+  hosts: ["kafka1:9092", "kafka2:9092", "kafka3:9092"]
+  topic: 'xxx_data_clickhouse'
+  partition.round_robin:
+            reachable_only: false
+            required_acks: 1
+            compression: gzip
+processors: 
+# 剔除filebeat 无效的字段数据
+    - drop_fields:  
+        fields: ["input", "agent", "ecs", "log", "metadata", "timestamp"]
+        ignore_missing: false
+
+
+nohup ./filebeat -e -c /etc/filebeat/filebeat.yml > /user/filebeat/filebeat.log & 
+</code></pre>
+<p>输出到filebeat.log文件中，方便排查</p>
+<h3 id="Clickhouse-部署"><a href="#Clickhouse-部署" class="headerlink" title="Clickhouse 部署"></a>Clickhouse 部署</h3><p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image-5.png" alt="Alt text"></p>
+<pre class=" language-shell"><code class="language-shell">#检查当前CPU是否支持SSE 4.2，如果不支持，需要通过源代码编译构建
+grep -q sse4_2 /proc/cpuinfo && echo "SSE 4.2 supported" || echo "SSE 4.2 not supported"
+# 返回 "SSE 4.2 supported" 表示支持，返回 "SSE 4.2 not supported" 表示不支持
+
+
+# 创建数据保存目录，将它创建到大容量磁盘挂载的路径
+mkdir -p /data/clickhouse
+# 修改/etc/hosts文件，添加clickhouse节点
+# 举例：
+10.190.85.92 bigdata-clickhouse-01
+10.190.85.93 bigdata-clickhouse-02
+
+
+# 服务器性能参数设置：
+# cpu频率调节，将CPU频率固定工作在其支持的最高运行频率上，而不动态调节，性能最好
+echo 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+
+
+# 内存调节，不要禁用 overcommit
+echo 0 | tee /proc/sys/vm/overcommit_memory
+
+
+# 始终禁用透明大页(transparent huge pages)。它会干扰内存分配器，从而导致显着的性能下降
+echo 'never' | tee /sys/kernel/mm/transparent_hugepage/enabled
+
+
+# 首先，需要添加官方存储库：
+yum install yum-utils
+rpm --import <https://repo.clickhouse.tech/CLICKHOUSE-KEY.GPG>
+yum-config-manager --add-repo <https://repo.clickhouse.tech/rpm/stable/x86_64>
+
+
+# 查看clickhouse可安装的版本：
+yum list | grep clickhouse
+# 运行安装命令：
+yum -y install clickhouse-server clickhouse-client
+
+
+# 修改/etc/clickhouse-server/config.xml配置文件，修改日志级别为information，默认是trace
+<level>information</level>
+# 执行日志所在目录：
+
+
+# 正常日志
+/var/log/clickhouse-server/clickhouse-server.log
+# 异常错误日志
+/var/log/clickhouse-server/clickhouse-server.err.log
+
+
+# 查看安装的clickhouse版本：
+clickhouse-server --version
+clickhouse-client --password
+
+
+sudo clickhouse stop
+sudo clickhouse tart
+sudo clickhouse start
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个部署的过程踩了不少坑，尤其是filebeat yml的参数设置。希望这篇文章可以给你一些建议</p>
 
                 
             </div>
@@ -473,7 +672,7 @@ print(&#34;hello world&#34;)
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://blog.daydayops.com/2024/01/20/ce-shi-wen-zhang/">https://blog.daydayops.com/2024/01/20/ce-shi-wen-zhang/</a>
+                    <a href="https://blog.daydayops.com/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/">https://blog.daydayops.com/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -511,12 +710,20 @@ print(&#34;hello world&#34;)
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%8E%9F%E5%88%9B/">
-                                    <span class="chip bg-color">原创</span>
+                                <a href="/tags/clickhouse/">
+                                    <span class="chip bg-color">clickhouse</span>
                                 </a>
                             
-                                <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                                    <span class="chip bg-color">测试</span>
+                                <a href="/tags/ELK/">
+                                    <span class="chip bg-color">ELK</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/">
+                                    <span class="chip bg-color">日志收集</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%97%A5%E5%BF%97%E5%8F%AF%E8%A7%82%E6%B5%8B/">
+                                    <span class="chip bg-color">日志可观测</span>
                                 </a>
                             
                         </div>
@@ -829,54 +1036,18 @@ print(&#34;hello world&#34;)
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2024/01/31/hello-world/">
+                <a href="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？">
                         
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-01-31
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            daydayops
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2024/01/20/ce-shi-wen-zhang/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="测试文章">
-                        
-                        <span class="card-title">测试文章</span>
+                        <span class="card-title">替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -887,16 +1058,12 @@ print(&#34;hello world&#34;)
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-15
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%B5%8B%E8%AF%95/" class="post-category">
-                                    测试
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            daydayops
                             
                         </span>
                     </div>
@@ -905,12 +1072,69 @@ print(&#34;hello world&#34;)
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8E%9F%E5%88%9B/">
-                        <span class="chip bg-color">原创</span>
+                    <a href="/tags/clickhouse/">
+                        <span class="chip bg-color">clickhouse</span>
                     </a>
                     
-                    <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                        <span class="chip bg-color">测试</span>
+                    <a href="/tags/ELK/">
+                        <span class="chip bg-color">ELK</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/">
+                        <span class="chip bg-color">日志收集</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%97%A5%E5%BF%97%E5%8F%AF%E8%A7%82%E6%B5%8B/">
+                        <span class="chip bg-color">日志可观测</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="基于minikube安装kubernetes">
+                        
+                        <span class="card-title">基于minikube安装kubernetes</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-02-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            daydayops
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/minikube/">
+                        <span class="chip bg-color">minikube</span>
+                    </a>
+                    
+                    <a href="/tags/kubernetes/">
+                        <span class="chip bg-color">kubernetes</span>
                     </a>
                     
                 </div>

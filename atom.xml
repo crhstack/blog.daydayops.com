@@ -6,7 +6,7 @@
   <link href="https://blog.daydayops.com/atom.xml" rel="self"/>
   
   <link href="https://blog.daydayops.com/"/>
-  <updated>2024-03-14T11:28:16.030Z</updated>
+  <updated>2024-03-15T03:46:36.787Z</updated>
   <id>https://blog.daydayops.com/</id>
   
   <author>
@@ -17,11 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？</title>
+    <link href="https://blog.daydayops.com/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/"/>
+    <id>https://blog.daydayops.com/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/</id>
+    <published>2024-03-15T03:26:22.000Z</published>
+    <updated>2024-03-15T03:46:36.787Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;替代ELK：ClickHouse-Kafka-FlieBeat，才是最佳选择？&quot;&gt;&lt;a href=&quot;#替代ELK：ClickHouse-Kafka-FlieBeat，才是最佳选择？&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="clickhouse" scheme="https://blog.daydayops.com/tags/clickhouse/"/>
+    
+    <category term="ELK" scheme="https://blog.daydayops.com/tags/ELK/"/>
+    
+    <category term="日志收集" scheme="https://blog.daydayops.com/tags/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/"/>
+    
+    <category term="日志可观测" scheme="https://blog.daydayops.com/tags/%E6%97%A5%E5%BF%97%E5%8F%AF%E8%A7%82%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>基于minikube安装kubernetes</title>
     <link href="https://blog.daydayops.com/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/"/>
     <id>https://blog.daydayops.com/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/</id>
     <published>2024-02-27T06:31:48.000Z</published>
-    <updated>2024-03-14T11:28:16.030Z</updated>
+    <updated>2024-03-15T03:42:15.484Z</updated>
     
     
       
@@ -35,7 +64,9 @@
     
     
     
-    <category term="minikube, kubernetes" scheme="https://blog.daydayops.com/tags/minikube-kubernetes/"/>
+    <category term="minikube" scheme="https://blog.daydayops.com/tags/minikube/"/>
+    
+    <category term="kubernetes" scheme="https://blog.daydayops.com/tags/kubernetes/"/>
     
   </entry>
   

@@ -368,8 +368,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/minikube-kubernetes/">
-                                <span class="chip bg-color">minikube, kubernetes</span>
+                            <a href="/tags/minikube/">
+                                <span class="chip bg-color">minikube</span>
+                            </a>
+                        
+                            <a href="/tags/kubernetes/">
+                                <span class="chip bg-color">kubernetes</span>
                             </a>
                         
                     </div>
@@ -391,14 +395,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-14
+                    2024-03-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    123
+                    121
                 </div>
                 
 
@@ -432,34 +436,29 @@
 机器要求至少2CPU 2G内存，硬盘20G，安装过程需要网络	
 实验环境Centos7.6 
 </code></pre>
-<p>配置阿里镜像源</p>
-<pre class=" language-shell"><code class="language-shell">wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+<h3 id="配置阿里镜像源"><a href="#配置阿里镜像源" class="headerlink" title="配置阿里镜像源"></a>配置阿里镜像源</h3><pre class=" language-shell"><code class="language-shell">wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
 </code></pre>
-<p>安装docker</p>
-<pre class=" language-shell"><code class="language-shell">yum install -y yum-utils   device-mapper-persistent-data   lvm2
+<h3 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h3><pre class=" language-shell"><code class="language-shell">yum install -y yum-utils   device-mapper-persistent-data   lvm2
 yum-config-manager     --add-repo     http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 yum install docker-ce-20.10.6
 </code></pre>
-<p>docker国内源</p>
-<pre class=" language-shell"><code class="language-shell">cat <<EOF > /etc/docker/daemon.json
+<h4 id="docker国内源"><a href="#docker国内源" class="headerlink" title="docker国内源"></a>docker国内源</h4><pre class=" language-shell"><code class="language-shell">cat <<EOF > /etc/docker/daemon.json
 {
   "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"]
 }
 EOF
 </code></pre>
-<p>启动docker</p>
-<pre class=" language-shell"><code class="language-shell">systemctl start docker
+<h4 id="启动docker"><a href="#启动docker" class="headerlink" title="启动docker"></a>启动docker</h4><pre class=" language-shell"><code class="language-shell">systemctl start docker
 systemctl enable docker
 </code></pre>
-<p>安装minikube <a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">官网地址</a> </p>
+<p>###安装minikube <a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">官网地址</a> </p>
 <pre class=" language-shell"><code class="language-shell">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 </code></pre>
-<p>minikube启动kubernetes集群</p>
-<pre class=" language-shell"><code class="language-shell">minikube start --driver=docker --image-mirror-country=cn --force
+<h3 id="minikube启动kubernetes集群"><a href="#minikube启动kubernetes集群" class="headerlink" title="minikube启动kubernetes集群"></a>minikube启动kubernetes集群</h3><pre class=" language-shell"><code class="language-shell">minikube start --driver=docker --image-mirror-country=cn --force
 </code></pre>
 <p><img src="/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/image.png" alt="安装过程"><br><img src="/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/image-1.png" alt="集群验证"></p>
-<p>minikube安装kubernetes集群需要使用命令minikube kubectl 命令操作，为了操作习惯，这里安装kubectl命令</p>
+<h3 id="安装kubectl"><a href="#安装kubectl" class="headerlink" title="安装kubectl"></a>安装kubectl</h3><p>minikube安装kubernetes集群需要使用命令minikube kubectl 命令操作，为了操作习惯，这里安装kubectl命令</p>
 <pre class=" language-shell"><code class="language-shell">cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -536,8 +535,12 @@ yum install kubectl -y
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/minikube-kubernetes/">
-                                    <span class="chip bg-color">minikube, kubernetes</span>
+                                <a href="/tags/minikube/">
+                                    <span class="chip bg-color">minikube</span>
+                                </a>
+                            
+                                <a href="/tags/kubernetes/">
+                                    <span class="chip bg-color">kubernetes</span>
                                 </a>
                             
                         </div>
@@ -850,18 +853,17 @@ yum install kubectl -y
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/">
+                <a href="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="基于minikube安装kubernetes">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？">
                         
-                        <span class="card-title">基于minikube安装kubernetes</span>
+                        <span class="card-title">替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -871,9 +873,9 @@ yum install kubectl -y
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-02-27
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-03-15
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -882,12 +884,23 @@ yum install kubectl -y
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/minikube-kubernetes/">
-                        <span class="chip bg-color">minikube, kubernetes</span>
+                    <a href="/tags/clickhouse/">
+                        <span class="chip bg-color">clickhouse</span>
+                    </a>
+                    
+                    <a href="/tags/ELK/">
+                        <span class="chip bg-color">ELK</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/">
+                        <span class="chip bg-color">日志收集</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%97%A5%E5%BF%97%E5%8F%AF%E8%A7%82%E6%B5%8B/">
+                        <span class="chip bg-color">日志可观测</span>
                     </a>
                     
                 </div>
@@ -1175,7 +1188,7 @@ yum install kubectl -y
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">802</span>
+                        class="white-color">2.4k</span>
             
             
             
