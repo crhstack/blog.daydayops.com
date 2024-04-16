@@ -6,7 +6,7 @@
   <link href="https://blog.daydayops.com/atom.xml" rel="self"/>
   
   <link href="https://blog.daydayops.com/"/>
-  <updated>2024-03-15T03:46:36.787Z</updated>
+  <updated>2024-04-16T02:48:29.568Z</updated>
   <id>https://blog.daydayops.com/</id>
   
   <author>
@@ -17,11 +17,59 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Kubernetes-v1.30新特性一览</title>
+    <link href="https://blog.daydayops.com/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/"/>
+    <id>https://blog.daydayops.com/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/</id>
+    <published>2024-04-16T02:32:16.000Z</published>
+    <updated>2024-04-16T02:48:29.568Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Kubernetes-v1-30-新特性一览&quot;&gt;&lt;a href=&quot;#Kubernetes-v1-30-新特性一览&quot; class=&quot;headerlink&quot; title=&quot;Kubernetes v1.30 新特性一览&quot;&gt;&lt;/a&gt;Kubernetes v1.30</summary>
+        
+      
+    
+    
+    
+    <category term="kubernetes" scheme="https://blog.daydayops.com/categories/kubernetes/"/>
+    
+    
+    <category term="kubernetes" scheme="https://blog.daydayops.com/tags/kubernetes/"/>
+    
+    <category term="转载" scheme="https://blog.daydayops.com/tags/%E8%BD%AC%E8%BD%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>kubeadm安装k8s集群</title>
+    <link href="https://blog.daydayops.com/2024/03/18/kubeadm-an-zhuang-k8s-ji-qun/"/>
+    <id>https://blog.daydayops.com/2024/03/18/kubeadm-an-zhuang-k8s-ji-qun/</id>
+    <published>2024-03-18T08:39:14.000Z</published>
+    <updated>2024-03-18T10:53:45.346Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;kubeadm安装k8s集群&quot;&gt;&lt;a href=&quot;#kubeadm安装k8s集群&quot; class=&quot;headerlink&quot; title=&quot;kubeadm安装k8s集群&quot;&gt;&lt;/a&gt;kubeadm安装k8s集群&lt;/h1&gt;&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？</title>
     <link href="https://blog.daydayops.com/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/"/>
     <id>https://blog.daydayops.com/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/</id>
     <published>2024-03-15T03:26:22.000Z</published>
-    <updated>2024-03-15T03:46:36.787Z</updated>
+    <updated>2024-03-15T10:25:10.164Z</updated>
     
     
       
@@ -33,6 +81,8 @@
       
     
     
+    
+    <category term="运维" scheme="https://blog.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
     
     
     <category term="clickhouse" scheme="https://blog.daydayops.com/tags/clickhouse/"/>
@@ -50,7 +100,7 @@
     <link href="https://blog.daydayops.com/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/"/>
     <id>https://blog.daydayops.com/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/</id>
     <published>2024-02-27T06:31:48.000Z</published>
-    <updated>2024-03-15T03:42:15.484Z</updated>
+    <updated>2024-03-15T10:24:53.828Z</updated>
     
     
       
@@ -62,6 +112,8 @@
       
     
     
+    
+    <category term="运维" scheme="https://blog.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
     
     
     <category term="minikube" scheme="https://blog.daydayops.com/tags/minikube/"/>
@@ -123,7 +175,7 @@
     <link href="https://blog.daydayops.com/2024/01/20/ce-shi-wen-zhang/"/>
     <id>https://blog.daydayops.com/2024/01/20/ce-shi-wen-zhang/</id>
     <published>2024-01-20T07:00:00.000Z</published>
-    <updated>2024-01-31T08:04:01.011Z</updated>
+    <updated>2024-03-15T10:40:18.587Z</updated>
     
     
       
@@ -131,9 +183,7 @@
         
         
     <summary type="html">&lt;p&gt;这是一篇测试文章&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/./12.jpeg&quot; alt=&quot;testimg&quot;&gt;&lt;/p&gt;
-&lt;p&gt;代码块&lt;/p&gt;
-&lt;pre class=&quot; language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span</summary>
+&lt;h2 id=&quot;信息框容器&quot;&gt;&lt;a href=&quot;#信息框容器&quot; class=&quot;headerlink&quot;</summary>
         
       
     

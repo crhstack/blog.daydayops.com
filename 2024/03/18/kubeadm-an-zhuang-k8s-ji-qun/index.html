@@ -4,8 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 天天运维博客">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="kubeadm安装k8s集群, 天天运维博客">
+    <meta name="description" content="kubeadm安装k8s集群安装kubeadm准备工作安装工具# 配置镜像
+cat &lt; EOF | tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+base">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 天天运维博客</title>
+    <title>kubeadm安装k8s集群 | 天天运维博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -335,12 +339,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">kubeadm安装k8s集群</h1>
                 </div>
             </div>
         </div>
@@ -376,21 +380,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-01-31
+                    2024-03-18
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-01-31
+                    2024-03-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    80
                 </div>
                 
 
@@ -420,19 +424,260 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
+                <h1 id="kubeadm安装k8s集群"><a href="#kubeadm安装k8s集群" class="headerlink" title="kubeadm安装k8s集群"></a>kubeadm安装k8s集群</h1><h2 id="安装kubeadm准备工作"><a href="#安装kubeadm准备工作" class="headerlink" title="安装kubeadm准备工作"></a>安装kubeadm准备工作</h2><h2 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h2><pre class=" language-shell"><code class="language-shell"># 配置镜像
+cat << EOF | tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+EOF
+
+# 安装工具
+yum install -y kubeadm kubelet kubectl --enablerepo=kubernetes
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server
+<pre class=" language-shell"><code class="language-shell"># cni指定
+cat << EOF | tee /etc/cni/net.d/10-containerd-net.conflist
+{
+ "cniVersion": "1.0.0",
+ "name": "containerd-net",
+ "plugins": [
+   {
+     "type": "bridge",
+     "bridge": "cni0",
+     "isGateway": true,
+     "ipMasq": true,
+     "promiscMode": true,
+     "ipam": {
+       "type": "host-local",
+       "ranges": [
+         [{
+           "subnet": "10.88.0.0/16"
+         }],
+         [{
+           "subnet": "2001:db8:4860::/64"
+         }]
+       ],
+       "routes": [
+         { "dst": "0.0.0.0/0" },
+         { "dst": "::/0" }
+       ]
+     }
+   },
+   {
+     "type": "portmap",
+     "capabilities": {"portMappings": true},
+     "externalSetMarkChain": "KUBE-MARK-MASQ"
+   }
+ ]
+}
+EOF
+
+# 配置路由转发
+echo 1 >/proc/sys/net/bridge/bridge-nf-call-iptables
+echo 1 >/proc/sys/net/ipv4/ip_forward contents
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate
+<p>初始化集群</p>
+<pre class=" language-shell"><code class="language-shell">kubeadm init --v=5 --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
+
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+I0318 17:13:06.333130   30977 kubeletfinalize.go:135] [kubelet-finalize] Restarting the kubelet to enable client certificate rotation
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 10.100.60.28:6443 --token 8upfhx.vl9d3m5myie3t89m \
+    --discovery-token-ca-cert-hash sha256:8a34de03c83faeead828e6e5349cb66f597bb48f463384cdc21f296b253c88c3
+
+
+使用kubectl proxy
+
+kubectl proxy --port=8080 &
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="1-提示CNI异常？"><a href="#1-提示CNI异常？" class="headerlink" title="1. 提示CNI异常？"></a>1. 提示CNI异常？</h3><pre class=" language-shell"><code class="language-shell">kubeadm init
+[init] Using Kubernetes version: v1.29.3
+[preflight] Running pre-flight checks
+error execution phase preflight: [preflight] Some fatal errors occurred:
+    [ERROR CRI]: container runtime is not running: output: time="2024-03-18T16:26:13+08:00" level=fatal msg="validate service connection: validate CRI v1 runtime API for endpoint \"unix:///var/run/containerd/containerd.sock\": rpc error: code = Unimplemented desc = unknown service runtime.v1.RuntimeService"
+, error: exit status 1
+[preflight] If you know what you are doing, you can make a check non-fatal with `--ignore-preflight-errors=...`
+To see the stack trace of this error execute with --v=5 or higher
+
+# 查看containerd版本
+containerd -v
+containerd github.com/containerd/containerd 1.2.4
+# 更新containerd版本
+``` shell
+wget https://github.com/containerd/containerd/releases/download/v1.7.14/containerd-1.7.14-linux-amd64.tar.gz
+tar -zxvf containerd-1.7.14-linux-amd64.tar.gz
+mv bin/* /usr/local/bin/
+
+#配置systemd文件
+vi /etc/systemd/system/containerd.service
+# Copyright The containerd Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[Unit]
+Description=containerd container runtime
+Documentation=https://containerd.io
+After=network.target local-fs.target
+
+[Service]
+ExecStartPre=-/sbin/modprobe overlay
+ExecStart=/usr/local/bin/containerd
+
+Type=notify
+Delegate=yes
+KillMode=process
+Restart=always
+RestartSec=5
+
+# Having non-zero Limit*s causes performance problems due to accounting overhead
+# in the kernel. We recommend using cgroups to do container-local accounting.
+LimitNPROC=infinity
+LimitCORE=infinity
+
+# Comment TasksMax if your systemd version does not supports it.
+# Only systemd 226 and above support this version.
+TasksMax=infinity
+OOMScoreAdjust=-999
+
+[Install]
+WantedBy=multi-user.target
+
+systemctl daemon-reload
+systemctl restart containerd
+systemctl status containerd
+# 查看containerd版本
+containerd -v
+containerd github.com/containerd/containerd v1.7.14 dcf2847247e18caba8dce86522029642f60fe96b
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="2-coredns安装失败"><a href="#2-coredns安装失败" class="headerlink" title="2. coredns安装失败"></a>2. coredns安装失败</h3><pre class=" language-shell"><code class="language-shell">kubectl get pod -A
+NAMESPACE     NAME                                              READY   STATUS              RESTARTS      AGE
+kube-system   coredns-5f98f8d567-2c4g9                          0/1     Terminating         0             61m
+kube-system   coredns-5f98f8d567-6c6sg                          0/1     ContainerCreating   0             38m
+kube-system   coredns-5f98f8d567-h572m                          0/1     ContainerCreating   0             61m
+
+kubectl describe pod coredns-5f98f8d567-6c6sg -n kube-system
+...
+Events:
+  Type     Reason                  Age                  From               Message
+  ----     ------                  ----                 ----               -------
+  Warning  FailedScheduling        33m                  default-scheduler  0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+  Warning  FailedScheduling        27m                  default-scheduler  0/2 nodes are available: 2 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. preemption: 0/2 nodes are available: 2 Preemption is not helpful for scheduling.
+  Normal   Scheduled               25m                  default-scheduler  Successfully assigned kube-system/coredns-5f98f8d567-6c6sg to tx7-ops-beian-temp81.bj
+  Warning  FailedCreatePodSandBox  25m                  kubelet            Failed to create pod sandbox: rpc error: code = Unknown desc = failed to setup network for sandbox "377bcf7984f12632bf9c55704f85744283ce8b75f6396f815e17a1548181d236": plugin type="flannel" failed (add): failed to find plugin "flannel" in path [/opt/cni/bin]
+  Normal   SandboxChanged          17s (x117 over 25m)  kubelet            Pod sandbox changed, it will be killed and re-created.
+</code></pre>
+<p>指定的cni找不到 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/migrating-from-dockershim/troubleshooting-cni-plugin-related-errors/#updating-your-cni-plugins-and-cni-config-files">官方文档</a></p>
+<pre class=" language-shell"><code class="language-shell">cat << EOF | tee /etc/cni/net.d/10-containerd-net.conflist
+{
+ "cniVersion": "1.0.0",
+ "name": "containerd-net",
+ "plugins": [
+   {
+     "type": "bridge",
+     "bridge": "cni0",
+     "isGateway": true,
+     "ipMasq": true,
+     "promiscMode": true,
+     "ipam": {
+       "type": "host-local",
+       "ranges": [
+         [{
+           "subnet": "10.88.0.0/16"
+         }],
+         [{
+           "subnet": "2001:db8:4860::/64"
+         }]
+       ],
+       "routes": [
+         { "dst": "0.0.0.0/0" },
+         { "dst": "::/0" }
+       ]
+     }
+   },
+   {
+     "type": "portmap",
+     "capabilities": {"portMappings": true},
+     "externalSetMarkChain": "KUBE-MARK-MASQ"
+   }
+ ]
+}
+EOF
+</code></pre>
+<p>重启containerd</p>
+<h3 id="3-提示kubelet超时"><a href="#3-提示kubelet超时" class="headerlink" title="3. 提示kubelet超时"></a>3. 提示kubelet超时</h3><pre class=" language-shell"><code class="language-shell">...
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+I0318 17:07:14.119153   18564 waitcontrolplane.go:83] [wait-control-plane] Waiting for the API server to be healthy
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+
+Unfortunately, an error has occurred:
+    timed out waiting for the condition
+
+This error is likely caused by:
+    - The kubelet is not running
+    - The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+    - 'systemctl status kubelet'
+    - 'journalctl -xeu kubelet'
+
+Additionally, a control plane component may have crashed or exited when started by the container runtime.
+
+# 启动kubelet超时 
+# 主机名解析配置
+cat /etc/hosts
+</code></pre>
+<h3 id="node-cni异常"><a href="#node-cni异常" class="headerlink" title="node cni异常"></a>node cni异常</h3><pre><code>kubectl describe node tx7-ops-beian-temp82.bj
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Mon, 18 Mar 2024 18:36:14 +0800   Mon, 18 Mar 2024 18:31:38 +0800   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Mon, 18 Mar 2024 18:36:14 +0800   Mon, 18 Mar 2024 18:31:38 +0800   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Mon, 18 Mar 2024 18:36:14 +0800   Mon, 18 Mar 2024 18:31:38 +0800   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            False   Mon, 18 Mar 2024 18:36:14 +0800   Mon, 18 Mar 2024 18:31:38 +0800   KubeletNotReady              container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized
+Addresses:
+...
+</code></pre>
+<p>查看Node节点kubelet日志</p>
+<pre class=" language-shell"><code class="language-shell">journalctl -u kubelet
+kuberuntime_manager.go:258] "Container runtime initialized" containerRuntime="containerd" version="v1.7.14" apiVersion="v1"
+</code></pre>
+<p>解决方法跟 <a href="###2">问题2</a></p>
 
                 
             </div>
@@ -459,7 +704,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://blog.daydayops.com/2024/01/31/hello-world/">https://blog.daydayops.com/2024/01/31/hello-world/</a>
+                    <a href="https://blog.daydayops.com/2024/03/18/kubeadm-an-zhuang-k8s-ji-qun/">https://blog.daydayops.com/2024/03/18/kubeadm-an-zhuang-k8s-ji-qun/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -811,31 +1056,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2024/01/31/github-pages-chuang-jian-zi-ji-yu-ming-wang-zhan/">
+                <a href="/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Github Pages创建自己域名网站">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Kubernetes-v1.30新特性一览">
                         
-                        <span class="card-title">Github Pages创建自己域名网站</span>
+                        <span class="card-title">Kubernetes-v1.30新特性一览</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Github Pages创建自己域名网站，无需服务器
+                            
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-01-31
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-04-16
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/web/" class="post-category">
-                                    web
+                            <a href="/categories/kubernetes/" class="post-category">
+                                    kubernetes
                                 </a>
                             
                             
@@ -845,12 +1090,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8E%9F%E5%88%9B/">
-                        <span class="chip bg-color">原创</span>
+                    <a href="/tags/kubernetes/">
+                        <span class="chip bg-color">kubernetes</span>
                     </a>
                     
-                    <a href="/tags/github/">
-                        <span class="chip bg-color">github</span>
+                    <a href="/tags/%E8%BD%AC%E8%BD%BD/">
+                        <span class="chip bg-color">转载</span>
                     </a>
                     
                 </div>
@@ -864,13 +1109,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/01/20/ce-shi-wen-zhang/">
+                <a href="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="测试文章">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？">
                         
-                        <span class="card-title">测试文章</span>
+                        <span class="card-title">替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -881,14 +1126,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-15
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B5%8B%E8%AF%95/" class="post-category">
-                                    测试
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
                                 </a>
                             
                             
@@ -898,12 +1143,20 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8E%9F%E5%88%9B/">
-                        <span class="chip bg-color">原创</span>
+                    <a href="/tags/clickhouse/">
+                        <span class="chip bg-color">clickhouse</span>
                     </a>
                     
-                    <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                        <span class="chip bg-color">测试</span>
+                    <a href="/tags/ELK/">
+                        <span class="chip bg-color">ELK</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/">
+                        <span class="chip bg-color">日志收集</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%97%A5%E5%BF%97%E5%8F%AF%E8%A7%82%E6%B5%8B/">
+                        <span class="chip bg-color">日志可观测</span>
                     </a>
                     
                 </div>
