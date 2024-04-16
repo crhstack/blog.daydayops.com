@@ -50,9 +50,9 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.1.1">
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="天天运维博客" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="天天运维博客" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -441,7 +441,7 @@
 <p>恰好前些天我在 “硬地骇客” 播客上录制了一期节目，正好提到 Kubernetes 现在是不是变得太复杂了，感兴趣的话可以听一下。</p>
 <p>具体来看 v1.30 版本中有 10 个增强功能正在进入 Alpha 阶段，18 个将升级到 Beta 阶段，而另外 17 个则将升级到稳定版。</p>
 <p>这次的版本称之为 “Uwernetes” 是 UwU 和 Kubernetes 的组合，因为发布团队认为这个版本是最可爱的版本了，也是对所有参与到 Kubernetes 生态中的人的一种致敬。让我们一起探索这个充满爱和喜悦的版本吧 UwU</p>
-<p><img src="/image.png" alt="Alt text"></p>
+<p><img src="/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/image.png" alt="Alt text"></p>
 <h3 id="Pod-调度就绪机制达到-GA"><a href="#Pod-调度就绪机制达到-GA" class="headerlink" title="Pod 调度就绪机制达到 GA"></a>Pod 调度就绪机制达到 GA</h3><p>这个功能实际上是从 Kubernetes v1.26 开始增加的。是 KEP 3521 的第一部分。并且在 v1.27 时候达到了 Beta。</p>
 <p>我们来快速的回顾一下 Pod 的创建过程。</p>
 <p>当 client 通过 kube-apiserver 创建成功 Pod 资源后，kube-scheduler 会去检查尚未被调度的 Pod，然后为其进行调度，分配 Node。之后 Node 获取到调度到该 Node 上的 Pod 然后进行创建。（这里省略了很多细节，但其他的部分与我们此处要介绍的内容关系不太大，就不展开了。）</p>
@@ -449,7 +449,7 @@
 <p>但在实际的场景中，Pod 通常还会需要一些其他的资源，最典型的比如存储。在一些环境中，这些资源是需要预先进行创建的，尤其是在一些云厂商的场景中，还需要检查用户账户中是否还有余额可以用于创建云盘等。</p>
 <p>一但前置的依赖无法满足，假如 kube-scheduler 已经完成了 Pod 的调度，那么 kubelet 侧就会处于尝试创建 Pod ，但失败的情况。</p>
 <p>这个 KEP 的出现就可以很好的解决这个问题，增加了一个 Pod 是否准备好被调度的机制。如果前置依赖不满足，那么 Pod 就无需被调度，这也不会消耗资源。kube-scheduler 和 kubelet 都无需进行处理。待条件满足，Pod 再被调度和创建即可。</p>
-<p><img src="/image-1.png" alt="Alt text"></p>
+<p><img src="/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/image-1.png" alt="Alt text"></p>
 <p>这个机制我个人感觉还是挺好的，甚至我可以有更灵活的策略来控制应用的副本。比如在大流量，需要动态扩容的场景下，我可以利用此机制预先创建一些 Pod 资源以及准备好它的依赖， 甚至可以在 Node 上准备好镜像等。当需要增加副本时，直接标记 Pod 可被调度，</p>
 <p>使用时，通过配置 Pod 的 .spec.schedulingGates 即可。例如：</p>
 <pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
@@ -603,12 +603,30 @@ authorizer.requestResource.check('my<span class="token punctuation">-</span>cust
 <h3 id="在卷恢复期间防止未经授权的卷模式转换-GA"><a href="#在卷恢复期间防止未经授权的卷模式转换-GA" class="headerlink" title="在卷恢复期间防止未经授权的卷模式转换 GA"></a>在卷恢复期间防止未经授权的卷模式转换 GA</h3><p>Prevent unauthorised volume mode conversion during volume restore KEP-3141 KEP-3141 提出一种机制来减轻用户在从现有 PVC 创建 VolumeSnapshot 时对卷模式的更改带来的漏洞。</p>
 <p>这个特性更偏向于对现有 Kubernetes 机制的一种加固。</p>
 <p>因为在 Kubernetes v1.20 时有一个 GA 的特性 VolumeSnapshot，用户可以通过使用 VolumeSnapshot 特性，从卷快照创建新的持久化卷。这是非常有用的，比如说 DBA 可以在进行数据库大的变更/迁移操作前，对持久化卷做一次快照，如果出现异常，则可以直接从该快照恢复数据库之前的状态。</p>
-<h2 id="例如通过以下方式可以动态的创建一个快照：-yamlapiVersion-snapshot-storage-k8s-io-v1kind-VolumeSnapshotClassmetadata-name-test-snapclassdriver-testdriver-csi-k8s-iodeletionPolicy-Deleteparameters-csi-storage-k8s-io-snapshotter-secret-name-mysecret-csi-storage-k8s-io-snapshotter-secret-namespace-mysecretnamespace"><a href="#例如通过以下方式可以动态的创建一个快照：-yamlapiVersion-snapshot-storage-k8s-io-v1kind-VolumeSnapshotClassmetadata-name-test-snapclassdriver-testdriver-csi-k8s-iodeletionPolicy-Deleteparameters-csi-storage-k8s-io-snapshotter-secret-name-mysecret-csi-storage-k8s-io-snapshotter-secret-namespace-mysecretnamespace" class="headerlink" title="例如通过以下方式可以动态的创建一个快照：```yamlapiVersion: snapshot.storage.k8s.io/v1kind: VolumeSnapshotClassmetadata:  name: test-snapclassdriver: testdriver.csi.k8s.iodeletionPolicy: Deleteparameters:  csi.storage.k8s.io/snapshotter-secret-name: mysecret  csi.storage.k8s.io/snapshotter-secret-namespace: mysecretnamespace"></a>例如通过以下方式可以动态的创建一个快照：<br>```yaml<br>apiVersion: snapshot.storage.k8s.io/v1<br>kind: VolumeSnapshotClass<br>metadata:<br>  name: test-snapclass<br>driver: testdriver.csi.k8s.io<br>deletionPolicy: Delete<br>parameters:<br>  csi.storage.k8s.io/snapshotter-secret-name: mysecret<br>  csi.storage.k8s.io/snapshotter-secret-namespace: mysecretnamespace</h2><p>apiVersion: snapshot.storage.k8s.io/v1<br>kind: VolumeSnapshot<br>metadata:<br>  name: test-snapshot<br>  namespace: ns1<br>spec:<br>  volumeSnapshotClassName: test-snapclass<br>  source:<br>    persistentVolumeClaimName: test-pvc</p>
-<pre><code>当然，这里也有些需要注意的点，该功能只能用于 CSI 存储驱动，并且该功能是自 Kubernetes v1.17 达到 beta，v1.20 正式 GA 的。
-
-VolumeSnapshot 是通过将 PVC 的 spec.dataSource 参数指向现有 VolumeSnapshot 实例来完成的。然而，没有任何逻辑来验证在此操作期间原始卷模式是否与新创建的 PVC 的卷模式匹配。这个 KEP 引入了一个新的 annotation，
-```yaml
-snapshot.storage.kubernetes.io/allow-volume-mode-change
+<p>例如通过以下方式可以动态的创建一个快照：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> snapshot.storage.k8s.io/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> VolumeSnapshotClass
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> test<span class="token punctuation">-</span>snapclass
+<span class="token key atrule">driver</span><span class="token punctuation">:</span> testdriver.csi.k8s.io
+<span class="token key atrule">deletionPolicy</span><span class="token punctuation">:</span> Delete
+<span class="token key atrule">parameters</span><span class="token punctuation">:</span>
+  <span class="token key atrule">csi.storage.k8s.io/snapshotter-secret-name</span><span class="token punctuation">:</span> mysecret
+  <span class="token key atrule">csi.storage.k8s.io/snapshotter-secret-namespace</span><span class="token punctuation">:</span> mysecretnamespace
+<span class="token punctuation">---</span>
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> snapshot.storage.k8s.io/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> VolumeSnapshot
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> test<span class="token punctuation">-</span>snapshot
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> ns1
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">volumeSnapshotClassName</span><span class="token punctuation">:</span> test<span class="token punctuation">-</span>snapclass
+  <span class="token key atrule">source</span><span class="token punctuation">:</span>
+    <span class="token key atrule">persistentVolumeClaimName</span><span class="token punctuation">:</span> test<span class="token punctuation">-</span>pvc
+</code></pre>
+<p>当然，这里也有些需要注意的点，该功能只能用于 CSI 存储驱动，并且该功能是自 Kubernetes v1.17 达到 beta，v1.20 正式 GA 的。</p>
+<p>VolumeSnapshot 是通过将 PVC 的 spec.dataSource 参数指向现有 VolumeSnapshot 实例来完成的。然而，没有任何逻辑来验证在此操作期间原始卷模式是否与新创建的 PVC 的卷模式匹配。这个 KEP 引入了一个新的 annotation，</p>
+<pre class=" language-yaml"><code class="language-yaml">snapshot.storage.kubernetes.io/allow<span class="token punctuation">-</span>volume<span class="token punctuation">-</span>mode<span class="token punctuation">-</span>change
 </code></pre>
 <p>用户可以通过它来防止未授权的卷模式转换。</p>
 <h3 id="为-Pod-添加-status-hostIPs-GA"><a href="#为-Pod-添加-status-hostIPs-GA" class="headerlink" title="为 Pod 添加 status.hostIPs GA"></a>为 Pod 添加 status.hostIPs GA</h3><p>Field status.hostIPs added for Pod KEP-2681 该 KEP 提出为 Pod 添加一个新字段 status.hostIP，以获取节点的地址。该 KEP 旨在改善 Pod 获取节点地址的能力，尤其是从单栈向双栈迁移的场景。</p>
