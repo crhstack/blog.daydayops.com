@@ -6,7 +6,7 @@
   <link href="https://blog.daydayops.com/atom.xml" rel="self"/>
   
   <link href="https://blog.daydayops.com/"/>
-  <updated>2024-04-16T06:25:04.180Z</updated>
+  <updated>2024-04-22T06:41:13.995Z</updated>
   <id>https://blog.daydayops.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>kubernets集群问题排查指南</title>
+    <link href="https://blog.daydayops.com/2024/04/22/kubernets-ji-qun-wen-ti-pai-cha-zhi-nan/"/>
+    <id>https://blog.daydayops.com/2024/04/22/kubernets-ji-qun-wen-ti-pai-cha-zhi-nan/</id>
+    <published>2024-04-22T06:38:15.000Z</published>
+    <updated>2024-04-22T06:41:13.995Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;排查指南&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/2024/04/22/kubernets-ji-qun-wen-ti-pai-cha-zhi-nan/image.png&quot; alt=&quot;PNG&quot;&gt;&lt;/p&gt;
+&lt;p&gt;pdf文件下载地址：&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="kubernets" scheme="https://blog.daydayops.com/tags/kubernets/"/>
+    
+    <category term="troubleshooting" scheme="https://blog.daydayops.com/tags/troubleshooting/"/>
+    
+  </entry>
   
   <entry>
     <title>Kubernetes-v1.30新特性一览</title>

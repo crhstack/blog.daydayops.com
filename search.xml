@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>kubernets集群问题排查指南</title>
+      <link href="/2024/04/22/kubernets-ji-qun-wen-ti-pai-cha-zhi-nan/"/>
+      <url>/2024/04/22/kubernets-ji-qun-wen-ti-pai-cha-zhi-nan/</url>
+      
+        <content type="html"><![CDATA[<p>排查指南</p><p><img src="/2024/04/22/kubernets-ji-qun-wen-ti-pai-cha-zhi-nan/image.png" alt="PNG"></p><p>pdf文件下载地址：<a href="https://static.learnk8s.io/168db7d27bbf0e31a0bd038bf98757fd.pdf">kubernets集群问题排查指南.pdf</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> kubernets </tag>
+            
+            <tag> troubleshooting </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Kubernetes-v1.30新特性一览</title>
       <link href="/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/"/>
       <url>/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/</url>
