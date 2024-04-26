@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？, 天天运维博客">
-    <meta name="description" content="替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？背景SaaS 服务未来会面临数据安全、合规等问题。公司的业务需要沉淀一套私有化部署能力，帮助业务提升行业竞争力。为了完善平台系统能力、我们需要沉淀一套数据体系帮助">
+    <meta name="keywords" content="MongoDB集群-带访问控制的分片副本集, 天天运维博客">
+    <meta name="description" content="MongoDB集群-带访问控制的分片副本集1.环境：集群部署采用三台服务器，部署三个分片，每个分片三个副本。各个分片之间是完全独立的，一个database的数据只能落在一个分片上。
+server：172.18.1.31 172.18.1.3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？ | 天天运维博客</title>
+    <title>MongoDB集群-带访问控制的分片副本集 | 天天运维博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -335,12 +336,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？</h1>
+                    <h1 class="description center-align post-title">MongoDB集群-带访问控制的分片副本集</h1>
                 </div>
             </div>
         </div>
@@ -364,35 +365,18 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/clickhouse/">
-                                <span class="chip bg-color">clickhouse</span>
+                            <a href="/tags/MongoDB/">
+                                <span class="chip bg-color">MongoDB</span>
                             </a>
                         
-                            <a href="/tags/ELK/">
-                                <span class="chip bg-color">ELK</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/">
-                                <span class="chip bg-color">日志收集</span>
-                            </a>
-                        
-                            <a href="/tags/%E6%97%A5%E5%BF%97%E5%8F%AF%E8%A7%82%E6%B5%8B/">
-                                <span class="chip bg-color">日志可观测</span>
+                            <a href="/tags/%E8%BF%90%E7%BB%B4/">
+                                <span class="chip bg-color">运维</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                运维
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -401,28 +385,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-03-15
+                    2024-04-25
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-15
+                    2024-04-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    11 分
                 </div>
                 
 
@@ -445,216 +429,502 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="替代ELK：ClickHouse-Kafka-FlieBeat，才是最佳选择？"><a href="#替代ELK：ClickHouse-Kafka-FlieBeat，才是最佳选择？" class="headerlink" title="替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？"></a>替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>SaaS 服务未来会面临数据安全、合规等问题。公司的业务需要沉淀一套私有化部署能力，帮助业务提升行业竞争力。为了完善平台系统能力、我们需要沉淀一套数据体系帮助运营分析活动效果、提升运营能力。</p>
-<p>然而在实际的开发过程中，如果直接部署一套大数据体系，对于使用者来说将是一笔比较大的服务器开销。为此我们选用折中方案完善数据分析能力。</p>
-<p>Easticsearch vs Clickhouse<br>ClickHouse是一款高性能列式分布式数据库管理系统，我们对ClickHouse进行了测试，发现有下列优势：</p>
-<p>ClickHouse写入吞吐量大，单服务器日志写入量在50MB到200MB/s，每秒写入超过60w记录数，是ES的5倍以上。在ES中比较常见的写Rejected导致数据丢失、写入延迟等问题，在ClickHouse中不容易发生。</p>
-<p>查询速度快，官方宣称数据在pagecache中，单服务器查询速率大约在2-30GB/s；没在pagecache的情况下，查询速度取决于磁盘的读取速率和数据的压缩率。经测试ClickHouse的查询速度比ES快5-30倍以上。</p>
-<p>ClickHouse比ES服务器成本更低。一方面ClickHouse的数据压缩比比ES高，相同数据占用的磁盘空间只有ES的1/3到1/30，节省了磁盘空间的同时，也能有效的减少磁盘IO，这也是ClickHouse查询效率更高的原因之一；另一方面ClickHouse比ES占用更少的内存，消耗更少的CPU资源。我们预估用ClickHouse处理日志可以将服务器成本降低一半。</p>
-<p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image.png" alt="架构"></p>
-<p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image-1.png" alt="成本对比"></p>
-<p>成本分析<br>备注：在没有任何折扣的情况下，基于aliyun分析</p>
-<p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image-2.png" alt="成本分析"></p>
-<h2 id="环境部署"><a href="#环境部署" class="headerlink" title="环境部署"></a>环境部署</h2><h3 id="zookeeper-集群部署"><a href="#zookeeper-集群部署" class="headerlink" title="zookeeper 集群部署"></a>zookeeper 集群部署</h3><p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image-3.png" alt="启动zk"></p>
-<pre class=" language-shell"><code class="language-shell">yum install java-1.8.0-openjdk-devel.x86_64
-#将java环境变量加入/etc/profile 配置环境变量
-#更新系统时间
-yum install  ntpdate
-ntpdate asia.pool.ntp.org
-
-
-mkdir zookeeper
-mkdir ./zookeeper/data
-mkdir ./zookeeper/logs
-
-
-wget  --no-check-certificate https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.7.1/apache-zookeeper-3.7.1-bin.tar.gz
-tar -zvxf apache-zookeeper-3.7.1-bin.tar.gz -C /usr/zookeeper
-
-
-export ZOOKEEPER_HOME=/usr/zookeeper/apache-zookeeper-3.7.1-bin
-export PATH=$ZOOKEEPER_HOME/bin:$PATH
-
-
-#进入ZooKeeper配置目录
-cd $ZOOKEEPER_HOME/conf
-
-
-#新建配置文件
-vim zoo.cfg
-
-
-tickTime=2000
-initLimit=10
-syncLimit=5
-dataDir=/usr/zookeeper/data
-dataLogDir=/usr/zookeeper/logs
-clientPort=2181
-server.1=zk1:2888:3888
-server.2=zk2:2888:3888
-server.3=zk3:2888:3888
-
-
-# 在每台服务器上执行，给zookeeper创建myid
-echo "1" > /usr/zookeeper/data/myid
-echo "2" > /usr/zookeeper/data/myid
-echo "3" > /usr/zookeeper/data/myid
-
-
-#进入ZooKeeper bin目录
-cd $ZOOKEEPER_HOME/bin
-sh zkServer.sh start
+                <h1 id="MongoDB集群-带访问控制的分片副本集"><a href="#MongoDB集群-带访问控制的分片副本集" class="headerlink" title="MongoDB集群-带访问控制的分片副本集"></a>MongoDB集群-带访问控制的分片副本集</h1><h2 id="1-环境："><a href="#1-环境：" class="headerlink" title="1.环境："></a>1.环境：</h2><p>集群部署采用三台服务器，部署三个分片，每个分片三个副本。各个分片之间是完全独立的，一个database的数据只能落在一个分片上。</p>
+<pre><code>server：172.18.1.31 172.18.1.32 172.18.1.33
+OS：CentOS 7.2
+MongoDB Version：v4.0.5
 </code></pre>
-<h3 id="Kafka-集群部署"><a href="#Kafka-集群部署" class="headerlink" title="Kafka 集群部署"></a>Kafka 集群部署</h3><pre class=" language-shell"><code class="language-shell">mkdir -p /usr/kafka
-chmod 777 -R /usr/kafka
-wget  --no-check-certificate https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/3.2.0/kafka_2.12-3.2.0.tgz
-tar -zvxf kafka_2.12-3.2.0.tgz -C /usr/kafka
-
-
-#不同的broker Id 设置不一样，比如 1,2,3
-broker.id=1
-listeners=PLAINTEXT://ip:9092
-socket.send.buffer.bytes=102400
-socket.receive.buffer.bytes=102400
-socket.request.max.bytes=104857600
-log.dir=/usr/kafka/logs
-num.partitinotallow=5
-num.recovery.threads.per.data.dir=3
-offsets.topic.replication.factor=2
-transaction.state.log.replication.factor=3
-transaction.state.log.min.isr=3
-log.retention.hours=168
-log.segment.bytes=1073741824
-log.retention.check.interval.ms=300000
-zookeeper.cnotallow=zk1:2181,zk2:2181,zk3:2181
-zookeeper.connection.timeout.ms=30000
-group.initial.rebalance.delay.ms=0
-
-
-#后台常驻进程启动kafka
-nohup /usr/kafka/kafka_2.12-3.2.0/bin/kafka-server-start.sh /usr/kafka/kafka_2.12-3.2.0/config/server.properties   >/usr/kafka/logs/kafka.log >&1 &
-
-
-/usr/kafka/kafka_2.12-3.2.0/bin/kafka-server-stop.sh
-
-
-$KAFKA_HOME/bin/kafka-topics.sh --list --bootstrap-server  ip:9092
-
-
-$KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server ip:9092 --topic test --from-beginning
-
-
-$KAFKA_HOME/bin/kafka-topics.sh  --create --bootstrap-server  ip:9092  --replication-factor 2 --partitions 3 --topic xxx_data
+<p>服务部署结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>172.18.1.31</th>
+<th>172.18.1.32</th>
+<th>172.18.1.33</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>config:27017</td>
+<td>config:27017</td>
+<td>config:27017</td>
+</tr>
+<tr>
+<td>mongos:27018</td>
+<td>mongos:27018</td>
+<td>mongos:27018</td>
+</tr>
+<tr>
+<td>shard01:27101</td>
+<td>shard01:27101</td>
+<td>shard01:27101</td>
+</tr>
+<tr>
+<td>shard02:27102</td>
+<td>shard02:27102</td>
+<td>shard02:27102</td>
+</tr>
+<tr>
+<td>shard03:27103</td>
+<td>shard03:27103</td>
+<td>shard03:27103</td>
+</tr>
+</tbody></table>
+<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h2><h3 id="2-1-添加yum源"><a href="#2-1-添加yum源" class="headerlink" title="2.1 添加yum源"></a>2.1 添加yum源</h3><pre class=" language-shell"><code class="language-shell">    cat &gt; /etc/yum.repos.d/mongodb-org-4.0.repo &lt;&lt; EOF
+    [mongodb-org-4.0]
+    name=MongoDB Repository
+    baseurl=https://repo.mongodb.org/yum/redhat/7/mongodb-org/4.0/x86_64/
+    gpgcheck=1
+    enabled=1
+    gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
+    EOF
 </code></pre>
-<h3 id="FileBeat-部署"><a href="#FileBeat-部署" class="headerlink" title="FileBeat 部署"></a>FileBeat 部署</h3><pre class=" language-shell"><code class="language-shell">sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-
-
-Create a file with a .repo extension (for example, elastic.repo) in your /etc/yum.repos.d/ directory and add the following lines:
-# 在/etc/yum.repos.d/ 目录下创建elastic.repo
-
-
-[elastic-8.x]
-name=Elastic repository for 8.x packages
-baseurl=https://artifacts.elastic.co/packages/8.x/yum
-gpgcheck=1
-gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-enabled=1
-autorefresh=1
-type=rpm-md
-
-
-yum install filebeat
-systemctl enable filebeat
-chkconfig --add filebeat
+<h3 id="2-2-安装"><a href="#2-2-安装" class="headerlink" title="2.2 安装"></a>2.2 安装</h3><pre class=" language-shell"><code class="language-shell">    # yum -y install mongodb-org
 </code></pre>
-<p>FileBeat 配置文件说明，坑点1（需设置keys_under_root: true）。如果不设置kafka的消息字段如下：</p>
-<p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image-4.png" alt="filebeat字段说明"></p>
-<p>文件目录：/etc/filebeat/filebeat.yml</p>
-<pre class=" language-yml"><code class="language-yml">filebeat.inputs:
-- type: log
-  enabled: true
-  paths:
-    - /root/logs/xxx/inner/*.log
-  json:  
-# 如果不设置该索性，所有的数据都存储在message里面，这样设置以后数据会平铺。
-       keys_under_root: true 
-output.kafka:
-  hosts: ["kafka1:9092", "kafka2:9092", "kafka3:9092"]
-  topic: 'xxx_data_clickhouse'
-  partition.round_robin:
-            reachable_only: false
-            required_acks: 1
-            compression: gzip
-processors: 
-# 剔除filebeat 无效的字段数据
-    - drop_fields:  
-        fields: ["input", "agent", "ecs", "log", "metadata", "timestamp"]
-        ignore_missing: false
-
-
-nohup ./filebeat -e -c /etc/filebeat/filebeat.yml > /user/filebeat/filebeat.log & 
+<h3 id="2-3-删除yum安装的mongod服务"><a href="#2-3-删除yum安装的mongod服务" class="headerlink" title="2.3 删除yum安装的mongod服务"></a>2.3 删除yum安装的mongod服务</h3><pre class=" language-shell"><code class="language-shell">    # systemctl disable mongod
+    # rm –f /usr/lib/systemd/system/mongod.service
+    # systemctl daemon-reload
 </code></pre>
-<p>输出到filebeat.log文件中，方便排查</p>
-<h3 id="Clickhouse-部署"><a href="#Clickhouse-部署" class="headerlink" title="Clickhouse 部署"></a>Clickhouse 部署</h3><p><img src="/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/image-5.png" alt="Alt text"></p>
-<pre class=" language-shell"><code class="language-shell">#检查当前CPU是否支持SSE 4.2，如果不支持，需要通过源代码编译构建
-grep -q sse4_2 /proc/cpuinfo && echo "SSE 4.2 supported" || echo "SSE 4.2 not supported"
-# 返回 "SSE 4.2 supported" 表示支持，返回 "SSE 4.2 not supported" 表示不支持
-
-
-# 创建数据保存目录，将它创建到大容量磁盘挂载的路径
-mkdir -p /data/clickhouse
-# 修改/etc/hosts文件，添加clickhouse节点
-# 举例：
-10.190.85.92 bigdata-clickhouse-01
-10.190.85.93 bigdata-clickhouse-02
-
-
-# 服务器性能参数设置：
-# cpu频率调节，将CPU频率固定工作在其支持的最高运行频率上，而不动态调节，性能最好
-echo 'performance' | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
-
-
-# 内存调节，不要禁用 overcommit
-echo 0 | tee /proc/sys/vm/overcommit_memory
-
-
-# 始终禁用透明大页(transparent huge pages)。它会干扰内存分配器，从而导致显着的性能下降
-echo 'never' | tee /sys/kernel/mm/transparent_hugepage/enabled
-
-
-# 首先，需要添加官方存储库：
-yum install yum-utils
-rpm --import <https://repo.clickhouse.tech/CLICKHOUSE-KEY.GPG>
-yum-config-manager --add-repo <https://repo.clickhouse.tech/rpm/stable/x86_64>
-
-
-# 查看clickhouse可安装的版本：
-yum list | grep clickhouse
-# 运行安装命令：
-yum -y install clickhouse-server clickhouse-client
-
-
-# 修改/etc/clickhouse-server/config.xml配置文件，修改日志级别为information，默认是trace
-<level>information</level>
-# 执行日志所在目录：
-
-
-# 正常日志
-/var/log/clickhouse-server/clickhouse-server.log
-# 异常错误日志
-/var/log/clickhouse-server/clickhouse-server.err.log
-
-
-# 查看安装的clickhouse版本：
-clickhouse-server --version
-clickhouse-client --password
-
-
-sudo clickhouse stop
-sudo clickhouse tart
-sudo clickhouse start
+<h2 id="3-高可用集群部署"><a href="#3-高可用集群部署" class="headerlink" title="3.高可用集群部署"></a>3.高可用集群部署</h2><h3 id="3-1-配置文件准备"><a href="#3-1-配置文件准备" class="headerlink" title="3.1 配置文件准备"></a>3.1 配置文件准备</h3><p>每台服务器上都运行monogs、config、shard01、shard02、shard03服务，分别对应一个配置文件，统一将配置文件存放在/etc/mongodb/目录下。</p>
+<pre class=" language-shell"><code class="language-shell">    # mkdir /etc/mongodb
+    # chown -R mongod.mongod /etc/mongodb
 </code></pre>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个部署的过程踩了不少坑，尤其是filebeat yml的参数设置。希望这篇文章可以给你一些建议</p>
+<p>将config和shard的数据保存在/data/mongodb/目录下。</p>
+<pre class=" language-shell"><code class="language-shell">    # mkdir -p /data/mongodb/{config,shard01,shard02,shard03}/data /data/mongodb/mongos
+    # chown -R mongod.mongod /data/mongodb
+</code></pre>
+<p>日志统一放在/data/logs/mongodb目录下</p>
+<pre class=" language-shell"><code class="language-shell">    # mkdir /data/logs/mongodb
+    # chown -R mongod.mongod /data/logs/mongodb
+</code></pre>
+<p>config配置</p>
+<pre class=" language-shell"><code class="language-shell">    vim /etc/mongodb/config.conf
+    # where to write logging data.
+    systemLog:
+      destination: file
+      logAppend: true
+      path: /data/logs/mongodb/config.log
+
+    # Where and how to store data.
+    storage:
+      dbPath: /data/mongodb/config/data
+      journal:
+        enabled: true
+
+    # how the process runs
+    processManagement:
+      fork: true
+      pidFilePath: /data/mongodb/config/mongodb-config.pid
+      timeZoneInfo: /usr/share/zoneinfo
+
+    # network interfaces
+    net:
+      port: 27018
+      bindIp: 0.0.0.0
+      unixDomainSocket:
+        pathPrefix: /var/run/mongodb
+
+    #operationProfiling:
+    replication:
+        replSetName: ussmongo-config
+
+    sharding:
+        clusterRole: configsvr
+</code></pre>
+<p>shard01配置</p>
+<pre class=" language-shell"><code class="language-shell">    cat /etc/mongodb/shard01.conf 
+    # where to write logging data.
+    systemLog:
+      destination: file
+      logAppend: true
+      path: /data/logs/mongodb/shard01.log
+      logRotate: rename
+
+    # Where and how to store data.
+    storage:
+      dbPath: /data/mongodb/shard01/data
+      journal:
+        enabled: true
+      wiredTiger:
+        engineConfig:
+           cacheSizeGB: 20
+
+    # how the process runs
+    processManagement:
+      fork: true
+      pidFilePath: /data/mongodb/shard01/mongodb-shard01.pid
+      timeZoneInfo: /usr/share/zoneinfo
+
+    # network interfaces
+    net:
+      port: 27101
+      bindIp: 0.0.0.0
+      unixDomainSocket:
+        pathPrefix: /var/run/mongodb
+
+    #operationProfiling:
+    replication:
+        replSetName: ussmongo-shard01
+
+    sharding:
+        clusterRole: shardsvr
+</code></pre>
+<p>shard02配置</p>
+<pre class=" language-shell"><code class="language-shell">    cat /etc/mongodb/shard02.conf 
+    # where to write logging data.
+    systemLog:
+      destination: file
+      logAppend: true
+      path: /data/logs/mongodb/shard02.log
+
+    # Where and how to store data.
+    storage:
+      dbPath: /data/mongodb/shard02/data
+      journal:
+        enabled: true
+      wiredTiger:
+        engineConfig:
+           cacheSizeGB: 20
+
+    # how the process runs
+    processManagement:
+      fork: true
+      pidFilePath: /data/mongodb/shard02/mongodb-shard02.pid
+      timeZoneInfo: /usr/share/zoneinfo
+
+    # network interfaces
+    net:
+      port: 27102
+      bindIp: 0.0.0.0
+      unixDomainSocket:
+        pathPrefix: /var/run/mongodb
+
+    #operationProfiling:
+    replication:
+        replSetName: ussmongo-shard02
+
+    sharding:
+        clusterRole: shardsvr
+</code></pre>
+<p>shard03配置</p>
+<pre class=" language-shell"><code class="language-shell">    # cat /etc/mongodb/shard03.conf 
+    # where to write logging data.
+    systemLog:
+      destination: file
+      logAppend: true
+      path: /data/logs/mongodb/shard03.log
+
+    # Where and how to store data.
+    storage:
+      dbPath: /data/mongodb/shard03/data
+      journal:
+        enabled: true
+      wiredTiger:
+        engineConfig:
+           cacheSizeGB: 20
+
+    # how the process runs
+    processManagement:
+      fork: true
+      pidFilePath: /data/mongodb/shard03/mongodb-shard03.pid
+      timeZoneInfo: /usr/share/zoneinfo
+
+    # network interfaces
+    net:
+      port: 27103
+      bindIp: 0.0.0.0
+      unixDomainSocket:
+        pathPrefix: /var/run/mongodb
+
+    #operationProfiling:
+    replication:
+        replSetName: ussmongo-shard03
+
+    sharding:
+        clusterRole: shardsvr
+</code></pre>
+<p>mongos配置</p>
+<pre class=" language-shell"><code class="language-shell">    # cat /etc/mongodb/mongos.conf 
+    systemLog:
+      destination: file
+      logAppend: true
+      path: /data/logs/mongodb/mongos.log
+
+    processManagement:
+      fork: true
+    #  pidFilePath: /data/mongodb/mongos.pid
+
+    # network interfaces
+    net:
+      port: 27017
+      bindIp: 0.0.0.0
+      unixDomainSocket:
+        pathPrefix: /var/run/mongodb
+
+    sharding:
+       configDB: ussmongo-config/172.18.1.31:27018,172.18.1.32:27018,172.18.1.33:27018
+
+    setParameter:
+      diagnosticDataCollectionDirectoryPath: /data/mongodb/mongos/diagnostic.data/
+</code></pre>
+<h3 id="3-2-服务文件准备"><a href="#3-2-服务文件准备" class="headerlink" title="3.2 服务文件准备"></a>3.2 服务文件准备</h3><p>为了方便对进程的统一管理，将其以服务的形式运行，亦可以使其开机自动启动。</p>
+<p>mongo-shard</p>
+<pre class=" language-shell"><code class="language-shell">    # cat /usr/lib/systemd/system/mongo-shard@.service 
+    [Unit]
+    Description=MongoDB Database Shard Service
+    After=network.target
+    Documentation=https://docs.mongodb.org/manual
+    PartOf=mongo-shard.target
+
+    [Service]
+    User=mongod
+    Group=mongod
+    Environment="OPTIONS=--quiet -f /etc/mongodb/shard%i.conf"
+    EnvironmentFile=-/etc/sysconfig/mongod
+    ExecStart=/usr/bin/mongod $OPTIONS
+    PermissionsStartOnly=true
+    Type=forking
+    TasksMax=infinity
+    TasksAccounting=false
+
+    [Install]
+    WantedBy=mongo-shard.target
+</code></pre>
+<p>mongo-config</p>
+<pre class=" language-shell"><code class="language-shell">    # cat /usr/lib/systemd/system/mongo-config.service 
+    [Unit]
+    Description=MongoDB Database Config Service
+    After=network.target
+    Documentation=https://docs.mongodb.org/manual
+    PartOf=mongo.target
+
+    [Service]
+    User=mongod
+    Group=mongod
+    Environment="OPTIONS=--quiet -f /etc/mongodb/config.conf"
+    EnvironmentFile=-/etc/sysconfig/mongod
+    ExecStart=/usr/bin/mongod $OPTIONS
+    PermissionsStartOnly=true
+    Type=forking
+    TasksMax=infinity
+    TasksAccounting=false
+
+    [Install]
+    WantedBy=mongo.target
+</code></pre>
+<p>mongo-mongos</p>
+<pre class=" language-shell"><code class="language-shell">    # cat /usr/lib/systemd/system/mongos.service 
+    [Unit]
+    Description=MongoDB Database Service
+    After=syslog.target network.target
+    PartOf=mongo.target
+
+    [Service]
+    User=mongod
+    Group=mongod
+    Environment="OPTIONS=--quiet -f /etc/mongodb/mongos.conf"
+    ExecStart=/usr/bin/mongos $OPTIONS
+    Type=forking
+    PrivateTmp=true
+    LimitNOFILE=64000
+    TimeoutStartSec=180
+
+    [Install]
+    WantedBy=mongo.target    
+</code></pre>
+<p>为了便于批量管理，创建target文件</p>
+<pre class=" language-shell"><code class="language-shell">/usr/lib/systemd/system/mongo-shard.target
+
+    [Unit]
+    Description=mongo shard target allowing to start/stop all mongo-shard@.service instances at once
+    PartOf=mongo.target
+
+    [Install]
+    WantedBy=mongo.target
+
+/usr/lib/systemd/system/mongo.target
+
+    [Unit]
+    Description=mongo target allowing to start/stop all mongo*.service instances at once
+
+    [Install]
+    WantedBy=multi-user.target
+</code></pre>
+<p>加载服务并使其开机自启动：</p>
+<pre class=" language-shell"><code class="language-shell">    # systemctl daemon-reload
+    # systemctl enable mongo-shard@01
+    # systemctl enable mongo-shard@02
+    # systemctl enable mongo-shard@03
+    # systemctl enable mongo-config
+    # systemctl enable mongos
+    # systemctl enable mongo-shard.target
+    # systemctl enable mongo.target
+</code></pre>
+<p>将上述配置文件及服务文件copy到所有节点的对于目录下</p>
+<p>启动服务</p>
+<pre><code>    systemctl start mongo.target
+</code></pre>
+<p>这个时候mongos会启动不了，需要先配置副本集</p>
+<h3 id="3-3-配置副本集"><a href="#3-3-配置副本集" class="headerlink" title="3.3 配置副本集"></a>3.3 配置副本集</h3><p>config和shard服务本质上都是mongod进程，将他们都配置为三副本模式。下面的操作可以在三个节点中的任意一个上执行，只需要执行一遍。</p>
+<p>config副本集</p>
+<pre class=" language-shell"><code class="language-shell">    config = {
+    _id : "ussmongo-config",
+     members : [
+         {_id : 0, host : "172.18.1.31:27018" },
+         {_id : 1, host : "172.18.1.32:27018" },
+         {_id : 2, host : "172.18.1.33:27018" }
+     ]
+    }
+</code></pre>
+<p>shard01副本集</p>
+<pre class=" language-shell"><code class="language-shell">    config = {
+    _id : "ussmongo-shard01",
+     members : [
+         {_id : 0, host : "172.18.1.31:27101" },
+         {_id : 1, host : "172.18.1.32:27101" },
+         {_id : 2, host : "172.18.1.33:27101" }
+     ]
+    }
+</code></pre>
+<p>shard02副本集</p>
+<pre class=" language-shell"><code class="language-shell">    config = {
+    _id : "ussmongo-shard02",
+     members : [
+         {_id : 0, host : "172.18.1.31:27102" },
+         {_id : 1, host : "172.18.1.32:27102" },
+         {_id : 2, host : "172.18.1.33:27102" }
+     ]
+    }
+</code></pre>
+<p>shard03副本集</p>
+<pre class=" language-shell"><code class="language-shell">    config = {
+    _id : "ussmongo-shard03",
+     members : [
+         {_id : 0, host : "172.18.1.31:27103" },
+         {_id : 1, host : "172.18.1.32:27103" },
+         {_id : 2, host : "172.18.1.33:27103" }
+     ]
+    }
+</code></pre>
+<p>此时，重启集群，mongs服务可以正常启动</p>
+<pre class=" language-shell"><code class="language-shell">    systemctl start mongo.target
+</code></pre>
+<h3 id="3-4-配置路由分片"><a href="#3-4-配置路由分片" class="headerlink" title="3.4 配置路由分片"></a>3.4 配置路由分片</h3><p>mongos对外提供服务，是集群的入口。需要先将分片添加到mongos配置中：<br>需要在所有节点执行</p>
+<pre class=" language-shell"><code class="language-shell">    # mongo --port 27017
+    mongos&gt; use admin
+    mongos&gt; sh.addShard("ussmongo-shard01/172.18.1.31:27101,172.18.1.32:27101,172.18.1.33:27101")
+    mongos&gt; sh.addShard("ussmongo-shard02/172.18.1.31:27102,172.18.1.32:27102,172.18.1.33:27102")
+    mongos&gt; sh.addShard("ussmongo-shard03/172.18.1.31:27103,172.18.1.32:27103,172.18.1.33:27103")
+</code></pre>
+<p>至此，多副本分片的高可用集群搭建完成，mongodb可以正常对外提供服务，可以在三台mongos之上再配置上负载均衡，高可用集群就完成了。</p>
+<h2 id="4-启动访问控制"><a href="#4-启动访问控制" class="headerlink" title="4.启动访问控制"></a>4.启动访问控制</h2><p>在生产环境中，没有认证连接集群是不安全的，也是不允许的，所以都需要开启安全认证。</p>
+<h3 id="4-1-添加用户"><a href="#4-1-添加用户" class="headerlink" title="4.1 添加用户"></a>4.1 添加用户</h3><p>连接上mongos添加的用户会保存在config副本集中，但是不会保存在shard副本集中，因此添加用户的操作需要分别在config、shard01、shard02、shard03上执行。<br>在执行的时候，只有在primary节点上才能执行成功，注意执行节点。</p>
+<p>config副本集：</p>
+<pre class=" language-shell"><code class="language-shell">    # mongo --port 27018
+    &gt; use admin
+    &gt; db.createUser(
+       {
+         user: "admin",
+         pwd: "admin",
+         roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase", "clusterAdmin"]
+       }
+     )
+</code></pre>
+<p>shard01副本集</p>
+<pre class=" language-shell"><code class="language-shell">    # mongo --port 27101
+    &gt; use admin
+    &gt; db.createUser(
+       {
+         user: "admin",
+         pwd: "admin",
+         roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase", "clusterAdmin"]
+       }
+    )
+</code></pre>
+<p>shard02副本集</p>
+<pre class=" language-shell"><code class="language-shell">    # mongo --port 27102
+    &gt; use admin
+    &gt; db.createUser(
+       {
+         user: "admin",
+         pwd: "admin",
+         roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase", "clusterAdmin"]
+       }
+    )    
+</code></pre>
+<p>shard03副本集</p>
+<pre class=" language-shell"><code class="language-shell">mongo --port 27103
+    &gt; use admin
+    &gt; db.createUser(
+       {
+         user: "admin",
+         pwd: "admin",
+         roles: ["userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase", "clusterAdmin"]
+       }
+    )
+</code></pre>
+<h3 id="4-2启用访问控制"><a href="#4-2启用访问控制" class="headerlink" title="4.2启用访问控制"></a>4.2启用访问控制</h3><p>创建密钥文件<br>启用访问控制之后，外部访问MongoDB服务需要进行身份验证，而mongos访问config和shard服务则是通过配置的秘钥文件。</p>
+<pre class=" language-shell"><code class="language-shell">openssl rand -base64 756 &gt;/data/mongodb/ussmongo.key
+chmod 0600 /data/mongodb/ussmongo.key
+chown mongod:mongod /data/mongodb/ussmongo.key
+</code></pre>
+<p>将密钥文件复制到所有的节点上</p>
+<p>添加security配置<br>mongos配置增加</p>
+<pre class=" language-yaml"><code class="language-yaml">    <span class="token key atrule">security</span><span class="token punctuation">:</span>
+      <span class="token key atrule">keyFile</span><span class="token punctuation">:</span> /data/mongodb/ussmongo.key
+</code></pre>
+<p>config和shard配置增加</p>
+<pre class=" language-yaml"><code class="language-yaml">    <span class="token key atrule">security</span><span class="token punctuation">:</span>
+      <span class="token key atrule">authorization</span><span class="token punctuation">:</span> enabled
+      <span class="token key atrule">keyFile</span><span class="token punctuation">:</span> /data/mongodb/ussmongo.key
+</code></pre>
+<p>重启所有服务</p>
+<pre class=" language-shell"><code class="language-shell">    # systemctl restart mongo.target
+</code></pre>
+<p>至此带访问控制的Mongodb高可用集群部署完成</p>
+<h2 id="5-日志切割"><a href="#5-日志切割" class="headerlink" title="5.日志切割"></a>5.日志切割</h2><h3 id="5-1-创建日志切割脚本"><a href="#5-1-创建日志切割脚本" class="headerlink" title="5.1 创建日志切割脚本"></a>5.1 创建日志切割脚本</h3><pre class=" language-shell"><code class="language-shell">    cat /opt/scripts/lograte_mongod.sh 
+    #!/bin/bash
+    #Rotate the MongoDB logs to prevent a single logfile from consuming too much disk space.
+
+    app=mongod
+
+    mongodPath=/usr/bin
+
+    pidArray=$(pidof $mongodPath/$app)
+
+    for pid in $pidArray;do
+    if [ $pid ]
+    then
+        echo $pid
+        kill -USR1 $pid
+    fi
+    done
+
+    exit
+    
+    chmod +x /opt/scripts/lograte_mongod.sh
+</code></pre>
+<h3 id="5-2-定时任务"><a href="#5-2-定时任务" class="headerlink" title="5.2 定时任务"></a>5.2 定时任务</h3><pre class=" language-shell"><code class="language-shell">    crontab -e
+    # mognod log lograte
+    00 00 * * * /opt/scripts/lograte_mongod.sh &gt;/dev/null 2&gt;&amp;1
+</code></pre>
+<p>参考文档：<a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/625991?spm=5176.10695662.1996646101.searchclickresult.374f3653bPUSs8">https://yq.aliyun.com/articles/625991?spm=5176.10695662.1996646101.searchclickresult.374f3653bPUSs8</a></p>
+<h2 id="6-问题处理"><a href="#6-问题处理" class="headerlink" title="6.问题处理"></a>6.问题处理</h2><h3 id="6-1-MongDB集群异常关闭修复"><a href="#6-1-MongDB集群异常关闭修复" class="headerlink" title="6.1 MongDB集群异常关闭修复"></a>6.1 MongDB集群异常关闭修复</h3><p>机器异常重启后，集群无法启动，需要修复数据</p>
+<pre class=" language-shell"><code class="language-shell"># 删除lock文件
+rm -rf /data/mongodb/data/mongod.lock
+rm -rf /data/mongodb/data/WiredTiger.lock
+
+# 数据修复,每个分片都需要执行修复操作
+mongod --repair -f /etc/mongodb/shard01.conf -nojournal --repairpath /data/mongodb/shard01/data/diagnostic.data/
+mongod --repair -f /etc/mongodb/shard02.conf -nojournal --repairpath /data/mongodb/shard02/data/diagnostic.data/
+mongod --repair -f /etc/mongodb/shard03.conf -nojournal --repairpath /data/mongodb/shard03/data/diagnostic.data/
+
+# 重启分片
+systemctl restart mongo-shard@01
+systemctl restart mongo-shard@02
+systemctl restart mongo-shard@03
+systemctl restart mongo-config
+systemctl restart mongos
+</code></pre>
 
                 
             </div>
@@ -681,7 +951,7 @@ sudo clickhouse start
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://blog.daydayops.com/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/">https://blog.daydayops.com/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/</a>
+                    <a href="https://blog.daydayops.com/2024/04/25/mongodb-ji-qun-dai-fang-wen-kong-zhi-de-fen-pian-fu-ben-ji/">https://blog.daydayops.com/2024/04/25/mongodb-ji-qun-dai-fang-wen-kong-zhi-de-fen-pian-fu-ben-ji/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -719,20 +989,12 @@ sudo clickhouse start
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/clickhouse/">
-                                    <span class="chip bg-color">clickhouse</span>
+                                <a href="/tags/MongoDB/">
+                                    <span class="chip bg-color">MongoDB</span>
                                 </a>
                             
-                                <a href="/tags/ELK/">
-                                    <span class="chip bg-color">ELK</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/">
-                                    <span class="chip bg-color">日志收集</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%97%A5%E5%BF%97%E5%8F%AF%E8%A7%82%E6%B5%8B/">
-                                    <span class="chip bg-color">日志可观测</span>
+                                <a href="/tags/%E8%BF%90%E7%BB%B4/">
+                                    <span class="chip bg-color">运维</span>
                                 </a>
                             
                         </div>
@@ -1045,17 +1307,18 @@ sudo clickhouse start
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2024/03/18/kubeadm-an-zhuang-k8s-ji-qun/">
+                <a href="/2024/04/25/mongodb-ji-qun-dai-fang-wen-kong-zhi-de-fen-pian-fu-ben-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="kubeadm安装k8s集群">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="MongoDB集群-带访问控制的分片副本集">
                         
-                        <span class="card-title">kubeadm安装k8s集群</span>
+                        <span class="card-title">MongoDB集群-带访问控制的分片副本集</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1065,9 +1328,9 @@ sudo clickhouse start
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-03-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1075,6 +1338,19 @@ sudo clickhouse start
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MongoDB/">
+                        <span class="chip bg-color">MongoDB</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%BF%90%E7%BB%B4/">
+                        <span class="chip bg-color">运维</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -1086,13 +1362,13 @@ sudo clickhouse start
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/">
+                <a href="/2024/04/22/kubernets-ji-qun-wen-ti-pai-cha-zhi-nan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="基于minikube安装kubernetes">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="kubernets集群问题排查指南">
                         
-                        <span class="card-title">基于minikube安装kubernetes</span>
+                        <span class="card-title">kubernets集群问题排查指南</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1103,16 +1379,12 @@ sudo clickhouse start
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-02-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-22
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                    运维
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            daydayops
                             
                         </span>
                     </div>
@@ -1120,12 +1392,12 @@ sudo clickhouse start
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/minikube/">
-                        <span class="chip bg-color">minikube</span>
+                    <a href="/tags/kubernets/">
+                        <span class="chip bg-color">kubernets</span>
                     </a>
                     
-                    <a href="/tags/kubernetes/">
-                        <span class="chip bg-color">kubernetes</span>
+                    <a href="/tags/troubleshooting/">
+                        <span class="chip bg-color">troubleshooting</span>
                     </a>
                     
                 </div>
