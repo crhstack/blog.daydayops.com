@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>CloudFlare代理GithubPage301问题</title>
+      <link href="/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/"/>
+      <url>/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<h1 id="CloudFlare代理GithubPage301问题"><a href="#CloudFlare代理GithubPage301问题" class="headerlink" title="CloudFlare代理GithubPage301问题"></a>CloudFlare代理GithubPage301问题</h1><p>由于GithubPage是美国服务器，国内访问速度较慢，所以使用CloudFlare加速。</p><p>注册cloudflare后，设置DNS解析，并开启proxy。</p><p>此时打开网站发现网站被循环301跳转无法正常访问<br><img src="/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/image.png" alt="Alt text"></p><p>检查cloudflare的配置，发现SSL配置使用的是flexible模式，这种模式回源是通过http协议，而githubpage又配置了强制https跳转，所以导致循环301跳转。</p><p><img src="/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/image-1.png" alt="Alt text"></p><p>网站正常访问</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 运维 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CloudFlare </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MongoDB集群-带访问控制的分片副本集</title>
       <link href="/2024/04/25/mongodb-ji-qun-dai-fang-wen-kong-zhi-de-fen-pian-fu-ben-ji/"/>
       <url>/2024/04/25/mongodb-ji-qun-dai-fang-wen-kong-zhi-de-fen-pian-fu-ben-ji/</url>
