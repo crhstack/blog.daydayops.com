@@ -51,10 +51,10 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="天天运维博客" type="application/atom+xml">
-
+<meta name="generator" content="Hexo 7.1.1">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="/atom.xml" title="天天运维博客" type="application/atom+xml">
+</head>
 
 
 <body>
@@ -405,7 +405,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-05-10
+                    2024-05-11
                 </div>
                 
 
@@ -460,7 +460,7 @@
 <p>想象一下，假设你有一个 Application，一个 Go 程序或者 Java Spring Boot 程序，Application 把自身的运行状态指标通过 /metrics 接口暴露出来，Prometheus 直接抓取即可，这里不需要什么 Exporter。但是一些成熟的数据库、中间件，比如 MySQL，Redis，这些软件没有直接暴露 Prometheus 格式的指标，Prometheus 没法直接来抓取，怎么办呢？当然，可以完善 Prometheus 的抓取器，让他不仅可以抓取 HTTP 协议的 /metrics 数据，也可以抓取 MySQL、Redis 等的数据，但是这样的话，Prometheus 代码会变得臃肿，不利于维护。所以，Prometheus 采用了 Exporter 的设计，Exporter 就是一个适配器，使用 Exporter 去抓取这些监控目标的指标，然后暴露为 Prometheus 格式的指标，Prometheus 再去抓取这些 Exporter 暴露的指标。这样做的好处是，Prometheus 代码保持简洁，Exporter 代码可以独立维护，提升整体可维护性。而且 Exporter 可以发动全网力量，让大家共建，一举多得。</p>
 <p>但是，Exporter 会有很多不同的进程，水平参差不齐，从部署的角度可能略麻烦，所以市面上也有一些开源项目，把众多 Exporter 整合在一起变成一个进程，比如 Grafana-agent、Cprobe，当然，还有大名鼎鼎的 OpenTelemetry 也是这个思路。</p>
 <p>了解了上述知识，我们再来看 Prometheus 官网的架构图。</p>
-<h2 id="Prometheus-架构"><a href="#Prometheus-架构" class="headerlink" title="Prometheus 架构"></a>Prometheus 架构</h2><p><img src="/./Prometheus%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0%E7%BB%84%E4%BB%B6%E6%B7%B1%E5%BA%A6%E8%AE%B2%E8%A7%A3/image-2.png" alt="Prometheus 架构"></p>
+<h2 id="Prometheus-架构"><a href="#Prometheus-架构" class="headerlink" title="Prometheus 架构"></a>Prometheus 架构</h2><p><img src="/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/image-2.png" alt="Prometheus 架构"></p>
 <ul>
 <li>Prometheus Server：是 prometheus 进程的一部分功能，负责数据的抓取、存储、HTTP 接口查询</li>
 <li>Retrieval：数据抓取，从监控目标那里拉取监控指标，Prometheus 定义了一个标准协议，只要监控目标支持这个协议，Prometheus 就可以抓取</li>
