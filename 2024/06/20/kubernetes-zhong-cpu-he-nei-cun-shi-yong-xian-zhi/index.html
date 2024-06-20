@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Prometheus监控平台组件深度讲解, 天天运维博客">
-    <meta name="description" content="Prometheus监控平台组件深度讲解Prometheus 的重要性和流行度已经无需多言。直入主题，本文对 Prometheus 监控平台的各个组件做深度讲解，希望能帮助读者更好地理解 Prometheus。
-监控系统的核心逻辑对于一套监">
+    <meta name="keywords" content="Kubernetes中CPU和内存使用限制, 天天运维博客">
+    <meta name="description" content="Kubernetes中CPU和内存使用限制与监控容器的内存和 CPU 资源是最应该重视的两个资源，我之前所在的公司就因为容器 CPU Throttling 问题导致 Redis 集群故障，越是延迟敏感型应用越是要注意。
+介绍使用 Kuber">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Prometheus监控平台组件深度讲解 | 天天运维博客</title>
+    <title>Kubernetes中CPU和内存使用限制 | 天天运维博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -341,7 +341,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Prometheus监控平台组件深度讲解</h1>
+                    <h1 class="description center-align post-title">Kubernetes中CPU和内存使用限制</h1>
                 </div>
             </div>
         </div>
@@ -365,16 +365,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Prometheus/">
-                                <span class="chip bg-color">Prometheus</span>
-                            </a>
-                        
                             <a href="/tags/%E7%9B%91%E6%8E%A7/">
                                 <span class="chip bg-color">监控</span>
                             </a>
                         
                             <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">
                                 <span class="chip bg-color">可观测性</span>
+                            </a>
+                        
+                            <a href="/tags/Kubernetes/">
+                                <span class="chip bg-color">Kubernetes</span>
                             </a>
                         
                     </div>
@@ -389,6 +389,10 @@
                                 运维
                             </a>
                         
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/kubernetes/" class="post-category">
+                                kubernetes
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -398,28 +402,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-05-10
+                    2024-06-20
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-05-11
+                    2024-06-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    5 分
                 </div>
                 
 
@@ -442,48 +446,84 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Prometheus监控平台组件深度讲解"><a href="#Prometheus监控平台组件深度讲解" class="headerlink" title="Prometheus监控平台组件深度讲解"></a>Prometheus监控平台组件深度讲解</h1><p>Prometheus 的重要性和流行度已经无需多言。直入主题，本文对 Prometheus 监控平台的各个组件做深度讲解，希望能帮助读者更好地理解 Prometheus。</p>
-<h2 id="监控系统的核心逻辑"><a href="#监控系统的核心逻辑" class="headerlink" title="监控系统的核心逻辑"></a>监控系统的核心逻辑</h2><p>对于一套监控系统而言，核心就是采集数据并存储，然后做告警判定、数据展示分析，这个 <a target="_blank" rel="noopener" href="https://time.geekbang.org/column/article/622150">专栏文章</a> 详细讲解了这个数据流架构，整个流程图如下：</p>
-<p><img src="/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/image.png" alt="监控系统的核心逻辑"></p>
-<p>Prometheus 有多个组件（或者说多个进程），协同工作。下面我们逐个组件做一概述：</p>
+                <h1 id="Kubernetes中CPU和内存使用限制与监控"><a href="#Kubernetes中CPU和内存使用限制与监控" class="headerlink" title="Kubernetes中CPU和内存使用限制与监控"></a>Kubernetes中CPU和内存使用限制与监控</h1><p>容器的内存和 CPU 资源是最应该重视的两个资源，我之前所在的公司就因为容器 CPU Throttling 问题导致 Redis 集群故障，越是延迟敏感型应用越是要注意。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>使用 Kubernetes 时，内存不足（OOM）错误和 CPU 限制（Throttling）是云应用程序中资源处理的主要难题。为什么呢？</p>
+<p>云应用程序中的 CPU 和内存要求变得越来越重要，因为它们与您的云成本直接相关。</p>
+<p>通过 limits 和 requests，您可以配置 pod 应如何分配内存和 CPU 资源，以防止资源匮乏并调整云成本。</p>
+<p>如果节点没有足够的资源，Pod 可能会因抢占或节点压力而被驱逐。</p>
+<p>当进程运行内存不足 (OOM) 时，它会因为没有所需的资源而被 Kill。</p>
+<p>如果 CPU 消耗高于实际 limits，进程将开始受到限制。</p>
+<p>OK，如何监控 Pod 快要 OOM 了，或者 CPU 快要被限制了呢？</p>
+<h2 id="Kubernetes-OOM"><a href="#Kubernetes-OOM" class="headerlink" title="Kubernetes OOM"></a>Kubernetes OOM</h2><p>Pod 中的每个容器都需要内存才能运行。</p>
+<p>Kubernetes limits 是在 Pod 定义或 Deployment 定义中为每个容器设置的。</p>
+<p>所有现代 Unix 系统都有一种方法可以杀死进程，以此回收内存（没用空闲内存的时候，只能杀进程了）。这个错误将被标记为 137 错误码或 OOMKilled。</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">State</span><span class="token punctuation">:</span>          Running
+    <span class="token key atrule">Started</span><span class="token punctuation">:</span>      Thu<span class="token punctuation">,</span> 10 Oct 2019 11<span class="token punctuation">:</span>14<span class="token punctuation">:</span>13 +0200
+Last State<span class="token punctuation">:</span>     Terminated
+    <span class="token key atrule">Reason</span><span class="token punctuation">:</span>       OOMKilled
+    Exit Code<span class="token punctuation">:</span>    <span class="token number">137</span>
+    <span class="token key atrule">Started</span><span class="token punctuation">:</span>      Thu<span class="token punctuation">,</span> 10 Oct 2019 11<span class="token punctuation">:</span>04<span class="token punctuation">:</span>03 +0200
+    <span class="token key atrule">Finished</span><span class="token punctuation">:</span>     Thu<span class="token punctuation">,</span> 10 Oct 2019 11<span class="token punctuation">:</span>14<span class="token punctuation">:</span>11 +0200
+</code></pre>
+<p>退出代码 137 意味着该进程使用的内存超过允许的数量，必须被 OS 终止。</p>
+<p>这是 Linux 中的一项功能，内核为系统中运行的进程设置 oom_score 值。此外，它还允许设置一个名为 oom_score_adj 的值，Kubernetes 使用该值来实现服务质量。它还具有 OOM Killer，它将检查进程并终止那些使用超过过多内存（比如申请了超过 limits 限制的数量的内存）的进程。</p>
+<p>请注意，在 Kubernetes 中，进程可能会达到以下任何限制：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/prometheus/prometheus%EF%BC%9A%E8%BF%99%E6%98%AF">https://github.com/prometheus/prometheus：这是</a> prometheus 进程的代码仓库，功能包括抓取远端监控指标、存储时序数据、暴露查询接口支持数据查询、支持告警规则配置并做告警判定</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/prometheus/alertmanager%EF%BC%9A%E8%BF%99%E6%98%AF">https://github.com/prometheus/alertmanager：这是</a> alertmanager 进程的代码仓库，功能包括接收 prometheus 产生的告警事件，对事件做去重、分组、路由、通知等操作<br>我把监控系统的流程图给变换一下颜色：</li>
-</ul>
-<p><img src="/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/image-1.png" alt="监控系统核心逻辑"></p>
-<ul>
-<li>prometheus 进程承接了图中蓝色功能，即：采集器、时序库、告警判定引擎</li>
-<li>alertmanager 进程负责告警事件分发，即图中红色部分</li>
-<li>数据展示分析，橙色部分，Prometheus 做的比较少，Prometheus 确实有一个简单的 Web UI，不过比较简陋，一般使用更为强大的 Grafana 来做数据展示分析</li>
-</ul>
-<p>大家可能还听过各类 Exporter，难道这些 Exporter 就没有一席之地了么？Exporter 也是很重要的，可以看做是一个适配器，把监控目标的指标暴露出来，让 Prometheus 来抓取。或者把 Exporter 看做是采集器的一部分也行，无伤大雅，理解整个数据流就可以，无需在词汇上纠结。</p>
-<p>想象一下，假设你有一个 Application，一个 Go 程序或者 Java Spring Boot 程序，Application 把自身的运行状态指标通过 /metrics 接口暴露出来，Prometheus 直接抓取即可，这里不需要什么 Exporter。但是一些成熟的数据库、中间件，比如 MySQL，Redis，这些软件没有直接暴露 Prometheus 格式的指标，Prometheus 没法直接来抓取，怎么办呢？当然，可以完善 Prometheus 的抓取器，让他不仅可以抓取 HTTP 协议的 /metrics 数据，也可以抓取 MySQL、Redis 等的数据，但是这样的话，Prometheus 代码会变得臃肿，不利于维护。所以，Prometheus 采用了 Exporter 的设计，Exporter 就是一个适配器，使用 Exporter 去抓取这些监控目标的指标，然后暴露为 Prometheus 格式的指标，Prometheus 再去抓取这些 Exporter 暴露的指标。这样做的好处是，Prometheus 代码保持简洁，Exporter 代码可以独立维护，提升整体可维护性。而且 Exporter 可以发动全网力量，让大家共建，一举多得。</p>
-<p>但是，Exporter 会有很多不同的进程，水平参差不齐，从部署的角度可能略麻烦，所以市面上也有一些开源项目，把众多 Exporter 整合在一起变成一个进程，比如 Grafana-agent、Cprobe，当然，还有大名鼎鼎的 OpenTelemetry 也是这个思路。</p>
-<p>了解了上述知识，我们再来看 Prometheus 官网的架构图。</p>
-<h2 id="Prometheus-架构"><a href="#Prometheus-架构" class="headerlink" title="Prometheus 架构"></a>Prometheus 架构</h2><p><img src="/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/image-2.png" alt="Prometheus 架构"></p>
-<ul>
-<li>Prometheus Server：是 prometheus 进程的一部分功能，负责数据的抓取、存储、HTTP 接口查询</li>
-<li>Retrieval：数据抓取，从监控目标那里拉取监控指标，Prometheus 定义了一个标准协议，只要监控目标支持这个协议，Prometheus 就可以抓取</li>
-<li>TSDB：时序库，Prometheus 会把抓取到的监控指标存储在本地，单点的。如果想要高可用，可以使用 Thanos、VictoriaMetrics 等</li>
-<li>HTTP server：Prometheus 会暴露 HTTP 接口，供外部查询监控指标</li>
-<li>Service Discovery：服务发现，是 prometheus 进程的一部分功能，Prometheus 会定期去服务发现组件那里拉取监控目标的列表，省去了手动配置的繁琐，当然，前提是这些监控目标得注册到服务发现组件上<ul>
-<li>Kubernetes SD：基于 Kubernetes 的服务发现机制，比如通过 apiserver 拉取 pod 列表、service 列表作为监控目标</li>
-<li>File SD：基于文件的服务发现机制，从配置文件中读取监控目标列表</li>
-<li>HTTP SD：基于 HTTP 的服务发现机制，从 HTTP 接口中读取监控目标列表</li>
-<li>Consul SD：基于 Consul 的服务发现机制，从 Consul 中读取监控目标列表</li>
-<li>等等</li>
-</ul>
+<li><p>在容器上设置的 Kubernetes 限制。</p>
 </li>
-<li>Pushgateway：是一个单独的进程，用于接收短生命周期的监控指标，比如批处理任务的监控指标，因为批处理任务通常不会暴露 HTTP 接口，Prometheus 就没法拉取了，所以批处理任务需要主动推送监控指标到 Pushgateway，Prometheus 再去拉取 Pushgateway 的监控指标</li>
-<li>Alertmanager：负责接收 prometheus 产生的告警事件，对事件做去重、分组、路由、通知等操作。如果想要更高阶的收敛、降噪、排班、认领、升级等功能，可以把 Alertmanager 和一些第三方工具结合使用，比如 PagerDuty、FlashDuty、OpsGenie 等</li>
-<li>Prometheus web UI：prometheus 进程启动之后，会暴露一个简单的 Web UI，可以查看监控指标，但是功能比较简陋，一般使用Grafana 来做数据展示分析</li>
-<li>Grafana：是一个独立的进程，不属于 Prometheus 项目的一部分，不过可以和 Prometheus 整合。用于数据展示分析，功能非常强大，支持多种数据源，比如 Prometheus、Elasticsearch、Loki 等，支持多种图表类型，比如折线图、柱状图、饼图、热力图等</li>
+<li><p>在 namespace 上设置的 Kubernetes ResourceQuota。</p>
+</li>
+<li><p>节点的实际内存大小。</p>
+</li>
 </ul>
-<h2 id="Prometheus-架构的问题"><a href="#Prometheus-架构的问题" class="headerlink" title="Prometheus 架构的问题"></a>Prometheus 架构的问题</h2><p>主要问题的容量扩展问题。Prometheus 一个进程干了很多事情，部署非常简单，弊端就是单点没法扩展，比如告警引擎是单点、存储是单点、采集是单点，如果体量很大或者对稳定性要求比较高，就需要通过其他手段来解决了。</p>
-<p>比如 VictoriaMetrics 项目，就是完全兼容 Prometheus 生态的协议和接口，但是提供了分布式能力。存储使用 vmstorage 进程，查询使用 vmselect 进程，数据接收使用 vminsert，告警使用 vmalert，数据抓取使用 vmagent，组件确实多了，但是每个组件都可以部署多个实例组成集群，提升了整体的可用性和容量。VictoriaMetrics 项目的架构图如下：</p>
-<p><img src="/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/image-3.png" alt="Alt text"></p>
-<p>或者还有一个办法，就是直接部署多套 Prometheus，比如 DBA 自己用一个 Prometheus，Hadoop 团队自己用一个 Prometheus，这样可以解决容量问题，没法解决数据单点存储问题。如何解决单点问题？双写！比如 DBA 团队，部署两个 Prometheus，采集相同的数据，两个 Prometheus 数据相同，规则相同，告警也会产生两份，可以通过 Alertmanager 做告警去重，这样就解决了单点问题。</p>
-<h2 id="Prometheus-规则管理问题"><a href="#Prometheus-规则管理问题" class="headerlink" title="Prometheus 规则管理问题"></a>Prometheus 规则管理问题</h2><p>最后一个问题，简单聊聊 Prometheus 的规则管理问题。Prometheus 的规则是通过配置文件定义的，这个配置文件是一个 yaml 文件，里面定义了监控规则、告警规则等。如果一个公司有很多套 Prometheus，规则分散在多个 yaml 中不方便管理，希望能有一套易用的、权限隔离的 UI，把监控能力开放给全公司各个团队并让他们自服务，别啥事都来找监控团队，这个时候就需要一个规则管理系统，比如夜莺（Nightingale）。如果有这方面的痛点可以去了解一下，如果 Prometheus 自身的玩法就感觉够用了，那更好，不用再引入新的组件。</p>
+<p><img src="/2024/06/20/kubernetes-zhong-cpu-he-nei-cun-shi-yong-xian-zhi/image.png" alt="Alt text"></p>
+<h3 id="内存过量分配（overcommitment）"><a href="#内存过量分配（overcommitment）" class="headerlink" title="内存过量分配（overcommitment）"></a>内存过量分配（overcommitment）</h3><p>限制（limits）可以高于请求（requests），因此所有限制的总和可以高于节点容量。这称为过量分配，而且很常见。实际上，如果所有容器使用的内存多于 request 的内存，则可能会耗尽节点中的内存。这通常会导致一些 pod 死亡，以释放一些内存。</p>
+<h3 id="监控-Kubernetes-OOM"><a href="#监控-Kubernetes-OOM" class="headerlink" title="监控 Kubernetes OOM"></a>监控 Kubernetes OOM</h3><p>在 Prometheus 生态中，使用 node-exporter 时，有一个名为 node_vmstat_oom_kill 的指标。跟踪 OOM 终止何时发生非常重要，但您可能希望在此类事件发生之前抢占先机并了解其情况。</p>
+<p>我们更希望的是，检查进程与 Kubernetes limits 的接近程度：</p>
+<pre><code>(sum by (namespace,pod,container)
+(rate(container_cpu_usage_seconds_total{container!=""}[5m])) / sum by 
+(namespace,pod,container)
+(kube_pod_container_resource_limits{resource="cpu"})) &gt; 0.8
+</code></pre>
+<h2 id="Kubernetes-CPU-throttling"><a href="#Kubernetes-CPU-throttling" class="headerlink" title="Kubernetes CPU throttling"></a>Kubernetes CPU throttling</h2><p>CPU 限制（throttling）是一种当进程即将达到某些资源限制时减慢速度的行为。与内存情况类似，这些限制可能是：</p>
+<ul>
+<li><p>在容器上设置的 Kubernetes limits。</p>
+</li>
+<li><p>在命名空间上设置的 Kubernetes ResourceQuota。</p>
+</li>
+<li><p>节点的实际算力大小。</p>
+</li>
+</ul>
+<p>想想下面的类比。我们有一条高速公路，交通流量如下：</p>
+<ul>
+<li><p>CPU 就好比一条路</p>
+</li>
+<li><p>车辆代表 Process，每辆车都有不同的尺寸</p>
+</li>
+<li><p>多个通道代表有多个 CPU 核心</p>
+</li>
+<li><p>request 将是一条专用道路，例如自行车道</p>
+</li>
+</ul>
+<p>这里的 throttling 被表示为交通拥堵：最终，所有进程都会运行，但一切都会变慢。</p>
+<h3 id="Kubernetes-中的-CPU-处理逻辑"><a href="#Kubernetes-中的-CPU-处理逻辑" class="headerlink" title="Kubernetes 中的 CPU 处理逻辑"></a>Kubernetes 中的 CPU 处理逻辑</h3><p>CPU 在 Kubernetes 中通过 shares 进行处理。每个 CPU 核心被分为 1024 个 shares，然后使用 Linux 内核的 cgroups（control groups）功能在运行的所有进程之间进行划分。</p>
+<p><img src="/2024/06/20/kubernetes-zhong-cpu-he-nei-cun-shi-yong-xian-zhi/image-1.png" alt="Alt text"></p>
+<p>如果 CPU 可以处理当前所有进程，则无需执行任何操作。如果进程使用超过 100% 的 CPU，shares 机制就要起作用了。与任何 Linux 内核一样，Kubernetes 使用 CFS（Completely Fair Scheduler）机制，因此拥有更多份额的进程将获得更多的 CPU 时间。</p>
+<p>与内存不同，Kubernetes 不会因为限流而杀死 Pod。</p>
+<p><img src="/2024/06/20/kubernetes-zhong-cpu-he-nei-cun-shi-yong-xian-zhi/image-2.png" alt="Alt text"></p>
+<h3 id="CPU-过渡分配"><a href="#CPU-过渡分配" class="headerlink" title="CPU 过渡分配"></a>CPU 过渡分配</h3><p>正如我们在limits 和 requests 文章中看到的，当我们想要限制进程的资源消耗时，设置 limits 或 requests 非常重要。尽管如此，请注意不要将总 requests 设置为大于实际 CPU 大小，每个容器都应该有保证的 CPU。</p>
+<h3 id="监控-Kubernetes-CPU-throttling"><a href="#监控-Kubernetes-CPU-throttling" class="headerlink" title="监控 Kubernetes CPU throttling"></a>监控 Kubernetes CPU throttling</h3><p>您可以检查进程与 Kubernetes limits 的接近程度：</p>
+<pre><code>(sum by (namespace,pod,container)(rate(container_cpu_usage_seconds_total
+{container!=""}[5m])) / sum by (namespace,pod,container)
+(kube_pod_container_resource_limits{resource="cpu"}))
+</code></pre>
+<p>如果我们想要跟踪集群中发生的限制量，cadvisor 提供了 container_cpu_cfs_throttled_periods_total 和 container_cpu_cfs_periods_total 两个指标。通过这两个指标，您可以轻松计算所有 CPU 周期内的限制百分比。</p>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><h3 id="注意-limits-和-requests"><a href="#注意-limits-和-requests" class="headerlink" title="注意 limits 和 requests"></a>注意 limits 和 requests</h3><p>Limits 是在节点中设置资源最大上限的一种方法，但需要谨慎对待，因为您可能最终会受到限制或终止进程。</p>
+<h3 id="准备好应对驱逐"><a href="#准备好应对驱逐" class="headerlink" title="准备好应对驱逐"></a>准备好应对驱逐</h3><p>通过设置非常低的请求，您可能认为这将为您的进程授予最少的 CPU 或内存。但 kubelet 会首先驱逐那些使用率高于请求的 Pod，因此就相当于您将这些进程标记为最先被杀死的！</p>
+<p>如果您需要保护特定 Pod 免遭抢占（当 kube-scheduler 需要分配新 Pod 时），请为最重要的进程分配 Priority Classes。</p>
+<h3 id="Throttling-是一个无声的敌人"><a href="#Throttling-是一个无声的敌人" class="headerlink" title="Throttling 是一个无声的敌人"></a>Throttling 是一个无声的敌人</h3><p>设置不切实际的 limits 或过度使用，您可能没有意识到您的进程正在受到限制并且性能受到影响。主动监控 CPU 用量，了解确切的容器和命名空间层面的限制，及时发现问题非常重要。</p>
+<h1 id="附"><a href="#附" class="headerlink" title="附"></a>附</h1><p>下面这张图，比较好的解释了 Kubernetes 中 CPU 和内存的限制问题。供参考：</p>
+<p><img src="/2024/06/20/kubernetes-zhong-cpu-he-nei-cun-shi-yong-xian-zhi/image-3.png" alt="Alt text"></p>
 
                 
             </div>
@@ -510,7 +550,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://blog.daydayops.com/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/">https://blog.daydayops.com/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/</a>
+                    <a href="https://blog.daydayops.com/2024/06/20/kubernetes-zhong-cpu-he-nei-cun-shi-yong-xian-zhi/">https://blog.daydayops.com/2024/06/20/kubernetes-zhong-cpu-he-nei-cun-shi-yong-xian-zhi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -548,16 +588,16 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Prometheus/">
-                                    <span class="chip bg-color">Prometheus</span>
-                                </a>
-                            
                                 <a href="/tags/%E7%9B%91%E6%8E%A7/">
                                     <span class="chip bg-color">监控</span>
                                 </a>
                             
                                 <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">
                                     <span class="chip bg-color">可观测性</span>
+                                </a>
+                            
+                                <a href="/tags/Kubernetes/">
+                                    <span class="chip bg-color">Kubernetes</span>
                                 </a>
                             
                         </div>
@@ -870,9 +910,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2024/06/20/kubernetes-zhong-cpu-he-nei-cun-shi-yong-xian-zhi/">
                     <div class="card-image">
@@ -890,9 +931,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-06-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-06-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -909,6 +950,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -935,13 +977,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/">
+                <a href="/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="CloudFlare代理GithubPage301问题">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Prometheus监控平台组件深度讲解">
                         
-                        <span class="card-title">CloudFlare代理GithubPage301问题</span>
+                        <span class="card-title">Prometheus监控平台组件深度讲解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -952,7 +994,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-05-10
                             </span>
                         <span class="publish-author">
                             
@@ -969,8 +1011,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CloudFlare/">
-                        <span class="chip bg-color">CloudFlare</span>
+                    <a href="/tags/Prometheus/">
+                        <span class="chip bg-color">Prometheus</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%9B%91%E6%8E%A7/">
+                        <span class="chip bg-color">监控</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">
+                        <span class="chip bg-color">可观测性</span>
                     </a>
                     
                 </div>
