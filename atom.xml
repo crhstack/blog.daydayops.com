@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>天天运维博客</title>
+  
+  
+  <link href="https://crhstack.daydayops.com/atom.xml" rel="self"/>
+  
+  <link href="https://crhstack.daydayops.com/"/>
+  <updated>2025-04-02T10:09:14.389Z</updated>
+  <id>https://crhstack.daydayops.com/</id>
+  
+  <author>
+    <name>daydayops</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Kubernetes集群问题排查指南</title>
+    <link href="https://crhstack.daydayops.com/2025/04/02/kubernetes-ji-qun-wen-ti-pai-cha-zhi-nan/"/>
+    <id>https://crhstack.daydayops.com/2025/04/02/kubernetes-ji-qun-wen-ti-pai-cha-zhi-nan/</id>
+    <published>2025-04-02T09:27:06.000Z</published>
+    <updated>2025-04-02T10:09:14.389Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Kubernetes集群组件较多，当集群出现某个问题的时候需要从多方面排查，下面这张图梳理常见异常问题的排查思路，可以以参考此图进行排查。&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://crhstack.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://crhstack.daydayops.com/tags/Kubernetes/"/>
+    
+    <category term="TroubleShooting" scheme="https://crhstack.daydayops.com/tags/TroubleShooting/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从k8s容器丢包事件中掌握内核参数优化技巧</title>
+    <link href="https://crhstack.daydayops.com/2024/07/03/cong-k8s-rong-qi-diu-bao-shi-jian-zhong-zhang-wo-nei-he-can-shu-you-hua-ji-qiao/"/>
+    <id>https://crhstack.daydayops.com/2024/07/03/cong-k8s-rong-qi-diu-bao-shi-jian-zhong-zhang-wo-nei-he-can-shu-you-hua-ji-qiao/</id>
+    <published>2024-07-03T02:35:27.000Z</published>
+    <updated>2025-04-02T07:23:46.384Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;从k8s容器丢包事件中掌握内核参数优化技巧&quot;&gt;&lt;a href=&quot;#从k8s容器丢包事件中掌握内核参数优化技巧&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://crhstack.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://crhstack.daydayops.com/tags/Kubernetes/"/>
+    
+    <category term="容器" scheme="https://crhstack.daydayops.com/tags/%E5%AE%B9%E5%99%A8/"/>
+    
+    <category term="性能调优" scheme="https://crhstack.daydayops.com/tags/%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kubernetes中CPU和内存使用限制</title>
+    <link href="https://crhstack.daydayops.com/2024/06/20/kubernetes-zhong-cpu-he-nei-cun-shi-yong-xian-zhi/"/>
+    <id>https://crhstack.daydayops.com/2024/06/20/kubernetes-zhong-cpu-he-nei-cun-shi-yong-xian-zhi/</id>
+    <published>2024-06-20T08:36:41.000Z</published>
+    <updated>2025-04-02T07:26:18.481Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Kubernetes中CPU和内存使用限制与监控&quot;&gt;&lt;a href=&quot;#Kubernetes中CPU和内存使用限制与监控&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://crhstack.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://crhstack.daydayops.com/tags/Kubernetes/"/>
+    
+    <category term="可观测性" scheme="https://crhstack.daydayops.com/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/"/>
+    
+    <category term="监控" scheme="https://crhstack.daydayops.com/tags/%E7%9B%91%E6%8E%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Prometheus监控平台组件深度讲解</title>
+    <link href="https://crhstack.daydayops.com/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/"/>
+    <id>https://crhstack.daydayops.com/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/</id>
+    <published>2024-05-10T07:36:00.000Z</published>
+    <updated>2025-04-02T07:26:54.796Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Prometheus监控平台组件深度讲解&quot;&gt;&lt;a href=&quot;#Prometheus监控平台组件深度讲解&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://crhstack.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="可观测性" scheme="https://crhstack.daydayops.com/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/"/>
+    
+    <category term="监控" scheme="https://crhstack.daydayops.com/tags/%E7%9B%91%E6%8E%A7/"/>
+    
+    <category term="Prometheus" scheme="https://crhstack.daydayops.com/tags/Prometheus/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CloudFlare代理GithubPage301问题</title>
+    <link href="https://crhstack.daydayops.com/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/"/>
+    <id>https://crhstack.daydayops.com/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/</id>
+    <published>2024-04-30T07:21:39.000Z</published>
+    <updated>2025-04-02T07:28:06.274Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;CloudFlare代理GithubPage301问题&quot;&gt;&lt;a href=&quot;#CloudFlare代理GithubPage301问题&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://crhstack.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="CloudFlare" scheme="https://crhstack.daydayops.com/tags/CloudFlare/"/>
+    
+    <category term="GithubPages" scheme="https://crhstack.daydayops.com/tags/GithubPages/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MongoDB集群-带访问控制的分片副本集</title>
+    <link href="https://crhstack.daydayops.com/2024/04/25/mongodb-ji-qun-dai-fang-wen-kong-zhi-de-fen-pian-fu-ben-ji/"/>
+    <id>https://crhstack.daydayops.com/2024/04/25/mongodb-ji-qun-dai-fang-wen-kong-zhi-de-fen-pian-fu-ben-ji/</id>
+    <published>2024-04-25T09:37:10.000Z</published>
+    <updated>2025-04-02T07:26:32.192Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;MongoDB集群-带访问控制的分片副本集&quot;&gt;&lt;a href=&quot;#MongoDB集群-带访问控制的分片副本集&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://crhstack.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="MongoDB" scheme="https://crhstack.daydayops.com/tags/MongoDB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kubernetes-v1.30新特性一览</title>
+    <link href="https://crhstack.daydayops.com/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/"/>
+    <id>https://crhstack.daydayops.com/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/</id>
+    <published>2024-04-16T02:32:16.000Z</published>
+    <updated>2025-04-02T07:25:18.075Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Kubernetes-v1-30-新特性一览&quot;&gt;&lt;a href=&quot;#Kubernetes-v1-30-新特性一览&quot; class=&quot;headerlink&quot; title=&quot;Kubernetes v1.30 新特性一览&quot;&gt;&lt;/a&gt;Kubernetes v1.30</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://crhstack.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://crhstack.daydayops.com/tags/Kubernetes/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kubeadm安装k8s集群</title>
+    <link href="https://crhstack.daydayops.com/2024/03/18/kubeadm-an-zhuang-k8s-ji-qun/"/>
+    <id>https://crhstack.daydayops.com/2024/03/18/kubeadm-an-zhuang-k8s-ji-qun/</id>
+    <published>2024-03-18T08:39:14.000Z</published>
+    <updated>2025-04-02T07:50:18.293Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;kubeadm安装k8s集群&quot;&gt;&lt;a href=&quot;#kubeadm安装k8s集群&quot; class=&quot;headerlink&quot; title=&quot;kubeadm安装k8s集群&quot;&gt;&lt;/a&gt;kubeadm安装k8s集群&lt;/h1&gt;&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://crhstack.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://crhstack.daydayops.com/tags/Kubernetes/"/>
+    
+    <category term="Kubeadm" scheme="https://crhstack.daydayops.com/tags/Kubeadm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>替代ELK：ClickHouse+Kafka+FlieBeat，才是最佳选择？</title>
+    <link href="https://crhstack.daydayops.com/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/"/>
+    <id>https://crhstack.daydayops.com/2024/03/15/ti-dai-elk-clickhouse-kafka-fliebeat-cai-shi-zui-jia-xuan-ze/</id>
+    <published>2024-03-15T03:26:22.000Z</published>
+    <updated>2025-04-02T07:18:34.886Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;替代ELK：ClickHouse-Kafka-FlieBeat，才是最佳选择？&quot;&gt;&lt;a href=&quot;#替代ELK：ClickHouse-Kafka-FlieBeat，才是最佳选择？&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://crhstack.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="ClickHouse" scheme="https://crhstack.daydayops.com/tags/ClickHouse/"/>
+    
+    <category term="ELK" scheme="https://crhstack.daydayops.com/tags/ELK/"/>
+    
+    <category term="日志收集" scheme="https://crhstack.daydayops.com/tags/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/"/>
+    
+    <category term="日志可观测" scheme="https://crhstack.daydayops.com/tags/%E6%97%A5%E5%BF%97%E5%8F%AF%E8%A7%82%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于MiniKube安装Kubernetes</title>
+    <link href="https://crhstack.daydayops.com/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/"/>
+    <id>https://crhstack.daydayops.com/2024/02/27/guo-nei-ji-yu-minikube-an-zhuang-kubernetes/</id>
+    <published>2024-02-27T06:31:48.000Z</published>
+    <updated>2025-04-02T09:37:36.987Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;国内基于minikube安装kubernetes&quot;&gt;&lt;a href=&quot;#国内基于minikube安装kubernetes&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://crhstack.daydayops.com/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://crhstack.daydayops.com/tags/Kubernetes/"/>
+    
+    <category term="MiniKube" scheme="https://crhstack.daydayops.com/tags/MiniKube/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Github Pages创建自己域名网站</title>
+    <link href="https://crhstack.daydayops.com/2024/01/31/github-pages-chuang-jian-zi-ji-yu-ming-wang-zhan/"/>
+    <id>https://crhstack.daydayops.com/2024/01/31/github-pages-chuang-jian-zi-ji-yu-ming-wang-zhan/</id>
+    <published>2024-01-31T10:19:40.000Z</published>
+    <updated>2025-04-02T07:19:27.454Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一、准备工作&quot;&gt;&lt;a href=&quot;#一、准备工作&quot; class=&quot;headerlink&quot; title=&quot;一、准备工作&quot;&gt;&lt;/a&gt;一、准备工作&lt;/h2&gt;&lt;h3 id=&quot;1-1-注册域名&quot;&gt;&lt;a href=&quot;#1-1-注册域名&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="web" scheme="https://crhstack.daydayops.com/categories/web/"/>
+    
+    
+    <category term="GithubPages" scheme="https://crhstack.daydayops.com/tags/GithubPages/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>测试文章</title>
+    <link href="https://crhstack.daydayops.com/2024/01/20/ce-shi-wen-zhang/"/>
+    <id>https://crhstack.daydayops.com/2024/01/20/ce-shi-wen-zhang/</id>
+    <published>2024-01-20T07:00:00.000Z</published>
+    <updated>2024-07-03T09:05:32.555Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;这是一篇测试文章&lt;/p&gt;
+&lt;h2 id=&quot;信息框容器&quot;&gt;&lt;a href=&quot;#信息框容器&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="测试" scheme="https://crhstack.daydayops.com/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+    <category term="原创" scheme="https://crhstack.daydayops.com/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+    <category term="测试" scheme="https://crhstack.daydayops.com/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+</feed>
