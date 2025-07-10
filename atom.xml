@@ -34,27 +34,6 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://www.daydayops.com/2025/07/07/hello-world/"/>
-    <id>https://www.daydayops.com/2025/07/07/hello-world/</id>
-    <published>2025-07-07T10:27:04.526Z</published>
-    <updated>2025-07-07T10:27:04.526Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>Kubernetes集群问题排查指南</title>
     <link href="https://www.daydayops.com/2025/04/02/kubernetes-ji-qun-wen-ti-pai-cha-zhi-nan/"/>
     <id>https://www.daydayops.com/2025/04/02/kubernetes-ji-qun-wen-ti-pai-cha-zhi-nan/</id>
