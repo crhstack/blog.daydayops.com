@@ -1,0 +1,1492 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Kubernetes-v1.30新特性一览, 运维,运维博客,运维技术,运维工程师,运维工程师博客,SRE,SRE博客,SRE技术,SRE工程师,SRE工程师博客,DevOps,DevOps博客,DevOps技术,DevOps工程师,DevOps工程师博客,云原生,云原生博客,云原生技术,云原生工程师,云原生工程师博客,运维工程师,运维工程师博客,运维工程师技术,运维工程师,运维工程师博客,kubernets,kubernets博客,kubernets技术,kubernets工程师,kubernets工程师博客,k8s">
+    <meta name="description" content="Kubernetes v1.30 新特性一览Kubernetes v1.30 是 2024 年发布的第一个大版本，包含了 45 项主要的更新。 对比去年的话，v1.27 有近 60 项，v1.28 有 46 项，v1.29 有 49 项。可">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Kubernetes-v1.30新特性一览 | 天天运维博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="天天运维博客" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">天天运维博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">天天运维博客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Kubernetes-v1.30新特性一览</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Kubernetes/">
+                                <span class="chip bg-color">Kubernetes</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                运维
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-04-16
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-07-07
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.8k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    18 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Kubernetes-v1-30-新特性一览"><a href="#Kubernetes-v1-30-新特性一览" class="headerlink" title="Kubernetes v1.30 新特性一览"></a>Kubernetes v1.30 新特性一览</h2><p>Kubernetes v1.30 是 2024 年发布的第一个大版本，包含了 45 项主要的更新。 对比去年的话，v1.27 有近 60 项，v1.28 有 46 项，v1.29 有 49 项。可以看到 Kubernetes 变得更加谨慎了，会更加保守的控制进入其核心的功能。</p>
+<p>恰好前些天我在 “硬地骇客” 播客上录制了一期节目，正好提到 Kubernetes 现在是不是变得太复杂了，感兴趣的话可以听一下。</p>
+<p>具体来看 v1.30 版本中有 10 个增强功能正在进入 Alpha 阶段，18 个将升级到 Beta 阶段，而另外 17 个则将升级到稳定版。</p>
+<p>这次的版本称之为 “Uwernetes” 是 UwU 和 Kubernetes 的组合，因为发布团队认为这个版本是最可爱的版本了，也是对所有参与到 Kubernetes 生态中的人的一种致敬。让我们一起探索这个充满爱和喜悦的版本吧 UwU</p>
+<p><img src="/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/image.png" alt="Alt text"></p>
+<h3 id="Pod-调度就绪机制达到-GA"><a href="#Pod-调度就绪机制达到-GA" class="headerlink" title="Pod 调度就绪机制达到 GA"></a>Pod 调度就绪机制达到 GA</h3><p>这个功能实际上是从 Kubernetes v1.26 开始增加的。是 KEP 3521 的第一部分。并且在 v1.27 时候达到了 Beta。</p>
+<p>我们来快速的回顾一下 Pod 的创建过程。</p>
+<p>当 client 通过 kube-apiserver 创建成功 Pod 资源后，kube-scheduler 会去检查尚未被调度的 Pod，然后为其进行调度，分配 Node。之后 Node 获取到调度到该 Node 上的 Pod 然后进行创建。（这里省略了很多细节，但其他的部分与我们此处要介绍的内容关系不太大，就不展开了。）</p>
+<p>根据上述的过程，我们可以发现，在 Pod 创建成功后，其实就默认该 Pod 是可以被调度了，kube-scheduler 就应该开始工作了。</p>
+<p>但在实际的场景中，Pod 通常还会需要一些其他的资源，最典型的比如存储。在一些环境中，这些资源是需要预先进行创建的，尤其是在一些云厂商的场景中，还需要检查用户账户中是否还有余额可以用于创建云盘等。</p>
+<p>一但前置的依赖无法满足，假如 kube-scheduler 已经完成了 Pod 的调度，那么 kubelet 侧就会处于尝试创建 Pod ，但失败的情况。</p>
+<p>这个 KEP 的出现就可以很好的解决这个问题，增加了一个 Pod 是否准备好被调度的机制。如果前置依赖不满足，那么 Pod 就无需被调度，这也不会消耗资源。kube-scheduler 和 kubelet 都无需进行处理。待条件满足，Pod 再被调度和创建即可。</p>
+<p><img src="/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/image-1.png" alt="Alt text"></p>
+<p>这个机制我个人感觉还是挺好的，甚至我可以有更灵活的策略来控制应用的副本。比如在大流量，需要动态扩容的场景下，我可以利用此机制预先创建一些 Pod 资源以及准备好它的依赖， 甚至可以在 Node 上准备好镜像等。当需要增加副本时，直接标记 Pod 可被调度，</p>
+<p>使用时，通过配置 Pod 的 .spec.schedulingGates 即可。例如：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> test<span class="token punctuation">-</span>pod
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">schedulingGates</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> moelove.info/disk
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> foo.bar/xyz
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> kong
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> kong<span class="token punctuation">:</span><span class="token number">3.6</span>
+</code></pre>
+<p>注意这里可以为它设置多个 schedulingGates 但是要确保它们的唯一性。</p>
+<p>如果将上述配置应用到 Kubernetes 集群中，则会看到</p>
+<pre class=" language-shell"><code class="language-shell">➜  ~ kubectl get pods 
+NAME       READY   STATUS            RESTARTS   AGE
+test-pod   0/1     SchedulingGated   0          17s
+</code></pre>
+<p>.status 中也会有相关输出：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">status</span><span class="token punctuation">:</span>
+  <span class="token key atrule">conditions</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">lastProbeTime</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+    <span class="token key atrule">lastTransitionTime</span><span class="token punctuation">:</span> <span class="token null important">null</span>
+    <span class="token key atrule">message</span><span class="token punctuation">:</span> Scheduling is blocked due to non<span class="token punctuation">-</span>empty scheduling gates
+    <span class="token key atrule">reason</span><span class="token punctuation">:</span> SchedulingGated
+    <span class="token key atrule">status</span><span class="token punctuation">:</span> <span class="token string">"False"</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> PodScheduled
+  <span class="token key atrule">phase</span><span class="token punctuation">:</span> Pending
+  <span class="token key atrule">qosClass</span><span class="token punctuation">:</span> BestEffort
+</code></pre>
+<p>那么何时能正常调度呢？我们在实现对应的 controller 或者 operator 时，只需要移除 schedulingGates 的配置即可。</p>
+<h3 id="kubectl-交互式删除达到-GA"><a href="#kubectl-交互式删除达到-GA" class="headerlink" title="kubectl 交互式删除达到 GA"></a>kubectl 交互式删除达到 GA</h3><p>很多人都会直接使用 kubectl 进行 Kubernetes 集群的管理，包括资源的创建和删除等。删除操作是很危险的动作，并且不可逆，如果由于错误的拼写，不小心的复制粘贴或者错误的补全等， 不小心误删了重要的资源，可能会带来一些不小的麻烦。</p>
+<p>这是一般情况下的删除操作，在回车后就直接执行了。</p>
+<pre class=" language-shell"><code class="language-shell">k8s-test:~$ kubectl create secret generic my-secret --from-literal=key1=supersecret
+secret/my-secret created
+k8s-test:~$ kubectl delete secret my-secret 
+secret "my-secret" deleted
+</code></pre>
+<p>在 KEP-3895 中提出可以为 kubectl delete 增加一个 -i 的选项，类似于 Linux 中的 rm -i 命令那样，在得到用户确认后再进行删除操作，如果用户否认则退出删除操作。</p>
+<p>我们来看下效果：</p>
+<pre class=" language-shell"><code class="language-shell">k8s-test:~$ kubectl create secret generic my-secret2 --from-literal=key1=supersecret 
+secret/my-secret2 created
+k8s-test:~$ kubectl delete -i secret my-secret2
+You are about to delete the following 1 resource(s):
+secret/my-secret2
+Do you want to continue? (y/n): n
+deletion is cancelled
+k8s-test:~$ kubectl delete -i secret my-secret2
+You are about to delete the following 1 resource(s):
+secret/my-secret2
+Do you want to continue? (y/n): y
+secret "my-secret2" deleted
+</code></pre>
+<p>这个特性是在 Kubernetes v1.27 作为 Alpha 特性引入的，在 Alpha 阶段，需要添加 KUBECTL_INTERACTIVE_DELETE=true 的环境变量进行开启；在 v1.29 达到了 beta 阶段，不再需要环境变量即可使用，如今在 v1.30 达到了 GA，建议大家可以加个 alias 会比较方便。</p>
+<h3 id="基于-CEL-的-Adminssion-Control-达到-GA"><a href="#基于-CEL-的-Adminssion-Control-达到-GA" class="headerlink" title="基于 CEL 的 Adminssion Control 达到 GA"></a>基于 CEL 的 Adminssion Control 达到 GA</h3><p>对 Kubernetes 中的 Adminssion Control 感兴趣的小伙伴可以看看我之前的文章：理清 Kubernetes 中的准入控制（Admission Controller) | MoeLove</p>
+<ul>
+<li>KEP-3488: Implement secondary authz for ValidatingAdmissionPolicy by jpbetz · Pull Request #116054 · kubernetes/kubernetes</li>
+<li>KEP-3488: Implement Enforcement Actions and Audit Annotations by jpbetz · Pull Request #115973 · kubernetes/kubernetes<br>Kubernetes 在 v1.26 增加了一项很重要的特性，那就是允许使用 CEL 进行 Admission Control，具体内容可以参考我之前写的文章：Kubernetes v1.26 新特性一览 | MoeLove</li>
+</ul>
+<p>其中引入了一个新的资源 ValidatingAdmissionPolicy ，使用起来如下:</p>
+<h3 id="v1-26-使用的-API-Version-是-v1alpha1"><a href="#v1-26-使用的-API-Version-是-v1alpha1" class="headerlink" title="v1.26 使用的 API Version 是 v1alpha1"></a>v1.26 使用的 API Version 是 v1alpha1</h3><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> admissionregistration.k8s.io/v1alpha1
+ <span class="token key atrule">kind</span><span class="token punctuation">:</span> ValidatingAdmissionPolicy
+ <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+   <span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">"demo-policy.moelove.info"</span>
+ <span class="token key atrule">Spec</span><span class="token punctuation">:</span>
+   <span class="token key atrule">failurePolicy</span><span class="token punctuation">:</span> Fail
+   <span class="token key atrule">matchConstraints</span><span class="token punctuation">:</span>
+     <span class="token key atrule">resourceRules</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> <span class="token key atrule">apiGroups</span><span class="token punctuation">:</span>   <span class="token punctuation">[</span><span class="token string">"apps"</span><span class="token punctuation">]</span>
+       <span class="token key atrule">apiVersions</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"v1"</span><span class="token punctuation">]</span>
+       <span class="token key atrule">operations</span><span class="token punctuation">:</span>  <span class="token punctuation">[</span><span class="token string">"CREATE"</span><span class="token punctuation">,</span> <span class="token string">"UPDATE"</span><span class="token punctuation">]</span>
+       <span class="token key atrule">resources</span><span class="token punctuation">:</span>   <span class="token punctuation">[</span><span class="token string">"deployments"</span><span class="token punctuation">]</span>
+   <span class="token key atrule">validations</span><span class="token punctuation">:</span>
+     <span class="token punctuation">-</span> <span class="token key atrule">expression</span><span class="token punctuation">:</span> <span class="token string">"object.spec.replicas &lt;= 2"</span>
+</code></pre>
+<p>但是在当时也只是实现了 KEP-3488 的一部分。</p>
+<p>比如实现 Authz 的部分，允许用 CEL 表达式编写复杂的 admission control 规则， 放置在声明式资源中，而不是构建和部署 webhook。</p>
+<p>虽然 admission webhook 一直是我们灵活的与第三方工具集成的基石，但是对于新用户来说，它们有很多复杂性，新的 CEL 系统有望接管仅需要对默认规则进行小修改的简单独立案例。</p>
+<p>以前，表达式上下文会公开有关当前请求和目标资源的信息，现在通过这个 #116054 PR 可以在授权层中动态检查 RBAC 权限。一些有用的地方可能是使用 RBAC 进行每个字段的更新权限，允许 RBAC 检查特定对象而不使用 resourceNames 系统， 或基于请求者身份限制对程序敏感字段（例如 finalizers ）的访问而无需生成复杂的 RBAC 策略。</p>
+<p>例如：</p>
+<pre class=" language-yaml"><code class="language-yaml">authorizer.group('').resource('pods').namespace('default').check('create').allowed()
+authorizer.path('/healthz').check('GET').allowed()
+authorizer.requestResource.check('my<span class="token punctuation">-</span>custom<span class="token punctuation">-</span>verb').allowed()
+</code></pre>
+<p>在 v1.27 还加入了#115973，该功能允许在失败时作为主要操作发出审计日志事件，或者如果需要更多数据，可以编写一个或多个 CEL 表达式，以提供详细的值， 这些值将发送到审计子系统。</p>
+<p>这既可以在开发新策略时提供强大的调试选项，也可以进行运行时分析。其他 CEL admission 特性包括各种检查，以防止您使用所有这些新功能意外拒绝服务自己的 kube-apiserver，以及改进的类型检查。</p>
+<p>该特性自 v1.28 升级到 Beta，v1.30 升级到 GA 阶段，API version 也就随之升级到了：</p>
+<pre class=" language-yaml"><code class="language-yaml">admissionregistration.k8s.io/v1
+</code></pre>
+<p>此外，还引入了很多值得关注的特性，包括：</p>
+<ul>
+<li>ValidatingAdmissionPolicy: support namespace access by cici37 · Pull Request #118267 · kubernetes/kubernetes 将 webhook 推入到一个有限的用例空间中（防止滥用）</li>
+<li>CEL-based admission webhook match conditions · Issue #3716 · kubernetes/enhancements 这是另一个 KEP，实现的特性称之为 AdmissionWebhookMatchConditions，也在 v1.30 中达到了 GA，这个特性其实就是个条件判断，在进行请求处理时候多了一份过滤</li>
+</ul>
+<h3 id="基于-container-资源的-HAP-达到-GA"><a href="#基于-container-资源的-HAP-达到-GA" class="headerlink" title="基于 container 资源的 HAP 达到 GA"></a>基于 container 资源的 HAP 达到 GA</h3><p>Horizontal Pod Autoscaler (HPA) 是 Kubernetes 集群中一个非常重要且实现自动伸缩功能必备组件之一，并支持根据目标 Pod 内部所有 Container 所占系统内存、CPU 等信息来判断是否需要进行 HPA 操作。但是，在某些场景下，默认采取“汇总”模式统计所有 Container 节点数据并作为判断依据就不那么适用了：</p>
+<ul>
+<li>比如存在 sidecar 模式下运行额外附属服务进程；</li>
+<li>比如某些业务场景下 CPU 和 Memory 使用完全无法预测、毫无规律可言等特殊状态。<br>针对以上场景，KEP-1610 定义了基于 container 资源的 HAP，扩展了之前基于 Pod 的 HPA 机制。该特性自 v1.19 引入 Alpha ，到 1.27 达到 Beta，在 v1.30 终于 GA。</li>
+</ul>
+<p>同时，在具体操作过程中还需注意以下两点：</p>
+<p>对那些性能极高且需要单独配置各个 container 资源参数（例如 CPU 和 Memory）以达到最优效果业务场景而言，默认 HPA Controller 行为则显得相对简陋；<br>在多数业务场景下，都会需要通过 sidecar 来运行一些额外的服务进程，例如采集日志等。但是由于 sidecar 本身的特殊用途和使用场景，使得它与主业务 container 耦合度较低甚至不存在强关联性，因此统计分析过程中对 sidecar 的资源消耗要独立考虑；</p>
+<h3 id="新的-Service-流量分配机制"><a href="#新的-Service-流量分配机制" class="headerlink" title="新的 Service 流量分配机制"></a>新的 Service 流量分配机制</h3><p>Traffic Distribution for Services · KEP-4444 建议在 Kubernetes service spec 中新增一个名为 trafficDistribution 的字段，以替代目前使用的 service.kubernetes.io/topology-mode annotation 和已于 Kubernetes v1.21 弃用的 topologyKeys 字段。</p>
+<p>具体来说，trafficDistribution 目前支持两个配置：</p>
+<ul>
+<li>nil （默认配置）：没有特别指定任何偏好，用户委派转发决策给底层实现；</li>
+<li>PreferClose：即优先选择与客户端所处拓扑结构相邻接口节点进行流量转发。“拓扑结构相邻”的定义会因不同实现而异，例如可能是同一台主机、机架、区域乃至地理位置内部分接口节点等等。<br>这个特性当前是 Alpha 阶段，未来可能还会有所调整。</li>
+</ul>
+<h3 id="新的-Job-完成-成功策略"><a href="#新的-Job-完成-成功策略" class="headerlink" title="新的 Job 完成/成功策略"></a>新的 Job 完成/成功策略</h3><p>Job success/completion policy KEP-3998 介绍了如何通过扩展 Job API 来设置 Indexed Job 的成功条件。对于某些批处理工作负载（如 MPI 和 PyTorch），我们仅希望考虑 leader 上的结果来判断整个任务是否成功。但现有机制要求所有节点均须执行完毕后方能标记 Indexed job 为完成状态。</p>
+<p>新机制允许用户在 Job 规范中指定 .spec.successPolicy 参数来定义 indexed Jobs 达成成功所需满足的条件。通过该功能可定义两种判定方式：</p>
+<ul>
+<li>succeededIndexes：只要指定的 index 成功了就算整个 Job 成功了（即使有其他 index 失败）</li>
+<li>succeededCount：只有达到指定数量的 index 成功才算 Job 完成<br>一旦 Job 满足完成条件后，Job 控制器会立即停止所有未完成的 Pods。</li>
+</ul>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> batch/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Job
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">parallelism</span><span class="token punctuation">:</span> <span class="token number">10</span>
+  <span class="token key atrule">completions</span><span class="token punctuation">:</span> <span class="token number">10</span>
+  <span class="token key atrule">completionMode</span><span class="token punctuation">:</span> Indexed <span class="token comment" spellcheck="true"># Required for the success policy</span>
+  <span class="token key atrule">successPolicy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">rules</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">succeededIndexes</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>2<span class="token punctuation">-</span><span class="token number">3</span>
+        <span class="token key atrule">succeededCount</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> main
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> python
+        <span class="token key atrule">command</span><span class="token punctuation">:</span>          <span class="token comment" spellcheck="true"># Provided that at least one of the Pods with 0, 2, and 3 indexes has succeeded,</span>
+                          <span class="token comment" spellcheck="true"># the overall Job is a success.</span>
+          <span class="token punctuation">-</span> python3
+          <span class="token punctuation">-</span> <span class="token punctuation">-</span>c
+          <span class="token punctuation">-</span> <span class="token punctuation">|</span><span class="token scalar string">
+            import os, sys
+            if os.environ.get("JOB_COMPLETION_INDEX") == "2":
+              sys.exit(0)
+            else:
+              sys.exit(1)</span>
+</code></pre>
+<p>与之前存在的 complete 和 successCriteriaMet 参数相比较而言：</p>
+<ul>
+<li>complete 表示所有 Pod 均已运行完毕，并且它们全部执行成功或者该任务原本就处于 SuccessCriteriaMet=true 状态；</li>
+<li>而 SuccessCriteriaMet 则表示当前任务至少符合其中一项 successPolicies 定义。<br>也就是说，在某些场景下一个 Task 可能既符合 complete 条件又符合 Success Criteria Met 条件。</li>
+</ul>
+<p>这个特性当前是 Alpha 阶段，而且很明显这个特性出发点是对类似 AI 场景下的任务提供更多支持，也是个方向。</p>
+<h3 id="kubelet-重启后-VolumeManager-重建能力-GA"><a href="#kubelet-重启后-VolumeManager-重建能力-GA" class="headerlink" title="kubelet 重启后 VolumeManager 重建能力 GA"></a>kubelet 重启后 VolumeManager 重建能力 GA</h3><p>Robust VolumeManager reconstruction after kubelet restart KEP-3756 KEP-3756 提出了对 Kubernetes 的 VolumeManager 重构过程的改进，在 kubelet 启动时，通过反转启动过程来实现对已挂载卷的更好的恢复。这个 KEP 的目的是在 kubelet 重启后，使其能够更好地恢复已挂载的卷，并为此提出了一个新的 feature gate NewVolumeManagerReconstruction。</p>
+<p>这个特性最早是 v1.25 引入的，不过当时是作为 SELinuxMountReadWriteOncePod 的一部分进行实现的。后来在 v1.27 达到 Beta，在 1.28 时候默认启用了，现在 v1.30 正式 GA。</p>
+<p>它还是很有用的，尤其是如果需要维护 Kubernetes 集群的话，会更喜欢这个特性。毕竟节点异常/重启后，对卷的相关处理一直都比较痛。</p>
+<h3 id="在卷恢复期间防止未经授权的卷模式转换-GA"><a href="#在卷恢复期间防止未经授权的卷模式转换-GA" class="headerlink" title="在卷恢复期间防止未经授权的卷模式转换 GA"></a>在卷恢复期间防止未经授权的卷模式转换 GA</h3><p>Prevent unauthorised volume mode conversion during volume restore KEP-3141 KEP-3141 提出一种机制来减轻用户在从现有 PVC 创建 VolumeSnapshot 时对卷模式的更改带来的漏洞。</p>
+<p>这个特性更偏向于对现有 Kubernetes 机制的一种加固。</p>
+<p>因为在 Kubernetes v1.20 时有一个 GA 的特性 VolumeSnapshot，用户可以通过使用 VolumeSnapshot 特性，从卷快照创建新的持久化卷。这是非常有用的，比如说 DBA 可以在进行数据库大的变更/迁移操作前，对持久化卷做一次快照，如果出现异常，则可以直接从该快照恢复数据库之前的状态。</p>
+<p>例如通过以下方式可以动态的创建一个快照：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> snapshot.storage.k8s.io/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> VolumeSnapshotClass
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> test<span class="token punctuation">-</span>snapclass
+<span class="token key atrule">driver</span><span class="token punctuation">:</span> testdriver.csi.k8s.io
+<span class="token key atrule">deletionPolicy</span><span class="token punctuation">:</span> Delete
+<span class="token key atrule">parameters</span><span class="token punctuation">:</span>
+  <span class="token key atrule">csi.storage.k8s.io/snapshotter-secret-name</span><span class="token punctuation">:</span> mysecret
+  <span class="token key atrule">csi.storage.k8s.io/snapshotter-secret-namespace</span><span class="token punctuation">:</span> mysecretnamespace
+<span class="token punctuation">---</span>
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> snapshot.storage.k8s.io/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> VolumeSnapshot
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> test<span class="token punctuation">-</span>snapshot
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> ns1
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">volumeSnapshotClassName</span><span class="token punctuation">:</span> test<span class="token punctuation">-</span>snapclass
+  <span class="token key atrule">source</span><span class="token punctuation">:</span>
+    <span class="token key atrule">persistentVolumeClaimName</span><span class="token punctuation">:</span> test<span class="token punctuation">-</span>pvc
+</code></pre>
+<p>当然，这里也有些需要注意的点，该功能只能用于 CSI 存储驱动，并且该功能是自 Kubernetes v1.17 达到 beta，v1.20 正式 GA 的。</p>
+<p>VolumeSnapshot 是通过将 PVC 的 spec.dataSource 参数指向现有 VolumeSnapshot 实例来完成的。然而，没有任何逻辑来验证在此操作期间原始卷模式是否与新创建的 PVC 的卷模式匹配。这个 KEP 引入了一个新的 annotation，</p>
+<pre class=" language-yaml"><code class="language-yaml">snapshot.storage.kubernetes.io/allow<span class="token punctuation">-</span>volume<span class="token punctuation">-</span>mode<span class="token punctuation">-</span>change
+</code></pre>
+<p>用户可以通过它来防止未授权的卷模式转换。</p>
+<h3 id="为-Pod-添加-status-hostIPs-GA"><a href="#为-Pod-添加-status-hostIPs-GA" class="headerlink" title="为 Pod 添加 status.hostIPs GA"></a>为 Pod 添加 status.hostIPs GA</h3><p>Field status.hostIPs added for Pod KEP-2681 该 KEP 提出为 Pod 添加一个新字段 status.hostIP，以获取节点的地址。该 KEP 旨在改善 Pod 获取节点地址的能力，尤其是从单栈向双栈迁移的场景。</p>
+<p>这个特性是 v1.28 引入，到 v1.29 Beta，到 v1.30 GA 并默认启用的。</p>
+<p>你可能会好奇那之前版本中的 status.hostIP 还能用吗？是可以用的，这个 .status.hostIPs 就是为了保证兼容性所以新添加的，它是个列表。效果如下：</p>
+<p>v1.30 之前</p>
+<pre class=" language-shell"><code class="language-shell">➜  ~ kubectl -n kong get pods kong-gateway-649bbf9c47-qk7vh -o=jsonpath='{.status.hostIP}'
+192.168.1.5
+</code></pre>
+<p>v1.30</p>
+<pre class=" language-shell"><code class="language-shell">➜  ~ kubectl -n kong get pods kong-gateway-649bbf9c47-qk7vh -o=jsonpath='{.status.hostIPs}'
+[{"ip":"192.168.1.5"}]
+</code></pre>
+<h3 id="NodeLogQuery-特性达到-Beta"><a href="#NodeLogQuery-特性达到-Beta" class="headerlink" title="NodeLogQuery 特性达到 Beta"></a>NodeLogQuery 特性达到 Beta</h3><p>我们通常最习惯使用 kubectl logs 命令来获取 Kubernetes 集群中运行的应用的日志，也可以通过给它传递一些参数来调整它的过滤范围。</p>
+<p>比如：kubectl logs job/hello 来指定获取 hello 这个 job 的日志；也可以增加 -l / –selector=’’ 来基于 label 进行过滤。</p>
+<p>但这并没有扩展到 Node 级别的日志，无法直接获取到某个 Node 上的全部日志，要想得到这个结果需要写一段很复杂的 Shell 来完成。</p>
+<p>当前 Kubernetes 社区已经逐渐提供了更多 Node 调试工具，旨在为调试 Node 故障提供统一体验，并更好地支持极简操作系统。通过 KEP 2258: add node log query by LorbusChris · Pull Request #96120 · kubernetes/kubernetes ，我们现在可以远程获取底层 Node 日志。与容器日志记录一样，这是 Kubelet API的一部分。</p>
+<p>对于Linux系统，它查询journald；对于Windows系统，则查询事件日志(Event Log)。目前还没有专门针对此功能的 kubectl 命令，但可以使用如下命令尝试：</p>
+<pre class=" language-shell"><code class="language-shell">➜ kubectl get --raw "/api/v2/nodes/$NODE_NAME/proxy/logs/?query=kubelet
+</code></pre>
+<p>也有一个对应的 kubectl 插件可以尝试：<a target="_blank" rel="noopener" href="https://github.com/aravindhp/kubectl-node-logs/">https://github.com/aravindhp/kubectl-node-logs/</a></p>
+<p>这个特性是自 v1.27 引入的，在 v1.30 达到 Beta，但是默认并没有启用。</p>
+<h3 id="Node-Swap-特性默认启用"><a href="#Node-Swap-特性默认启用" class="headerlink" title="Node Swap 特性默认启用"></a>Node Swap 特性默认启用</h3><p>关于 Node Swap 的背景我在 2021 年 Kubernetes v1.22 的文章中就介绍过了，这个话题是从 2016 年开始就一直在讨论了。</p>
+<p>如今在 v1.30 中默认开始启用，才算是真正的更进一步了。但是需要 注意它的一些参数修改了 ，如果是从之前版本升级，并启用了该特性的话，需要注意！</p>
+<p>具体来说是在 Kubelet 的配置中增加 MemorySwap.SwapBehavior 字段，它有两个可选值：</p>
+<ul>
+<li>NoSwap：它就是之前版本中的 UnlimitedSwap，并且也是默认值；</li>
+<li>LimitedSwap：表示可以使用有限的 Swap，Swap 限制与容器的内存请求成比例；<br>同时，还需要注意，LimitedSwap 仅支持在 cgroup v2 中使用。</li>
+</ul>
+<h3 id="新增递归只读挂载-RRO"><a href="#新增递归只读挂载-RRO" class="headerlink" title="新增递归只读挂载 RRO"></a>新增递归只读挂载 RRO</h3><p>Recursive Read-only (RRO) mounts KEP-3857 它允许在一个目录上创建只读挂载，同时也会递归地将该目录下的所有子目录和文件都设置为只读。</p>
+<p>RRO 挂载可以提高 Kubernetes 的安全性和稳定性，同时也可以减少不必要的读写操作，提高性能。这个功能需要 kernel &gt;= 5.12，并且需要使用 runc &gt;= 1.1 或 crun &gt;= 1.4 之一的 OCI 运行时。</p>
+<p>配置方式如下，主要是增加 recursiveReadOnly: Enabled</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> rro
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mnt
+      <span class="token key atrule">hostPath</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># tmpfs is mounted on /mnt/tmpfs</span>
+        <span class="token key atrule">path</span><span class="token punctuation">:</span> /mnt
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> busybox
+      <span class="token key atrule">image</span><span class="token punctuation">:</span> busybox
+      <span class="token key atrule">args</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"sleep"</span><span class="token punctuation">,</span> <span class="token string">"infinity"</span><span class="token punctuation">]</span>
+      <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># /mnt-rro/tmpfs is not writable</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mnt
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /mnt<span class="token punctuation">-</span>rro
+          <span class="token key atrule">readOnly</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+          <span class="token key atrule">mountPropagation</span><span class="token punctuation">:</span> None
+          <span class="token key atrule">recursiveReadOnly</span><span class="token punctuation">:</span> Enabled
+        <span class="token comment" spellcheck="true"># /mnt-ro/tmpfs is writable</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mnt
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /mnt<span class="token punctuation">-</span>ro
+          <span class="token key atrule">readOnly</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+        <span class="token comment" spellcheck="true"># /mnt-rw/tmpfs is writable</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> mnt
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /mnt<span class="token punctuation">-</span>rw
+</code></pre>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>移除了 SecurityContextDeny adminssion plugin;</li>
+<li>新增 StorageVersionMigrator 可以方便的进行 CRD 版本升级；</li>
+<li>Pod user namespace 从 v1.25 引入，到如今成为 Beta，但是这需要底层容器运行时支持 user namespace;</li>
+<li>Kubelet ImageMaximumGCAge 达到 Beta;</li>
+<li>Kubelet 可以修改 Pod 的日志目录了，默认是 /var/log/pods 。但是要注意的是，如果你挂了个盘然后它和 /var 不是一个文件系统的话，kubelet 不会感知到文件系统的用量，可能会导致一些异常情况；</li>
+</ul>
+<p>好了，这就是我觉得 Kubernetes v1.30 中主要值得关注的内容了。欢迎大家交流讨论，下次再见！</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">daydayops</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.daydayops.com/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/">https://www.daydayops.com/2024/04/16/kubernetes-v1-30-xin-te-xing-yi-lan/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">daydayops</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Kubernetes/">
+                                    <span class="chip bg-color">Kubernetes</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2024/04/25/mongodb-ji-qun-dai-fang-wen-kong-zhi-de-fen-pian-fu-ben-ji/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="MongoDB集群-带访问控制的分片副本集">
+                        
+                        <span class="card-title">MongoDB集群-带访问控制的分片副本集</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-04-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MongoDB/">
+                        <span class="chip bg-color">MongoDB</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/03/18/kubeadm-an-zhuang-k8s-ji-qun/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Kubeadm安装k8s集群">
+                        
+                        <span class="card-title">Kubeadm安装k8s集群</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Kubernetes/">
+                        <span class="chip bg-color">Kubernetes</span>
+                    </a>
+                    
+                    <a href="/tags/Kubeadm/">
+                        <span class="chip bg-color">Kubeadm</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 天天运维博客<br />'
+            + '文章作者: daydayops<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023-2025</span>
+            
+            <a href="/about" target="_blank">daydayops</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">13.6k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2023";
+                        var startMonth = "10";
+                        var startDate = "28";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/crhstack" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1057266956@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1057266956" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1057266956" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
