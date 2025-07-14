@@ -4,10 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CloudFlare代理GithubPage301问题, 运维,运维博客,运维技术,运维工程师,运维工程师博客,SRE,SRE博客,SRE技术,SRE工程师,SRE工程师博客,DevOps,DevOps博客,DevOps技术,DevOps工程师,DevOps工程师博客,云原生,云原生博客,云原生技术,云原生工程师,云原生工程师博客,运维工程师,运维工程师博客,运维工程师技术,运维工程师,运维工程师博客,kubernets,kubernets博客,kubernets技术,kubernets工程师,kubernets工程师博客,k8s">
-    <meta name="description" content="CloudFlare代理GithubPage301问题由于GithubPage是美国服务器，国内访问速度较慢，所以使用CloudFlare加速。
-注册cloudflare后，设置DNS解析，并开启proxy。
-此时打开网站发现网站被循环30">
+    <meta name="keywords" content="k8s污点和容忍度的使用, 运维,运维博客,运维技术,运维工程师,运维工程师博客,SRE,SRE博客,SRE技术,SRE工程师,SRE工程师博客,DevOps,DevOps博客,DevOps技术,DevOps工程师,DevOps工程师博客,云原生,云原生博客,云原生技术,云原生工程师,云原生工程师博客,运维工程师,运维工程师博客,运维工程师技术,运维工程师,运维工程师博客,kubernets,kubernets博客,kubernets技术,kubernets工程师,kubernets工程师博客,k8s">
+    <meta name="description" content="k8s污点(Taint)和容忍度(Toleration)的使用Kubernetes 的污点 (Taint) 和容忍度 (Toleration) 是强大的机制，用于控制 Pod 在节点上的调度。它们允许对节点进行标记，并指定哪些 Pod 可以">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CloudFlare代理GithubPage301问题 | 天天运维博客</title>
+    <title>k8s污点和容忍度的使用 | 天天运维博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -339,12 +337,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CloudFlare代理GithubPage301问题</h1>
+                    <h1 class="description center-align post-title">k8s污点和容忍度的使用</h1>
                 </div>
             </div>
         </div>
@@ -368,12 +366,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/CloudFlare/">
-                                <span class="chip bg-color">CloudFlare</span>
-                            </a>
-                        
-                            <a href="/tags/GithubPages/">
-                                <span class="chip bg-color">GithubPages</span>
+                            <a href="/tags/Kubernetes/">
+                                <span class="chip bg-color">Kubernetes</span>
                             </a>
                         
                     </div>
@@ -384,8 +378,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                运维
+                            <a href="/categories/Kubernetes/" class="post-category">
+                                Kubernetes
                             </a>
                         
                     </div>
@@ -397,28 +391,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2024-04-30
+                    2025-07-14
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-07-07
+                    2025-07-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    117
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    6 分
                 </div>
                 
 
@@ -436,12 +430,176 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="CloudFlare代理GithubPage301问题"><a href="#CloudFlare代理GithubPage301问题" class="headerlink" title="CloudFlare代理GithubPage301问题"></a>CloudFlare代理GithubPage301问题</h1><p>由于GithubPage是美国服务器，国内访问速度较慢，所以使用CloudFlare加速。</p>
-<p>注册cloudflare后，设置DNS解析，并开启proxy。</p>
-<p>此时打开网站发现网站被循环301跳转无法正常访问<br><img src="/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/image.png" alt="Alt text"></p>
-<p>检查cloudflare的配置，发现SSL配置使用的是flexible模式，这种模式回源是通过http协议，而githubpage又配置了强制https跳转，所以导致循环301跳转。</p>
-<p><img src="/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/image-1.png" alt="Alt text"></p>
-<p>网站正常访问</p>
+                <h2 id="k8s污点-Taint-和容忍度-Toleration-的使用"><a href="#k8s污点-Taint-和容忍度-Toleration-的使用" class="headerlink" title="k8s污点(Taint)和容忍度(Toleration)的使用"></a>k8s污点(Taint)和容忍度(Toleration)的使用</h2><p>Kubernetes 的<strong>污点 (Taint)</strong> 和<strong>容忍度 (Toleration)</strong> 是强大的机制，用于控制 Pod 在节点上的调度。它们允许对节点进行标记，并指定哪些 Pod 可以忽略这些标记并仍然被调度到这些节点上。 这对于实现节点隔离、资源专用以及处理节点维护非常有用，Kubernetes 污点和容忍度还可以与其他调度功能（如节点亲和性）结合使用。</p>
+<h3 id="污点-Taint"><a href="#污点-Taint" class="headerlink" title="污点 (Taint):"></a>污点 (Taint):</h3><p>污点应用于节点，表示节点的一些特性或限制。 它本质上是一个标记，告诉 Kubernetes 调度程序避免将某些 Pod 调度到该节点。 一个污点包含三个部分：</p>
+<ul>
+<li><p>key: 污点的键，一个字符串，用于标识污点的类型。</p>
+</li>
+<li><p>value: 污点的值，一个字符串，提供关于污点类型的更多信息。可以为空字符串。</p>
+</li>
+<li><p>effect: 污点的效果，决定污点如何影响 Pod 的调度。 有三种效果：</p>
+<ul>
+<li><p>NoSchedule：阻止 Pod 调度到该节点，除非 Pod 有匹配的容忍度。</p>
+</li>
+<li><p>PreferNoSchedule：调度程序会尽量避免将 Pod 调度到该节点，但如果必要，仍然可以调度。</p>
+</li>
+<li><p>NoExecute：驱逐节点上已经存在的、没有匹配容忍度的 Pod。 这通常用于维护。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="容忍度-Toleration"><a href="#容忍度-Toleration" class="headerlink" title="容忍度 (Toleration):"></a>容忍度 (Toleration):</h3><p>容忍度应用于 Pod，表示 Pod 可以容忍某些节点上的污点。 它允许 Pod 被调度到具有匹配污点的节点上。 一个容忍度包含四个部分：</p>
+<ul>
+<li><p>key: 容忍度的键，必须与节点污点的键匹配。</p>
+</li>
+<li><p>operator: 运算符，指定如何匹配污点的值。 可以是：</p>
+<ul>
+<li><p>Equal：污点的值必须与容忍度的值完全匹配。</p>
+</li>
+<li><p>Exists：只要污点的键存在即可，忽略污点的值。</p>
+</li>
+</ul>
+</li>
+<li><p>value: 容忍度的值，如果 operator 为 Equal，则必须与污点的值匹配。</p>
+</li>
+<li><p>effect: 容忍度的效果，必须与节点污点的效果匹配。</p>
+</li>
+</ul>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景:"></a>使用场景:</h3><ul>
+<li><p>专用节点: 将节点标记为仅用于特定类型的应用程序。 例如，将节点标记为 gpu=true:NoSchedule，只有具有 gpu=true:NoSchedule 容忍度的 Pod 才能调度到该节点。</p>
+</li>
+<li><p>节点维护: 在节点进行维护之前，使用 NoExecute 效果的污点驱逐节点上的 Pod，然后进行维护。</p>
+</li>
+<li><p>隔离敏感数据: 将节点标记为仅用于处理敏感数据的应用程序。</p>
+</li>
+<li><p>资源隔离: 将节点标记为仅用于高内存或高 CPU 应用程序。</p>
+</li>
+</ul>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h3><ol>
+<li>添加污点:</li>
+</ol>
+<pre class=" language-shell"><code class="language-shell">kubectl taint nodes <node-name> key1=value1:NoSchedule
+</code></pre>
+<p>这将为名为 <node-name> 的节点添加一个污点，键为 key1，值为 value1，效果为 NoSchedule。</node-name></p>
+<ol start="2">
+<li>定义容忍度 (在 Pod 的 YAML 文件中):</li>
+</ol>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>pod
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>container
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+  <span class="token key atrule">tolerations</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"key1"</span>
+    <span class="token key atrule">operator</span><span class="token punctuation">:</span> <span class="token string">"Equal"</span>
+    <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token string">"value1"</span>
+    <span class="token key atrule">effect</span><span class="token punctuation">:</span> <span class="token string">"NoSchedule"</span>
+</code></pre>
+<p>这将允许名为 my-pod 的 Pod 调度到具有 key1=value1:NoSchedule 污点的节点上。</p>
+<ol start="3">
+<li>使用 Exists 运算符:</li>
+</ol>
+<p>如果只想检查键的存在性，而忽略值：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>pod
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>container
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+  <span class="token key atrule">tolerations</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"key1"</span>
+    <span class="token key atrule">operator</span><span class="token punctuation">:</span> <span class="token string">"Exists"</span>
+    <span class="token key atrule">effect</span><span class="token punctuation">:</span> <span class="token string">"NoSchedule"</span>
+</code></pre>
+<p>这将允许 my-pod 调度到任何具有 key1 键的污点的节点上，无论其值是什么。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项:"></a>注意事项:</h3><ul>
+<li><p>匹配: 污点和容忍度必须完全匹配才能生效（除非使用 Exists 运算符，否则 key、value 和 effect 必须完全匹配）。</p>
+</li>
+<li><p>顺序: 先添加污点，再创建具有匹配容忍度的 Pod，容忍度的顺序无关紧要。</p>
+</li>
+<li><p>移除污点: 使用 kubectl taint nodes <node-name> <key>-命令移除污点。</key></node-name></p>
+</li>
+<li><p>谨慎操作: 不正确的污点和容忍度配置可能会导致 Pod 无法调度或被意外驱逐。</p>
+</li>
+</ul>
+<p><strong>如果一个节点同时存在多个污点，Pod 的容忍度必须能够满足所有这些污点才能成功调度到该节点。 这意味着需要为每个污点在 Pod 的 tolerations 列表中添加一个对应的容忍度。</strong></p>
+<p>Kubernetes 处理多个污点和容忍度的方式就像一个过滤器：从节点的所有污点开始，然后忽略 pod 具有匹配容忍度的污点；其余未被忽略的污点对 pod 具有的效果如下：</p>
+<ul>
+<li><p>如果至少有一个未被忽略的污点具有 NoSchedule 效果， 那么 Kubernetes 将不会将 pod 调度到该节点上。</p>
+</li>
+<li><p>如果没有未忽略的污点 NoSchedule ，但至少有一个未忽略的污点 PreferNoSchedule，则 Kubernetes 将尝试不将 pod 调度到节点上。</p>
+</li>
+<li><p>如果至少有一个未被忽略的污点 NoExecute，那么该 pod 将被从节点中逐出（如果它已经在节点上运行），并且不会被调度到节点上（如果它尚未在节点上运行）。</p>
+</li>
+</ul>
+<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p>1.例如，假设我们的一个节点上有以下三个污点：</p>
+<ul>
+<li><p>kubectl taint nodes node1 key1=value1:NoSchedule</p>
+</li>
+<li><p>kubectl taint nodes node1 key1=value1:NoExecute</p>
+</li>
+<li><p>kubectl taint nodes node1 key2=value2:NoSchedule</p>
+</li>
+</ul>
+<p>我们创建一个pod，但是只配置两种容忍度匹配两个污点：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">tolerations</span><span class="token punctuation">:</span>
+<span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"key1"</span>
+  <span class="token key atrule">operator</span><span class="token punctuation">:</span> <span class="token string">"Equal"</span>
+  <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token string">"value1"</span>
+  <span class="token key atrule">effect</span><span class="token punctuation">:</span> <span class="token string">"NoSchedule"</span>
+<span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"key1"</span>
+  <span class="token key atrule">operator</span><span class="token punctuation">:</span> <span class="token string">"Equal"</span>
+  <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token string">"value1"</span>
+  <span class="token key atrule">effect</span><span class="token punctuation">:</span> <span class="token string">"NoExecute"</span>
+</code></pre>
+<p>在这种情况下，pod 将无法调度到节点上，因为没有与第三个污点匹配的容忍度。但是，如果在添加污点时它已经在节点上运行，它将能够继续运行，因为第三个污点是三个污点中唯一一个不被 pod 容忍的污点。</p>
+<p>通常情况下，如果将具有效果的污点 NoExecute 添加到节点，则任何不容忍该污点的 Pod 都会被立即驱逐，而容忍该污点的 Pod 则永远不会被驱逐。但是，具有 NoExecute 效果的容忍可以指定一个可选 tolerationSeconds 字段，该字段表示在添加污点后 Pod 将与节点保持绑定多长时间。例如：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">tolerations</span><span class="token punctuation">:</span>
+<span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"key1"</span>
+  <span class="token key atrule">operator</span><span class="token punctuation">:</span> <span class="token string">"Equal"</span>
+  <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token string">"value1"</span>
+  <span class="token key atrule">effect</span><span class="token punctuation">:</span> <span class="token string">"NoExecute"</span>
+  <span class="token key atrule">tolerationSeconds</span><span class="token punctuation">:</span> <span class="token number">3600</span>
+</code></pre>
+<p>这个配置表示如果此 pod 正在运行，并且节点上添加了匹配的污点，则 pod 将保持与节点的绑定状态 3600 秒，然后被驱逐。如果在此时间之前删除污点，则 pod 将不会被驱逐。</p>
+<p>2.假设一个节点存在以下三个污点：</p>
+<ul>
+<li><p>key=env,value=prod,effect=NoSchedule</p>
+</li>
+<li><p>key=disktype,value=ssd,effect=NoSchedule</p>
+</li>
+<li><p>key=zone,value=us-east-1,effect=NoSchedule</p>
+</li>
+</ul>
+<p>那么，Pod 的 tolerations 部分应该如下配置：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>pod
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>container
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+  <span class="token key atrule">tolerations</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"env"</span>
+    <span class="token key atrule">operator</span><span class="token punctuation">:</span> <span class="token string">"Equal"</span>
+    <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token string">"prod"</span>
+    <span class="token key atrule">effect</span><span class="token punctuation">:</span> <span class="token string">"NoSchedule"</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"disktype"</span>
+    <span class="token key atrule">operator</span><span class="token punctuation">:</span> <span class="token string">"Equal"</span>
+    <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token string">"ssd"</span>
+    <span class="token key atrule">effect</span><span class="token punctuation">:</span> <span class="token string">"NoSchedule"</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">"zone"</span>
+    <span class="token key atrule">operator</span><span class="token punctuation">:</span> <span class="token string">"Equal"</span>
+    <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token string">"us-east-1"</span>
+    <span class="token key atrule">effect</span><span class="token punctuation">:</span> <span class="token string">"NoSchedule"</span>
+</code></pre>
+<p>这个配置确保了 my-pod 可以容忍这三个污点，从而能够被调度到该节点。</p>
 
                 
             </div>
@@ -468,7 +626,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.daydayops.com/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/">https://www.daydayops.com/2024/04/30/cloudflare-dai-li-githubpage301-wen-ti/</a>
+                    <a href="https://www.daydayops.com/2025/07/14/k8s-wu-dian-he-rong-ren-du-de-shi-yong/">https://www.daydayops.com/2025/07/14/k8s-wu-dian-he-rong-ren-du-de-shi-yong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -506,12 +664,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/CloudFlare/">
-                                    <span class="chip bg-color">CloudFlare</span>
-                                </a>
-                            
-                                <a href="/tags/GithubPages/">
-                                    <span class="chip bg-color">GithubPages</span>
+                                <a href="/tags/Kubernetes/">
+                                    <span class="chip bg-color">Kubernetes</span>
                                 </a>
                             
                         </div>
@@ -590,17 +744,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2024/05/10/prometheus-jian-kong-ping-tai-zu-jian-shen-du-jiang-jie/">
+                <a href="/2025/07/14/k8s-wu-dian-he-rong-ren-du-de-shi-yong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Prometheus监控平台组件深度讲解">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="k8s污点和容忍度的使用">
                         
-                        <span class="card-title">Prometheus监控平台组件深度讲解</span>
+                        <span class="card-title">k8s污点和容忍度的使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -610,34 +765,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2024-05-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                    运维
+                            <a href="/categories/Kubernetes/" class="post-category">
+                                    Kubernetes
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/">
-                        <span class="chip bg-color">可观测性</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%9B%91%E6%8E%A7/">
-                        <span class="chip bg-color">监控</span>
-                    </a>
-                    
-                    <a href="/tags/Prometheus/">
-                        <span class="chip bg-color">Prometheus</span>
+                    <a href="/tags/Kubernetes/">
+                        <span class="chip bg-color">Kubernetes</span>
                     </a>
                     
                 </div>
@@ -651,13 +799,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/04/25/mongodb-ji-qun-dai-fang-wen-kong-zhi-de-fen-pian-fu-ben-ji/">
+                <a href="/2025/07/10/k8s-qin-he-xing-he-fan-qin-he-xing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="MongoDB集群-带访问控制的分片副本集">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="k8s调度之亲和性与反亲和性">
                         
-                        <span class="card-title">MongoDB集群-带访问控制的分片副本集</span>
+                        <span class="card-title">k8s调度之亲和性与反亲和性</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -668,14 +816,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                    运维
+                            <a href="/categories/Kubernetes/" class="post-category">
+                                    Kubernetes
                                 </a>
                             
                             
@@ -685,8 +833,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MongoDB/">
-                        <span class="chip bg-color">MongoDB</span>
+                    <a href="/tags/Kubernetes/">
+                        <span class="chip bg-color">Kubernetes</span>
                     </a>
                     
                 </div>

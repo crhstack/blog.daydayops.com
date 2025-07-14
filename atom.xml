@@ -6,7 +6,7 @@
   <link href="https://www.daydayops.com/atom.xml" rel="self"/>
   
   <link href="https://www.daydayops.com/"/>
-  <updated>2025-07-14T07:58:04.390Z</updated>
+  <updated>2025-07-14T08:33:23.312Z</updated>
   <id>https://www.daydayops.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>k8s污点和容忍度的使用</title>
+    <link href="https://www.daydayops.com/2025/07/14/k8s-wu-dian-he-rong-ren-du-de-shi-yong/"/>
+    <id>https://www.daydayops.com/2025/07/14/k8s-wu-dian-he-rong-ren-du-de-shi-yong/</id>
+    <published>2025-07-14T08:24:12.000Z</published>
+    <updated>2025-07-14T08:33:23.312Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;k8s污点-Taint-和容忍度-Toleration-的使用&quot;&gt;&lt;a href=&quot;#k8s污点-Taint-和容忍度-Toleration-的使用&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Kubernetes" scheme="https://www.daydayops.com/categories/Kubernetes/"/>
+    
+    
+    <category term="Kubernetes" scheme="https://www.daydayops.com/tags/Kubernetes/"/>
+    
+  </entry>
   
   <entry>
     <title>k8s调度之亲和性与反亲和性</title>
