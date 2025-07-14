@@ -6,7 +6,7 @@
   <link href="https://www.daydayops.com/atom.xml" rel="self"/>
   
   <link href="https://www.daydayops.com/"/>
-  <updated>2025-07-10T03:05:30.527Z</updated>
+  <updated>2025-07-14T07:58:04.390Z</updated>
   <id>https://www.daydayops.com/</id>
   
   <author>
@@ -17,12 +17,20 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>k8s亲和性和反亲和性</title>
+    <title>k8s调度之亲和性与反亲和性</title>
     <link href="https://www.daydayops.com/2025/07/10/k8s-qin-he-xing-he-fan-qin-he-xing/"/>
     <id>https://www.daydayops.com/2025/07/10/k8s-qin-he-xing-he-fan-qin-he-xing/</id>
     <published>2025-07-10T03:03:31.000Z</published>
-    <updated>2025-07-10T03:05:30.527Z</updated>
+    <updated>2025-07-14T07:58:04.390Z</updated>
     
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;k8s亲和性与反亲和性&quot;&gt;&lt;a href=&quot;#k8s亲和性与反亲和性&quot; class=&quot;headerlink&quot; title=&quot;k8s亲和性与反亲和性&quot;&gt;&lt;/a&gt;k8s亲和性与反亲和性&lt;/h2&gt;&lt;p&gt;Kubernetes 的亲和性和反亲和性是用于控制 Pod</summary>
+        
+      
     
     
     
@@ -333,34 +341,6 @@
     
     
     <category term="GithubPages" scheme="https://www.daydayops.com/tags/GithubPages/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>测试文章</title>
-    <link href="https://www.daydayops.com/2024/01/20/ce-shi-wen-zhang/"/>
-    <id>https://www.daydayops.com/2024/01/20/ce-shi-wen-zhang/</id>
-    <published>2024-01-20T07:00:00.000Z</published>
-    <updated>2025-07-07T10:27:04.534Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;这是一篇测试文章&lt;/p&gt;
-&lt;h2 id=&quot;信息框容器&quot;&gt;&lt;a href=&quot;#信息框容器&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="测试" scheme="https://www.daydayops.com/categories/%E6%B5%8B%E8%AF%95/"/>
-    
-    
-    <category term="原创" scheme="https://www.daydayops.com/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-    <category term="测试" scheme="https://www.daydayops.com/tags/%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   

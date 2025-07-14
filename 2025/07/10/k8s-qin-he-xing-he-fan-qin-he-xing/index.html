@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="k8s亲和性和反亲和性, 运维,运维博客,运维技术,运维工程师,运维工程师博客,SRE,SRE博客,SRE技术,SRE工程师,SRE工程师博客,DevOps,DevOps博客,DevOps技术,DevOps工程师,DevOps工程师博客,云原生,云原生博客,云原生技术,云原生工程师,云原生工程师博客,运维工程师,运维工程师博客,运维工程师技术,运维工程师,运维工程师博客,kubernets,kubernets博客,kubernets技术,kubernets工程师,kubernets工程师博客,k8s">
-    <meta name="description" content="">
+    <meta name="keywords" content="k8s调度之亲和性与反亲和性, 运维,运维博客,运维技术,运维工程师,运维工程师博客,SRE,SRE博客,SRE技术,SRE工程师,SRE工程师博客,DevOps,DevOps博客,DevOps技术,DevOps工程师,DevOps工程师博客,云原生,云原生博客,云原生技术,云原生工程师,云原生工程师博客,运维工程师,运维工程师博客,运维工程师技术,运维工程师,运维工程师博客,kubernets,kubernets博客,kubernets技术,kubernets工程师,kubernets工程师博客,k8s">
+    <meta name="description" content="k8s亲和性与反亲和性Kubernetes 的亲和性和反亲和性是用于控制 Pod 调度策略的强大工具。它允许根据节点或其他 Pod 的属性来指定 Pod 应该或不应该被调度到哪些节点上。通常情况下Pod被分配到哪些Node是不需要我们操心的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>k8s亲和性和反亲和性 | 天天运维博客</title>
+    <title>k8s调度之亲和性与反亲和性 | 天天运维博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -337,12 +337,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">k8s亲和性和反亲和性</h1>
+                    <h1 class="description center-align post-title">k8s调度之亲和性与反亲和性</h1>
                 </div>
             </div>
         </div>
@@ -398,21 +398,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2025-07-10
+                    2025-07-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    9 分
                 </div>
                 
 
@@ -430,7 +430,272 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="k8s亲和性与反亲和性"><a href="#k8s亲和性与反亲和性" class="headerlink" title="k8s亲和性与反亲和性"></a>k8s亲和性与反亲和性</h2><p>Kubernetes 的亲和性和反亲和性是用于控制 Pod 调度策略的强大工具。它允许根据节点或其他 Pod 的属性来指定 Pod 应该或不应该被调度到哪些节点上。通常情况下Pod被分配到哪些Node是不需要我们操心的，这个过程会由scheduler自动实现。但有时，我们需要让Pod按照我们的预想运行在Node上，例如某些应用 “必须/或者尽量” 跑在具有SSD存储的节点上；有些彼此相关的Pod应用应该跑在同一个节点上；有些业务Pod为了实现高可用需要将多个副本分散到不同的主机上，使每个主机有且只能运行服务的一个副本。为此，k8s为我们提供了这样的策略，我们可以通过使用 “亲和性/反亲和性” 制定一些规则来实现我们的需求</p>
+<h3 id="亲和性（Affinity）"><a href="#亲和性（Affinity）" class="headerlink" title="亲和性（Affinity）"></a>亲和性（Affinity）</h3><p>亲和性用于指定 Pod 应该被调度到哪些节点上。可以基于节点的标签、节点的拓扑结构（例如，可用区或机架）或其他 Pod 的标签。</p>
+<h4 id="亲和性类型"><a href="#亲和性类型" class="headerlink" title="亲和性类型:"></a>亲和性类型:</h4><ul>
+<li><p>节点亲和性（Node Affinity）: 基于节点的标签或拓扑结构来指定 Pod 应该被调度到哪些节点上。Pod 与 Node 之间的匹配规则。</p>
+</li>
+<li><p>Pod 亲和性（Pod Affinity）: 基于其他 Pod 的标签来指定 Pod 应该被调度到哪些节点上。Pod 与 Pod 之间的匹配规则。</p>
+</li>
+</ul>
+<h3 id="反亲和性（Anti-affinity）"><a href="#反亲和性（Anti-affinity）" class="headerlink" title="反亲和性（Anti-affinity）"></a>反亲和性（Anti-affinity）</h3><p>反亲和性用于指定 Pod 不应该被调度到哪些节点上。可以基于节点的标签、节点的拓扑结构或其他 Pod 的标签。</p>
+<h4 id="反亲和性类型"><a href="#反亲和性类型" class="headerlink" title="反亲和性类型:"></a>反亲和性类型:</h4><ul>
+<li><p>节点反亲和性（Node Anti-affinity）: 基于节点的标签或拓扑结构来指定 Pod 不应该被调度到哪些节点上。</p>
+</li>
+<li><p>Pod 反亲和性（Pod Anti-affinity）: 基于其他 Pod 的标签来指定 Pod 不应该被调度到哪些节点上。<strong>Pod 与 Pod 不能在一起的规则</strong> 。</p>
+</li>
+</ul>
+<h3 id="亲和性调度："><a href="#亲和性调度：" class="headerlink" title="亲和性调度："></a>亲和性调度：</h3><ul>
+<li><p>硬策略：可以理解为必须遵守的规则，就是如果没有满足条件的节点的话，就不断重试直到满足条件为止。对应的配置规则为 <strong>requiredDuringSchedulingIgnoredDuringExecution</strong>。</p>
+</li>
+<li><p>软策略：可以理解为尽量遵守的规则，就是如果现在没有满足调度要求的节点的话，pod就会忽略这条规则，继续完成调度的过程，说白了就是满足条件最好了，没有的话也无所谓。对应的配置规则为 <strong>preferredDuringSchedulingIgnoredDuringExecution</strong>。</p>
+</li>
+</ul>
+<p><strong>所有的规则以 Label 作为元数据</strong>。对于 label 的匹配规则，可选的操作符有：</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>规则说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>In</td>
+<td>label 的值在某个列表中</td>
+</tr>
+<tr>
+<td>NotIn</td>
+<td>label 的值不在某个列表中</td>
+</tr>
+<tr>
+<td>Exists</td>
+<td>某个 label 存在</td>
+</tr>
+<tr>
+<td>DoesNotExist</td>
+<td>某个 label 不存在</td>
+</tr>
+<tr>
+<td>Gt</td>
+<td>label 的值大于某个值（字符串比较）</td>
+</tr>
+<tr>
+<td>Lt</td>
+<td>label 的值小于某个值（字符串比较）</td>
+</tr>
+</tbody></table>
+<p>如果 nodeAffinity 中 nodeSelectorTerms 有多个选项，则节点满足任何一个条件就可以；</p>
+<p>如果 matchExpressions 有多个选项，则只有同时满足这些逻辑选项的节点才能运行 Pod。</p>
+<h3 id="亲和性和反亲和性作用范围："><a href="#亲和性和反亲和性作用范围：" class="headerlink" title="亲和性和反亲和性作用范围："></a>亲和性和反亲和性作用范围：</h3><p>在 Kubernetes 的亲和性和反亲和性配置中，topologyKey 用于指定拓扑域，决定了亲和性或反亲和性规则的作用范围。</p>
+<h4 id="topologyKey-的作用"><a href="#topologyKey-的作用" class="headerlink" title="topologyKey 的作用:"></a>topologyKey 的作用:</h4><ul>
+<li><p>定义拓扑域: topologyKey 指定了用于匹配节点或 Pod 的拓扑域。例如，kubernetes.io/hostname 表示节点，failure-domain.beta.kubernetes.io/zone 表示可用区。</p>
+</li>
+<li><p>限制亲和性/反亲和性范围: topologyKey 限制了亲和性或反亲和性规则的应用范围。例如，如果 topologyKey 设置为 kubernetes.io/hostname，则亲和性或反亲和性规则只会在同一个节点上生效。</p>
+</li>
+</ul>
+<h4 id="topologyKey-的常见值"><a href="#topologyKey-的常见值" class="headerlink" title="topologyKey 的常见值:"></a>topologyKey 的常见值:</h4><ul>
+<li><p>kubernetes.io/hostname: 表示节点。</p>
+</li>
+<li><p>failure-domain.beta.kubernetes.io/zone: 表示可用区。</p>
+</li>
+<li><p>failure-domain.beta.kubernetes.io/region: 表示区域。</p>
+</li>
+<li><p>topology.kubernetes.io/region: 表示区域（与 failure-domain.beta.kubernetes.io/region 相同）。</p>
+</li>
+<li><p>topology.kubernetes.io/zone: 表示可用区（与 failure-domain.beta.kubernetes.io/zone 相同）。</p>
+</li>
+</ul>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景:"></a>使用场景:</h4><ul>
+<li><p>亲和性:</p>
+<ul>
+<li><p>将特定类型的 Pod 调度到具有特定资源或功能的节点上。</p>
+</li>
+<li><p>将 Pod 调度到同一可用区或机架上的节点上，以提高网络性能。</p>
+</li>
+<li><p>将 Pod 调度到与其他 Pod 相同的节点上，以实现数据共享或协同工作。</p>
+</li>
+</ul>
+</li>
+<li><p>反亲和性:</p>
+<ul>
+<li><p>将 Pod 分散到不同的节点上，以提高可用性和容错性。</p>
+</li>
+<li><p>将 Pod 分散到不同的可用区或机架上，以提高容错性和地理冗余。</p>
+</li>
+<li><p>将 Pod 分散到不同的节点上，以避免资源竞争或性能冲突。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置:"></a>配置:</h4><p>亲和性和反亲和性可以通过 Pod 的 affinity 字段进行配置。</p>
+<p>示例:</p>
+<h5 id="节点亲和性"><a href="#节点亲和性" class="headerlink" title="节点亲和性:"></a>节点亲和性:</h5><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>pod
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">affinity</span><span class="token punctuation">:</span>
+    <span class="token key atrule">nodeAffinity</span><span class="token punctuation">:</span>
+      <span class="token key atrule">requiredDuringSchedulingIgnoredDuringExecution</span><span class="token punctuation">:</span>
+        <span class="token key atrule">nodeSelectorTerms</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">matchExpressions</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> disktype
+            <span class="token key atrule">operator</span><span class="token punctuation">:</span> In
+            <span class="token key atrule">values</span><span class="token punctuation">:</span>
+            <span class="token punctuation">-</span> ssd
+</code></pre>
+<p>这个配置指定 Pod 必须被调度到具有标签 disktype: ssd 的节点上。</p>
+<h5 id="Pod-反亲和性"><a href="#Pod-反亲和性" class="headerlink" title="Pod 反亲和性:"></a>Pod 反亲和性:</h5><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>pod
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">affinity</span><span class="token punctuation">:</span>
+    <span class="token key atrule">podAntiAffinity</span><span class="token punctuation">:</span>
+      <span class="token key atrule">requiredDuringSchedulingIgnoredDuringExecution</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">labelSelector</span><span class="token punctuation">:</span>
+          <span class="token key atrule">matchExpressions</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> app
+            <span class="token key atrule">operator</span><span class="token punctuation">:</span> In
+            <span class="token key atrule">values</span><span class="token punctuation">:</span>
+            <span class="token punctuation">-</span> my<span class="token punctuation">-</span>app
+        <span class="token key atrule">topologyKey</span><span class="token punctuation">:</span> kubernetes.io/hostname
+</code></pre>
+<p>这个配置指定 Pod 不能与具有标签 app: my-app 的其他 Pod 在同一个节点上运行。</p>
+<h3 id="K8s-pod-反亲和性配置策略由“必须”改为“尽量”"><a href="#K8s-pod-反亲和性配置策略由“必须”改为“尽量”" class="headerlink" title="K8s pod 反亲和性配置策略由“必须”改为“尽量”"></a>K8s pod 反亲和性配置策略由“必须”改为“尽量”</h3><p>在 Kubernetes 中，Pod 反亲和性（podAntiAffinity）用于防止 Pod 被调度到具有特定标签的节点上。默认情况下，反亲和性规则是“必须”遵守的，这意味着如果找不到符合规则的节点，Pod 将无法被调度。</p>
+<p>要将反亲和性策略由“必须”改为“尽量”，需要修改 Pod 定义中的 podAntiAffinity 配置。</p>
+<p>以下是具体的步骤：</p>
+<ol>
+<li><p>找到 podAntiAffinity 配置: 在 Pod 的 YAML 文件中，找到 spec.affinity.podAntiAffinity 部分。</p>
+</li>
+<li><p>修改 topologyKey:</p>
+<ul>
+<li><p>确认 topologyKey 设置为合适的拓扑域，例如 kubernetes.io/hostname（表示节点）或 failure-domain.beta.kubernetes.io/zone（表示可用区）。</p>
+</li>
+<li><p>topologyKey 决定了反亲和性规则的作用范围。</p>
+</li>
+</ul>
+</li>
+<li><p>将 requiredDuringSchedulingIgnoredDuringExecution 改为 preferredDuringSchedulingIgnoredDuringExecution:</p>
+<ul>
+<li><p>requiredDuringSchedulingIgnoredDuringExecution 表示调度器必须遵守反亲和性规则。</p>
+</li>
+<li><p>preferredDuringSchedulingIgnoredDuringExecution 表示调度器会尽量遵守反亲和性规则，但如果找不到符合条件的节点，仍然会调度 Pod。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例:"></a>示例:</h4><p>假设有一个 Pod 定义如下：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>pod
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">affinity</span><span class="token punctuation">:</span>
+    <span class="token key atrule">podAntiAffinity</span><span class="token punctuation">:</span>
+      <span class="token key atrule">requiredDuringSchedulingIgnoredDuringExecution</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">labelSelector</span><span class="token punctuation">:</span>
+          <span class="token key atrule">matchExpressions</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> app
+            <span class="token key atrule">operator</span><span class="token punctuation">:</span> In
+            <span class="token key atrule">values</span><span class="token punctuation">:</span>
+            <span class="token punctuation">-</span> my<span class="token punctuation">-</span>app
+        <span class="token key atrule">topologyKey</span><span class="token punctuation">:</span> kubernetes.io/hostname
+</code></pre>
+<p>这个配置要求 Pod 不能与具有标签 app: my-app 的其他 Pod 在同一个节点上运行。</p>
+<p><strong>要将策略改为“尽量”，可以将 requiredDuringSchedulingIgnoredDuringExecution 改为 preferredDuringSchedulingIgnoredDuringExecution：</strong></p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>pod
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">affinity</span><span class="token punctuation">:</span>
+    <span class="token key atrule">podAntiAffinity</span><span class="token punctuation">:</span>
+      <span class="token key atrule">preferredDuringSchedulingIgnoredDuringExecution</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">weight</span><span class="token punctuation">:</span> <span class="token number">100</span>
+        <span class="token key atrule">podAffinityTerm</span><span class="token punctuation">:</span>
+          <span class="token key atrule">labelSelector</span><span class="token punctuation">:</span>
+            <span class="token key atrule">matchExpressions</span><span class="token punctuation">:</span>
+            <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> app
+              <span class="token key atrule">operator</span><span class="token punctuation">:</span> In
+              <span class="token key atrule">values</span><span class="token punctuation">:</span>
+              <span class="token punctuation">-</span> my<span class="token punctuation">-</span>app
+          <span class="token key atrule">topologyKey</span><span class="token punctuation">:</span> kubernetes.io/hostname
+</code></pre>
+<p>修改后，调度器会尽量将 Pod 调度到没有运行 app: my-app Pod 的节点上。但如果所有节点都运行了 app: my-app Pod，调度器仍然会将 Pod 调度到其中一个节点上。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意:"></a>注意:</h4><ul>
+<li><p>preferredDuringSchedulingIgnoredDuringExecution 需要设置 weight 参数，用于表示优先级，值越大表示优先级越高。</p>
+</li>
+<li><p>修改后的策略并不能完全保证 Pod 不会被调度到同一个节点上，只能说是尽量避免。</p>
+</li>
+</ul>
+<h3 id="k8s-pod-pending-报错：xxx-node-s-didn’t-match-pod-affinity-affinity-xxx-node-s-didn’t-match-pod-anti-affinity-rules-问题解析"><a href="#k8s-pod-pending-报错：xxx-node-s-didn’t-match-pod-affinity-affinity-xxx-node-s-didn’t-match-pod-anti-affinity-rules-问题解析" class="headerlink" title="k8s pod pending 报错：xxx node(s) didn’t match pod affinity/affinity, xxx node(s) didn’t match pod anti-affinity rules. 问题解析"></a>k8s pod pending 报错：xxx node(s) didn’t match pod affinity/affinity, xxx node(s) didn’t match pod anti-affinity rules. 问题解析</h3><p>这个错误信息表明 Kubernetes 集群中的 xxx 个节点都无法满足 Pod 的亲和性或反亲和性规则，导致 Pod 处于 Pending 状态。</p>
+<h4 id="导致此错误的常见原因包括："><a href="#导致此错误的常见原因包括：" class="headerlink" title="导致此错误的常见原因包括："></a>导致此错误的常见原因包括：</h4><ol>
+<li><p>资源不足: 节点可能没有足够的 CPU、内存或其他资源来运行 Pod。</p>
+</li>
+<li><p>污点和容忍度不匹配: 节点可能具有 Pod 不容忍的污点（Taint）。</p>
+</li>
+<li><p>亲和性/反亲和性规则过于严格: Pod 可能设置了过于严格的亲和性或反亲和性规则，导致无法找到合适的节点。</p>
+</li>
+<li><p>节点选择器冲突: Pod 的节点选择器可能与亲和性/反亲和性规则冲突。</p>
+</li>
+<li><p>节点亲和性冲突: Pod 的节点亲和性规则可能相互冲突，导致无法找到合适的节点。</p>
+</li>
+</ol>
+<h4 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤:"></a>解决步骤:</h4><ol>
+<li><p>检查资源限制和节点容量:</p>
+<ul>
+<li><p>使用 kubectl describe node &lt;节点名称&gt; 检查节点的资源容量。</p>
+</li>
+<li><p>使用 kubectl describe pod &lt;pod名称&gt; 检查 Pod 的资源请求和限制。</p>
+</li>
+<li><p>确保节点有足够的可用资源来满足 Pod 的需求。</p>
+</li>
+</ul>
+</li>
+<li><p>检查污点和容忍度:</p>
+<ul>
+<li><p>使用 kubectl describe node &lt;节点名称&gt; 检查节点上的污点。</p>
+</li>
+<li><p>使用 kubectl describe pod &lt;pod名称&gt; 检查 Pod 的容忍度设置。</p>
+</li>
+<li><p>确保 Pod 容忍所有节点上的污点，或者修改污点和容忍度设置以使其匹配。</p>
+</li>
+</ul>
+</li>
+<li><p>审查亲和性/反亲和性规则:</p>
+<ul>
+<li><p>检查 Pod 定义中的 affinity 和 antiAffinity 字段。</p>
+</li>
+<li><p>确保规则不会过于严格，例如要求 Pod 必须与特定标签的 Pod 位于同一节点，但该标签的 Pod 数量不足。</p>
+</li>
+<li><p>尝试使用 preferredDuringSchedulingIgnoredDuringExecution 代替 requiredDuringSchedulingIgnoredDuringExecution，以便调度器在找不到完全匹配的节点时可以做出妥协。</p>
+</li>
+</ul>
+</li>
+<li><p>检查节点选择器:</p>
+<ul>
+<li><p>检查 Pod 定义中的 nodeSelector 字段。</p>
+</li>
+<li><p>确保节点选择器不会亲和性/反亲和性规则冲突。</p>
+</li>
+</ul>
+</li>
+<li><p>检查事件日志:</p>
+<ul>
+<li>使用 kubectl describe pod &lt;pod名称&gt; 查看 Pod 的事件日志，以获取有关调度失败的更多详细信息。</li>
+</ul>
+</li>
+</ol>
+<h4 id="其他建议"><a href="#其他建议" class="headerlink" title="其他建议:"></a>其他建议:</h4><ul>
+<li><p>尝试删除并重新创建 Pod，看看问题是否解决。</p>
+</li>
+<li><p>尝试使用 kubectl cordon &lt;节点名称&gt; 将节点标记为不可调度，然后使用 kubectl uncordon &lt;节点名称&gt; 重新启用调度，看看是否可以解决问题。</p>
+</li>
+<li><p>如果使用的是自定义调度器，请检查其配置是否正确。</p>
+</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -583,9 +848,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="k8s亲和性和反亲和性">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="k8s调度之亲和性与反亲和性">
                         
-                        <span class="card-title">k8s亲和性和反亲和性</span>
+                        <span class="card-title">k8s调度之亲和性与反亲和性</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -903,7 +1168,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">13.5k</span>
+                        class="white-color">15.9k</span>
             
             
             
